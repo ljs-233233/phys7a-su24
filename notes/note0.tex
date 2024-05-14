@@ -1,0 +1,443 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Note 0}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Note 0 } \\[0.05in]
+Curvilinear Coordinates, Complex Exponentials  \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
+\end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+\textbf{Curvilinear Coordinate Systems} will very commonly appear in subsequent physics classes, and your professors would expect you to recall them by heart. \textbf{Complex Numbers}, on the other hand, is a very powerful tool that simplifies a lot of calculations in mathematics, physics, and engineering. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item Position, Velocity, and Acceleration vectors (We shall constrain our motion in two dimensions for now): 
+\[ \Vec{r} = x\Hat{x} + y\Hat{y} \]
+\[ \Vec{v} = v_x\Hat{x} + v_y\Hat{y} = \Dot{\Vec{r}} \]
+\[ \Vec{a} = a_x\Hat{x} + a_y\Hat{y} = \Dot{\Vec{v}} = \Ddot{\Vec{r}} \]
+\item For any Vector: 
+\[ \Vec{A} = A\Hat{A} \] \\
+Its Magnitude is given by: 
+\[ A = \sqrt{\Vec{A}^2} = \sqrt{\Vec{A} \cdot \Vec{A}} \]
+And its Unit Vector is: 
+\[ \Hat{A} = \frac{\Vec{A}}{A} \]
+\end{itemize}
+\pagebreak
+
+\section{Polar Coordinate System}
+
+The Cartesian coordinate system, which you may be familiar with, is well suited to describe motion in a straight line. Like on the surface of the Earth, we experience an acceleration $\Vec{a} = -g\Hat{y}$ downward. \\ 
+However, in many other circumstances, the Cartesian system falls short. One such example is when the Earth interacts with the Sun, which we conveniently place at the origin of a Cartesian coordinate plane, under the influence of a gravitational force $\Vec{F} = -\frac{GMm}{r^2} \Hat{r}$. \\
+One can imagine the force felt by Earth caused by the Sun. When the Earth is located at different places on our coordinate plane, $\Vec{F}$ acts toward different directions. Yet one thing remains constant: The force $\Vec{F}$ always points \textit{radially inward}, from Earth's position toward the origin. 
+
+\subsection{Radial and Azimuthal Unit Vectors}
+
+Notice that in the expression $\Vec{F} = -\frac{GMm}{r^2} \Hat{r}$, the gravitational force extends from one object towards the other. Fixing the source $M$ at the origin, the unit vector $\Hat{r}$ is essentially in the direction of the object under the gravitational force. It is precisely just the unit vector of the position vector $\Vec{r}$. Therefore we can define: 
+
+\begin{definition}
+Position in Polar Coordinates. \\
+\begin{equation}
+\Vec{r} = r \Hat{r}
+\end{equation}
+Where $r$ is the distance of the object from origin, and $\Hat{r}$ is the unit vector in the object's direction. 
+\end{definition}
+
+Geometrically, we can find that 
+\[ r = \sqrt{x^2 + y^2} \]
+And
+\[ r\Hat{r} = x\Hat{x} + y\Hat{y} \implies \Hat{r} = \frac{x}{r}\Hat{x} + \frac{y}{r}\Hat{y} \]
+And if we let $\theta$ be the angle between the object's position and the x-axis, 
+\[ \Hat{r} = cos\theta\Hat{x} + sin\theta\Hat{y} \]
+If we want to express every vector on the 2-D coordinate plane, we would need a second unit vector. In the same spirit as the Cartesian unit vectors, we define a second unit vector, $\Hat{\theta}$, at a $90 \degree$ angle counterclockwise to the first one. 
+\[ \Hat{\theta} = -sin\theta\Hat{x} + cos\theta\Hat{y} \]
+Both unit vectors $\Hat{r}$ and $\Hat{\theta}$ point in the direction of increasing $r$ and $\theta$. 
+
+\fig{figs/n0/polar.jpg}{An illustration of the Polar Coordinates.}{0.1}{0}
+
+Since circular motion and radial forces play a prominent role in physics, we can greatly simplify our calculations by adopting this new coordinate system, named the \textit{Polar Coordinate System}, defined by the parameters $r$ (distance from origin) and $\theta$ (angle from x-axis). 
+
+\begin{definition}
+The Polar Coordinate System. \\
+The Polar Coordinate System is defined by the following quantities, 
+\begin{center}
+    $r$, the radial distance \\
+    $\theta$, the polar angle
+\end{center}
+With the associated unit vectors 
+\begin{center}
+    $\Hat{r}$, the radial unit vector \\
+    $\Hat{\theta}$, the azimuthal unit vector
+\end{center}
+Where, 
+\begin{equation}
+    r = \sqrt{x^2 + y^2}
+\end{equation}
+\begin{equation}
+    \theta = \arctan(\frac{y}{x})
+\end{equation}
+And, 
+\begin{equation}
+    \Hat{r} = \cos\theta\Hat{x} + \sin\theta\Hat{y}
+\end{equation}
+\begin{equation}
+    \Hat{\theta} = -\sin\theta\Hat{x} + \cos\theta\Hat{y}
+\end{equation}
+Or Conversely, 
+\begin{equation}
+    x = r\cos\theta
+\end{equation}
+\begin{equation}
+    y = r\sin\theta
+\end{equation}
+And, 
+\begin{equation}
+    \Hat{x} = \cos\theta\Hat{r} - \sin\theta\Hat{\theta}
+\end{equation}
+\begin{equation}
+    \Hat{y} = \sin\theta\Hat{r} + \cos\theta\Hat{\theta}
+\end{equation}
+\end{definition}
+
+\fig{figs/n0/unit-vectors.jpg}{Polar and Cartesian unit vectors.}{0.1}{0}
+
+\subsection{Velocity and Acceleration in Polar Coordinates}
+Unlike the Cartesian unit vectors, which have constant orientations regardless of time and space, we notice that the Polar unit vectors are dependent on the polar angle $\theta$. 
+
+To find the velocity in polar coordinates, we must not naively differentiate only the distance part of the position vector. Rather, we need to use the Chain Rule here. First consider the time derivative of the radial unit vector: 
+\[ \frac{d\Hat{r}}{dt} = \frac{d}{dt}(\cos\theta\Hat{x} + \sin\theta\Hat{y}) = -\sin\theta \ \Dot{\theta} \Hat{x} + \cos\theta \ \Dot{\theta} \Hat{y} = \Dot{\theta}(-\sin\theta\Hat{x} + \cos\theta\Hat{y}) \]
+Where $\Dot{\theta}$ is the rate of change of the angle $\theta$. Thus, 
+\[ \frac{d\Hat{r}}{dt} = \Dot{\theta}\Hat{\theta} \]
+Applying the chain rule on the position vector, 
+\[ \frac{d}{dt} \Vec{r} = \frac{d}{dt} (r\Hat{r}) = \frac{dr}{dt}\Hat{r} + r\frac{d\Hat{r}}{dt} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta} \]
+
+\fig{figs/n0/change.jpg}{The spatial evolution of Polar unit vectors.}{0.1}{0}
+
+\begin{definition}
+Velocity in Polar Coordinates. \\
+\begin{equation}
+\Vec{v} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta}
+\end{equation}
+The first term, $\Dot{r}\Hat{r}$, is the \textbf{Radial Velocity} away from the origin. \\ 
+The second term, $r\Dot{\theta}\Hat{\theta}$, is the \textbf{Tangential Velocity} associated with Uniform Circular Motion, which you will encounter later in the course. 
+\end{definition}
+
+Similarly, we can take the derivative of velocity to find acceleration. Consider the time derivative of the azimuthal unit vector: 
+\[ \frac{d\Hat{\theta}}{dt} = \frac{d}{dt}(-\sin\theta\Hat{x} + \cos\theta\Hat{y}) = -\cos\theta \ \Dot{\theta}\Hat{x} - \sin\theta \ \Dot{\theta}\Hat{y} = -\Dot{\theta}(\cos\theta\Hat{x} + \sin\theta\Hat{y}) \]
+Thus, 
+\[ \frac{d\Hat{\theta}}{dt} = -\Dot{\theta}\Hat{r} \]
+And so, 
+\[ \frac{d\Vec{v}}{dt} = \frac{d}{dt}(\Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta}) = \frac{d\Dot{r}}{dt}\Hat{r} + \Dot{r}\frac{d\Hat{r}}{dt} + \frac{dr}{dt}\Dot{\theta}\Hat{\theta} + r\frac{d\Dot{\theta}}{dt}\Hat{\theta} + r\Dot{\theta}\frac{d\Hat{\theta}}{dt} \]
+\[ \frac{d\Vec{v}}{dt} = \Ddot{r}\Hat{r} + \Dot{r}\Dot{\theta}\Hat{\theta} + \Dot{r}\Dot{\theta}\Hat{\theta} + r\Ddot{\theta}\Hat{\theta} -r\Dot{\theta}^2\Hat{r} = (\Ddot{r} - r\Dot{\theta}^2)\Hat{r} + (r\Ddot{\theta} + 2\Dot{r}\Dot{\theta})\Hat{\theta} \]
+
+\begin{definition}
+Acceleration in Polar Coordinates. \\
+\begin{equation}
+\Vec{a} = (\Ddot{r} - r\Dot{\theta}^2)\Hat{r} + (r\Ddot{\theta} + 2\Dot{r}\Dot{\theta})\Hat{\theta}
+\end{equation}
+The first term, $\Ddot{r}\Hat{r}$, is the \textbf{Radial Acceleration} away from the origin. \\ 
+The second term, $-r\Dot{\theta}^2\Hat{r}$, is the \textbf{Centripetal Acceleration} associated with Uniform Circular Motion, which you will encounter later in the course. \\
+The third term, $r\Ddot{\theta}\Hat{\theta}$, is the \textbf{Angular Acceleration} from an external torque, which you will encounter when you study rotational motion. \\
+The fourth term, $2\Dot{r}\Dot{\theta}\Hat{\theta}$, is the \textbf{Coriolis Acceleration} that arises when both linear velocity and rotation are present. This is why \href{https://www.youtube.com/watch?v=7TjOy56-x8Q}{the ball you throw always misses your friend on the other side of the merry-go-round}. 
+\end{definition}
+
+\subsection{A Geometric Proof: Time Derivatives of Unit Vectors}
+
+\begin{definition}
+Time derivatives of Polar Unit Vectors. 
+\begin{equation}
+    \frac{d\Hat{r}}{dt} = \Dot{\theta}\Hat{\theta}
+\end{equation}
+\begin{equation}
+    \frac{d\Hat{\theta}}{dt} = -\Dot{\theta}\Hat{r}
+\end{equation}
+\end{definition}
+We have proven these results algebraically in the previous section. But what do they mean geometrically? It turns out they are closely related to the nature of vectors: A vector has both \textit{magnitude} and \textit{direction}. In Calculus, you may have learned that the derivative describes the rate of change of a quantity, or the magnitude of a number. It turns out that derivatives of vectors account for both their magnitude and direction. In other words, a vector can have a nonzero derivative when its direction changes, even though its magnitude stays constant. In this case, its derivative is perpendicular to the vector itself. 
+
+Note that the polar unit vectors only depend on the value of $\theta$. This means that the unit vectors cannot change if we only move radially inward/outward. Indeed, the time derivatives of $\Hat{r}$ and $\Hat{\theta}$ only depend on the rate of change of $\theta$. Consider the $\Hat{r}$ vector rotating for an infinitesimal angle $d\theta$ counterclockwise. 
+
+\fig{figs/n0/rotate.jpg}{Rotation of the polar unit vector. \textit{Graph is VERY not to scale.}}{0.12}{0}
+
+Here, $|dr|$ is the arc length of the infinitesimal section of the circle spanned by this rotation. By the arc length formula, $|dr| = |r| d\theta = d\theta$, as the magnitude of the unit vector $\Hat{r}$ is 1. Its direction is $90\degree$ counterclockwise with respect to the original $\Hat{r}$ vector -- That is exactly how we defined the $\Hat{\theta}$ direction. 
+
+We get, 
+\[ d\Hat{r} = d\theta\Hat{\theta} \]
+Differentiating both sides of the equation with respect to time, 
+\[ \frac{d\Hat{r}}{dt} = \frac{d\theta}{dt}\Hat{\theta} = \Dot{\theta}\Hat{\theta} \]
+
+At this point, I must tell you it's excruciating to type these notes due to my lack of experience. I will omit the proof for the derivative of the $\Hat{\theta}$ vector. I recommend you convince yourself with a similar proof, or accept it with faith. 
+
+\subsection{Example: Bead on a Rotating Rod}
+
+\begin{example}
+Bead on a Rotating Rod. \\ 
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 1.18} \\
+A bead moves outward with constant speed $u$ outward along a rod. The bead starts at the center at $t = 0$. The angular position of the rod is given by $\theta = \omega t$, where $\omega$ is a constant. Find the position, velocity, and acceleration of the bead. \\
+
+\textbf{Solution:} Using
+\[ \begin{cases}
+\Vec{r} = r\Hat{r} \\
+\Vec{v} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta} \\
+\Vec{a} = (\Ddot{r} - r\Dot{\theta}^2)\Hat{r} + (r\Ddot{\theta} + 2\Dot{r}\Dot{\theta})\Hat{\theta}
+\end{cases}\]
+At any time $t$, the radial and angular position of the bead is given by: 
+\[ \begin{cases}
+\Dot{r} = u \implies r = ut \\
+\Dot{\theta} = \omega \implies\theta = \omega t
+\end{cases} \]
+Therefore, 
+\[ \begin{cases}
+\Vec{r} = ut\Hat{r} \\
+\Vec{v} = u\Hat{r} + u\omega t\Hat{\theta} \\
+\Vec{a} = -u\omega^2t\Hat{r} + 2u\omega\Hat{\theta}
+\end{cases} \]
+
+\fig{figs/n0/ex1.jpg}{The trajectory and velocity of the bead at different times.}{0.5}{0}
+\end{example}
+
+\pagebreak
+
+\section{Complex Numbers}
+
+\subsection{Terminology and Notation}
+
+\begin{definition}
+Imaginary Unit. \\
+Mathematicians developed the complex number system to express square roots of negative numbers. The imaginary unit, $i$, is defined as
+\begin{equation}
+i = \sqrt{-1}
+\end{equation}
+Therefore, 
+\begin{equation}
+i^2 = -1
+\end{equation}
+\begin{equation}
+i^3 = -i
+\end{equation}
+\begin{equation}
+i^4 = 1
+\end{equation}
+\begin{equation}
+i^{-1} = \frac{1}{i} = -i = i^3
+\end{equation}
+Or in summary
+\begin{equation}
+i^n = i^{(n \ mod \ 4)}
+\end{equation}
+\end{definition}
+
+\begin{definition}
+Cartesian Form of Complex Numbers. \\
+A complex number $z$ cam be expressed as 
+\begin{equation}
+z = a + bi
+\end{equation}
+Where $\Re(z) = a$ is the Real part of $z$; $\Im(z) = b$ is the Imaginary part of $z$. 
+\end{definition}
+
+\begin{definition}
+Complex Conjugate. \\
+For a complex number $z = a + bi$, its complex conjugate $z^*$ is defined as
+\begin{equation}
+z^* = a - bi
+\end{equation}
+For any complex number with possibly more terms involved, we can find its conjugate by reversing the sign of every term containing $i$. 
+\end{definition}
+
+Note that $z + z^* = 2a$, and $z - z^* = 2bi$. Therefore
+
+\begin{definition}
+Real and Imaginary Part of Complex Numbers. \\
+We can find $\Re(z)$ by 
+\begin{equation}
+\Re(z) = \frac{1}{2}(z + z^*)
+\end{equation}
+And
+\begin{equation}
+\Im(z) = \frac{1}{2i}(z - z^*)
+\end{equation}
+\end{definition}
+\begin{definition}
+Modulus and Argument of Complex Numbers. \\
+For a complex number $z = a + bi$, its modulus, sometimes called the magnitude, is given by
+\begin{equation}
+|z| = \sqrt{a^2 + b^2} = zz^*
+\end{equation}
+And its argument, or sometimes called the phase, is
+\begin{equation}
+\phi = \arctan(\frac{b}{a})
+\end{equation}
+\end{definition}
+
+\subsection{The Polar Form of Complex Numbers}
+
+Consider the 2-dimensional complex plane, where the x-axis represents the Real part, and the y-axis represents the Imaginary part of a complex number. Any complex number can be written in terms of its magnitude $r = |z|$ and its phase $\phi$. The relationship between the Cartesian and Polar forms is given by: 
+
+\begin{definition}
+Polar Form of Complex Numbers. \\
+Any complex number can be written as
+\begin{equation}
+z = a + bi = re^{i\phi}
+\end{equation}
+Where
+\begin{equation}
+\begin{cases}
+r = \sqrt{a^2 + b^2} \\
+\phi = \arctan(\frac{b}{a})
+\end{cases}
+\end{equation}
+Or conversely, 
+\begin{equation}
+\begin{cases}
+a = r \cos\phi \\
+b = r\sin\phi
+\end{cases}
+\end{equation}
+\end{definition}
+
+\fig{figs/n0/complex.jpeg}{Illustration of Complex Numbers in Polar Form.}{0.1}{0}
+
+Specifically, when $|r| = 1$, the above relationship becomes the \textit{Euler's Formula}. You will see this identity coming up very frequently if you continue taking more advanced physics classes. 
+\begin{definition}
+Euler's Formula. \\
+\begin{equation}
+e^{i\phi} = \cos\phi + i\sin\phi
+\end{equation}
+\end{definition}
+
+\subsection{Example: Trigonometric Identity}
+\begin{example}
+The Pythagorean Identity. \\
+Prove that $\cos^2\theta + \sin^2\theta = 1$. \\
+
+\textbf{Solution:} 
+\[ \begin{cases}
+\cos\theta = \frac{1}{2}(e^{i\theta} + e^{-i\theta}) \\
+\sin\theta = \frac{1}{2i}(e^{i\theta} - e^{-i\theta})
+\end{cases} \]
+\[ \begin{cases}
+\cos^2\theta = \frac{1}{4}(e^{i\theta} + e^{-i\theta})^2 = \frac{1}{4}(e^{i\theta} + e^{-i\theta})(e^{i\theta} + e^{-i\theta}) \\
+\sin^2\theta = -\frac{1}{4}(e^{i\theta} - e^{-i\theta})^2 = -\frac{1}{4}(e^{i\theta} - e^{-i\theta})(e^{i\theta} - e^{-i\theta})
+\end{cases} \]
+\[ \begin{cases}
+\cos^2\theta = \frac{1}{4}(e^{i2\theta} + 2 + e^{-i2\theta}) \\
+\sin^2\theta = -\frac{1}{4}(e^{i2\theta} - 2 + e^{-i2\theta})
+\end{cases} \]
+\[ \cos^2\theta + \sin^2\theta = \frac{1}{4}(e^{i2\theta} + 2 + e^{-i2\theta}) -\frac{1}{4}(e^{i2\theta} - 2 + e^{-i2\theta}) \]
+Thus
+\[ \cos^2\theta + \sin^2\theta = 1 \]
+Consistent with the Pythagorean Identity.
+\end{example}
+
+\pagebreak
+
+\section{Exercises}
+\begin{problem}
+Azimuthal Force Motion. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 2.9} \\
+Consider a particle that feels an angular force only, of the form $\Vec{F} = 3m\Dot{r}\Dot{\theta}\Hat{\theta}$. Show that $\Dot{r} = \sqrt{Ar^4 + B}$ for some constants $A$ and $B$. Also, show that the particle eventually reaches $r = \infty$. 
+\end{problem}
+
+\begin{problem}
+Spiraling particle.  \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 1.25} \\
+A particle moves outward along a spiral. Its trajectory is given by $r = A\theta$, where $A = \frac{1}{\pi}$ is a constant. $\theta$ increases in time according to $\theta = \alpha t^2 / 2$, where $\alpha$ is a constant. \\ 
+
+a) Sketch the motion, and indicate the approximate velocity and acceleration at a few points. \\
+b) Show that the radial acceleration is zero when $\theta = 1 / \sqrt{2}$ radians.  \\
+c) At what angles do the radial and tangential accelerations have equal magnitude? \\
+\end{problem}
+
+\begin{problem}
+An Oscillating Skateboard. \\
+\textit{Taylor, Classical Mechanics, Example 1.2} \\
+A "half-pipe" at a skateboard park consists of a concrete trough with a semicircular cross-section of radius $R$, as shown below. I hold a frictionless skateboard on the side of the trough, pointing down toward the bottom, and release it. Describe its subsequent motion. 
+\fig{figs/n0/taylor.jpg}{Taylor, Example 1.2}{0.4}{0}
+\end{problem}
+
+\begin{problem}
+Trigonometric Identities. \\
+\textit{Physics 137A, Spring 2024 (Haxton)} \\
+Prove the following identities. \\ 
+
+a) $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$ \\
+b) $\cos(4\theta) = 8\cos^4\theta - 8\cos^2\theta + 1$ 
+\end{problem}
+
+\begin{problem}
+More Trigonometric Identities. \\
+\textit{EL ENG 120, Fall 2023 (Ramchandran)} \\
+Prove the following identities. \\ 
+
+a) Show that $A\cos\theta + B\sin\theta$ can be written in the form $C\cos(\theta + \phi)$. Find $C$ and $\phi$ in terms of the given quantities $A$, $B$, and $\theta$. \\
+b) Prove \textit{de Moivre's Theorem}: For any integer $n$, $(\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta)$.  
+\end{problem}
+
+\end{document}

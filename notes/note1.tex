@@ -1,0 +1,285 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Note 1}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Note 1 } \\[0.05in]
+Differential Equations, Damped Oscillator  \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
+\end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+Learning the techniques to solve \textbf{Differential Equations} will be very helpful for you in this class, and every other class you will take in the Physical Sciences/Engineering -- You should learn this skill sooner rather than later. We will apply these methods to study \textbf{Damped Oscillators}, which is widely used in Analytic Mechanics and Electromagnetism to model dissipative systems. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item The relationships between Position, Velocity, and Acceleration: 
+\[ x = \int v \ dt \]
+\[ v = \int a \ dt \]
+\[ v = \frac{dx}{dt}\]
+\[ a = \frac{dv}{dt} \]
+\item Newton's Second Law of Motion: 
+\[ F = ma \]
+\item Mathematical expressions of certain Forces that we will study, including: \\
+Viscosity, given by a velocity-dependent Friction: 
+\[ F_v = -cv \]
+Elastic Force, given by Hooke's Law: 
+\[ F_s = -kx \]
+\item Some common derivatives: 
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\end{itemize}
+\pagebreak
+
+% this is a comment
+
+\section{First Order Differential Equation}
+\subsection{Separation of Variables}
+
+We will motivate the notion of differential equations through a few types of motion commonly seen in physics. We shall start by reviewing the technique of Separation of Variables one may have learned from Calculus. 
+
+\begin{example}
+A Bacterium with a Viscous Drag Force \\
+\textit{Helliwell and Sahakian, Modern Classical Mechanics, Example 1.1} \\
+The most important force on a non-swimming bacterium in a fluid is the viscous drag force $F = -bv$, where $v$ is the velocity of the bacterium relative to the fluid and $b$ is a constant that depends on the size and shape of the bacterium and the viscosity of the fluid – the minus sign means that the drag force is opposite to the direction of motion. If the bacterium gains a velocity $v_0$ at $t = 0$, what is its subsequent velocity as a function of time? \\
+
+\textbf{Solution:} Per Newton's Second Law, 
+\[ F = m\frac{dv}{dt} = -bv \implies \frac{dv}{dt} = \frac{-b}{m}v \]
+Using separation of variables,
+\[ \frac{1}{v}dv = \frac{-b}{m}dt \]
+Integrate both sides
+\[ \int_{v_0}^v \frac{1}{v}dv = \frac{-b}{m} \int_0^t dt \]
+Which gives
+\[ \ln(v) - \ln(v_0) = \ln(\frac{v}{v_0}) = \frac{-bt}{m} \]
+Thus
+\[ v = v_0e^{-t / \tau} \]
+Where $\tau = m/b$ is called the "time constant" of the exponential decay. 
+
+\fig{figs/n1/exp.jpg}{Position and Velocity of the Bacterium}{0.4}{0}
+\end{example}
+
+As you may find, Separation of Variables is a powerful technique for solving motion that we could not analyze without calculus. However, the derivation is often slow and painful, and the process becomes exponentially more frustrating if we throw in extra conditions, like when we consider the Drag Force and Gravity simultaneously on an object in the air, $F = -bv + mg$. With some appropriate mathematical ingenuity, we can solve physical systems like these much more easily. 
+
+\subsection{The Method of Ansatz}
+
+\begin{example}
+A Bacterium with a Viscous Drag Force \\
+\textit{Helliwell and Sahakian, Modern Classical Mechanics, Example 1.1 (Continued)} \\
+The most important force on a non-swimming bacterium in a fluid is the viscous drag force $F = -bv$, where $v$ is the velocity of the bacterium relative to the fluid and $b$ is a constant that depends on the size and shape of the bacterium and the viscosity of the fluid – the minus sign means that the drag force is opposite to the direction of motion. If the bacterium gains a velocity $v_0$ at $t = 0$, what is its subsequent velocity as a function of time? \\
+
+\textbf{Alternative Solution:} Per Newton's Second Law, 
+\[ F = m\Dot{v} = -bv \implies \Dot{v} = \frac{-b}{m}v \]
+Notice that in this expression, the derivative of $v$ is proportional to $v$ itself. Conveniently, you may have also learned from Calculus that the only type of function whose derivative is proportional to itself are exponential functions, 
+\[ f(x) = Ae^{bx} \implies f'(x) = Abe^{bx} \]
+In fact, exponential functions are the \textit{only} type of functions whose derivatives are proportional to the functions themselves. So we could conclude that the velocity due to a drag force must be an exponential function (And this process method is called \textit{Ansatz}, "guess" or "estimation" in German), 
+\[ v(t) = Ae^{rt} \]
+For some constants $A$ and $r$ that we need to find. Differentiate our proposed solution for $v$, 
+\[ \Dot{v} = Are^{rt} \]
+And plug these results into the equation of motion, 
+\[ Are^{rt} = (\frac{-b}{m})Ae^{rt} \]
+Thus, 
+\[ r = \frac{-b}{m} \implies v = Ae^{-bt/m} \]
+As we are given the bacterium's initial velocity, 
+\[ v_0 = v(t = 0) = Ae^0 = A \]
+Thus we have, 
+\[ v = v_0e^{-bt/m} = v_0e^{-t / \tau} \]
+Consistent with the results we found with Separation of Variables. 
+\end{example}
+
+\subsection{The Addition of Gravity}
+
+\begin{example}
+Falling Raindrop \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.9} \\
+The Earth’s atmosphere normally contains a large number of very small particles, for instance water droplets and carbon soot, generally called aerosols. Consider a spherical water droplet in still air falling under gravity, when also subject to a drag force $F_v = -bv$. Solve the equation of motion to find the speed at any time after the droplet is released from rest. \\
+
+\textbf{Solution:} Per Newton's Second Law, 
+\[ F = m\Dot{v} = -bv + mg \implies \Dot{v} + \frac{b}{m}v = g \]
+Notice that we can rewrite the right hand side as
+\[ \Dot{v} + \frac{b}{m}v = 0 + g \]
+We exploit the fact that the derivative of the sum of two functions is distributive, i.e.
+\[ \frac{d}{dx}(f(x) + g(x)) = f'(x) + g'(x) \]
+Therefore, if we separately solve two independent solutions for the two following equations
+\[ \begin{cases}
+\Dot{v_1} + \frac{b}{m}v_1 = 0 \\
+\Dot{v_2} + \frac{b}{m}v_2 = g
+\end{cases}\]
+And add them together, 
+\[ v = v_1 + v_2 \]
+Then $v$ solves the differential equation in full. \\
+Recall the first of the two equations is as if the object is moving under a drag force without the influence of gravity, which we have solved earlier, 
+\[ v_1 = Ae^{-t/\tau} \]
+Where $\tau = m/b$. Since there is also a second term contributing to $v$, we cannot determine $A$ until we put together the full solution. \\
+For the second equation, we want some combination of $v$ and its derivatives to be equal to a constant. $v$ must then be a constant to make this work. \textit{(In fact, when the right hand side of the equation is a degree-n polynomial, the solution must take the form of a polynomial of the same degree.)}
+\[ v = v_T \implies \Dot{v} = 0 \]
+\[ 0 + \frac{b}{m}v_T = g \implies v_T = \frac{mg}{b} \]
+Where $v_T$ is a constant which we will specify later. Putting together the two solutions, 
+\[ v = Ae^{-t/\tau} + \frac{mg}{b} \]
+Plug in the condition where the raindrop starts at rest at $t = 0$, 
+\[ v(t = 0)  = A + \frac{mg}{b} = 0 \implies A = -\frac{mg}{b} \]
+Thus we have, 
+\[ v = v_T(1 - e^{-t/\tau}) \]
+Here, $v_T = mg/b$ is the terminal velocity. The raindrop starts from rest, and accelerates to terminal velocity. At terminal velocity, the Drag force and Gravity have equal magnitudes, preventing the object from accelerating further. 
+\end{example}
+
+You could verify these results with Separation of Variables, but I shall omit the derivation here. If you continue your career in the Physical Sciences, differential equations like these will appear frequently. As the physical systems you study become increasingly complicated, older methods become slow, or perhaps straight up unfeasible. Although Physics 7A may not demand you to learn these new techniques, I still suggest you pick up these skills sooner rather than later. 
+
+\subsection{Conclusion: First Order Differential Equation}
+
+We make these conclusions from the examples above. 
+
+\begin{definition}
+Solution to First Order Homogeneous Differential Equations. \\
+Given a function $y(x)$ and its derivative $y'(x)$, and its initial value $y(x = 0) = y_0$, related by the following equation, 
+\begin{equation}
+y' - ay = 0
+\end{equation}
+For some constant $a$, its solution is given by
+\begin{equation}
+y(x) = Ae^{ax}
+\end{equation}
+For some constant $A$, whose value is determined by enforcing the initial condition on $y$. 
+\end{definition}
+
+\begin{definition}
+Solution to First Order Nonhomogeneous Differential Equations. \\
+Given a function $y(x)$ and its derivative $y'(x)$, and its initial value $y(x = 0) = y_0$, related by the following equation, 
+\begin{equation}
+y' - ay = b
+\end{equation}
+For some constants $a$ and $b$, we separately consider these two equations, 
+\begin{equation}
+y_1' - ay_1 = 0
+\end{equation}
+\begin{equation}
+y_2' - ay_2 = b
+\end{equation}
+Where, \\
+The first equation has the solution
+\begin{equation}
+y_1 = Ae^{ax} 
+\end{equation}
+For some constant $A$. \\
+The second equation has the solution
+\begin{equation}
+y_2 = \frac{-b}{a}
+\end{equation}
+And the full solution is given by 
+\begin{equation}
+y = y_1 + y_2
+\end{equation}
+The value of $A$ is determined by enforcing the initial condition on $y$. 
+\end{definition}
+
+\section{Second Order Differential Equation}
+\subsection{Simple Harmonic Motion}
+
+You may have undoubtedly learned some formulas that describe Simple Harmonic Motion from the 7A lecture or prior physics classes. We do not want you to unlearn those formulas; however, we will present a more rigorous derivation, and you should be aware of the mathematical justifications that stand behind it. 
+
+\begin{example}
+A Mass on a Spring \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.10} \\
+In the mid-seventeenth century Robert Hooke (a contemporary of Newton) discovered that the extension of a spring is proportional to the applied force, for both positive and negative displacements. The force $F_s$ exerted by a spring is given by Hooke’s law, $F_s = -k(x - x_0)$, where $k$ is a constant called the spring constant and $x - x_0$ is the displacement of the end of the spring from its equilibrium position $x_0$. At time $t = 0$, we pull the block for a distance $X$ and release it from rest. Take the zero of the coordinate system to lie at the equilibrium position. Solve for the motion of the block. \\
+
+\textbf{Solution:} The equation of motion is
+\[ F_s = m\Ddot{x} = -kx \implies \Ddot{x} = \frac{-k}{m}x \]
+Notice that in this expression, the second derivative of $x$ is proportional to $x$ itself. Conveniently, you may have also learned from Calculus that the only type of function whose second derivative is proportional to itself are sinusoidal functions, 
+\[ f(x) = A\cos(cx) \implies f'(x) = -Ac^2\cos(cx) \]
+\[ f(x) = B\sin(cx) \implies f'(x) = -Bc^2\sin(cx) \]
+And since the derivative of a sum of two functions is distributive, 
+\[ \frac{d}{dx}(f(x) + g(x)) = f'(x) + g'(x) \]
+We can conclude that the solution to the spring-mass system must be
+\[ x = A\cos(\omega t) + B\sin(\omega t) \]
+For some constants $A$, $B$, and $\omega$. \\
+Or using the results of Note 0, Problem 5(a), 
+\[ x = C\cos(\omega t + \phi) \]
+Where $C = \sqrt{A^2 + B^2}$ and $\phi = -\arctan(B/A)$.
+\[ \Ddot{x} = -C\omega^2\cos(\omega t + \phi) \]
+Plug these results into the equation of motion, 
+\[ -C\omega^2\cos(\omega t + \phi) = \frac{-k}{m} C\cos(\omega t + \phi) \]
+Thus the frequency of the motion $\omega$ is given by
+\[ \omega = \sqrt{k/m} \]
+Initially, at $t = 0$, the block is at its maximum position $X$. Therefore $\phi = 0$ or else our motion would not begin from rest at its maximum amplitude. 
+\[ \phi = 0 \implies X = x(0) = C\cos(0) = C \]
+Thus we have, 
+\[ x = X\cos(\omega t) \]
+\fig{figs/n1/cos.jpg}{Position-Time Graph of Simple Harmonic Motion}{0.5}{0}
+\end{example}
+
+e
+
+\begin{warning}
+We live in a real world where physical systems are denoted by real-valued quantities. We can use complex numbers to simplify our calculations, but only the Real part of our solution describes the actual motion of the system. 
+\end{warning}
+
+\end{document}
