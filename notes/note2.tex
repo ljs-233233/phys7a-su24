@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 2}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -35,17 +64,323 @@
 
 \begin{center}
 \vspace{3in}
-{\Large Note 2 } \\[0.05in]
-Driven Oscillator, Mechanical Impedance \\ [0.5in]
+{\Large Note 2} \\[0.05in]
+Damped Oscillators (Part 2), Driven Oscillators and Frequency Response  \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
 \end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+We will continue our discussion on \textbf{Differential Equations} and study the remaining forms of \textbf{Damped Oscillators}. Then, we will extend our discussions to \textbf{Driven Oscillators}, or Second-Order Nonhomogeneous Differential Equations in general. We will briefly introduce the notion of \textbf{Frequency Response}, a concept widely used by engineers in processing mechanical and electric signals. 
+
+\subsection*{Review}
+
+You should be familiar with the results we derived in Note 1, as well as the following relationships. 
+
+\begin{itemize}
+\item The relationships between Position, Velocity, and Acceleration: 
+\[ x = \int v \ dt \]
+\[ v = \int a \ dt \]
+\[ v = \frac{dx}{dt}\]
+\[ a = \frac{dv}{dt} \]
+\item Newton's Second Law of Motion: 
+\[ F = ma \]
+\item Mathematical expressions of certain Forces that we will study, including: \\
+Viscosity, given as a velocity-dependent Friction: 
+\[ F_v = -cv \]
+Elastic Force, given by Hooke's Law: 
+\[ F_s = -kx \]
+\item Some common derivatives: 
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\end{itemize}
+\pagebreak
 
 % this is a comment
 
-\section{1}
-1
+\section{Damped Oscillators, Continued}
+\subsection{The Spring-Mass-Damper Model}
 
-\subsection{11}
+A \textit{Damper} is a mechanical element, similar to a spring, that connects to two objects on its two ends. However, unlike a spring, which produces a force dependent on the position difference of the two objects (i.e. how long the spring is being stretched), a damper produces a force that depends on the velocity difference on its two sides (i.e. how fast the damper is moving relatively), opposing the tendency of motion. Dampers are very commonly used in real life -- in cars, buildings, and electronics, to reduce the impact of shocks and collisions. \\
+The force produced by a damper is given by the relation
+\[ F_D = -b(v_1 - v_2) \]
 
-1
+Therefore, a damper connected to an immobile wall and a mass with velocity $v$ produces a resistive force on the mass that equals to
+\[ F_D = -bv \]
+
+Mathematically, a mass on a spring and a damper gives the same equation of motion as the mass-spring system submerged in a resistive fluid. 
+\[ F = -bv - kx \]
+
+In these notes, we shall adopt the spring-mass-damper model in our discussion of damped oscillators to be consistent with the conventions in mechanical engineering. 
+\fig{figs/n2/damper.png}{The Spring-Mass-Damper Model}{1.25}{0}
+
+\subsection{Overdamped, Critically Damped, and Underdamped Oscillators}
+
+Recall the setup of the damped oscillator from Note 1: 
+\[ F = m\Ddot{x} = -b\Dot{x} - kx \]
+\[ \Ddot{x} + \frac{b}{m}\Dot{x} + \frac{k}{m}x = 0 \]
+Where we define the parameters $\beta = b/2m$, and $\omega_0 = \sqrt{k / m}$, 
+\[ \Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = 0 \]
+And we proposed the solution 
+\[ \Tilde{x} = \Tilde{A}e^{\lambda t} \]
+For some constants $\Tilde{A}$ and $\lambda$, possibly complex. Also, for consistency with the terminologies used by engineers, we shall refer to this complex exponential solution as the \textbf{Phasor} of $x$. Thus
+\[ \Dot{\Tilde{x}} = \Tilde{A}\lambda e^{\lambda t} \]
+\[ \Ddot{\Tilde{x}} = \Tilde{A}\lambda^2 e^{\lambda t} \]
+Plugging these terms into the equation of motion, 
+\[ \Tilde{A}\lambda^2 e^{\lambda t} + 2\beta \Tilde{A}\lambda e^{\lambda t} + \omega_0^2 \Tilde{A}e^{\lambda t} = 0 \]
+Cancelling out the common factor, 
+\[ \lambda^2 + 2\beta\lambda + \omega_0^2 = 0 \]
+Solving for $\lambda$ using the quadratic formula,
+\[ \lambda = \frac{-2\beta \pm \sqrt{4\beta^2 - 4\omega_0^2}}{2} = -\beta \pm \sqrt{\beta^2 - \omega_0^2} \]
+
+\begin{definition}
+The Eigenvalue Equation of the Damped Oscillator \\
+For a damped oscillator modeled by the equation
+\begin{equation}
+\Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = 0
+\end{equation}
+The phasor of the solution $\Tilde{x}$ is given by
+\begin{equation}
+\Tilde{x} = \Tilde{A}e^{\lambda t}
+\end{equation}
+And
+\begin{equation}
+\lambda = -\beta \pm \sqrt{\beta^2 - \omega_0^2}
+\end{equation}
+Where $\lambda$ is a possibly complex quantity, whose exact nature depends on the relationship between $\beta$ and $\omega_0$. 
+\end{definition}
+
+In Note 1, we restricted our solution under the condition $\beta^2 < \omega_0^2$. Here, we expand our discussion to all three possibilities of this (in)equality. 
+
+\subsubsection{The Overdamped Oscillator: $\beta^2 > \omega_0^2$}
+
+In the case that $\beta^2 > \omega_0^2$, the exponent $\lambda$ is purely a real quantity, taking on two negative values \textit{(Since $\sqrt{\beta^2 - \omega_0^2} < \beta$)}, 
+\[ \begin{cases}
+\lambda_1 = -\beta + \sqrt{\beta^2 - \omega_0^2} = - \gamma_1 \\
+\lambda_2 = -\beta - \sqrt{\beta^2 - \omega_0^2} = - \gamma_2
+\end{cases} \]
+
+Recall that
+\[ \frac{d}{dx}(f(x) + g(x)) = f'(x) + g'(x) \]
+
+The solution to the equation of motion is thus the sum of the two independent cases. 
+\[ x(t) = Ae^{-\gamma_1t} + Be^{-\gamma_2t} \]
+For constants $A$ and $B$, determined by the initial conditions ($x_0$, $v_0$) of the system. 
+
+\begin{definition}
+Solution to the Overdamped Oscillator \\
+An overdamped oscillator, given by the condition $\beta^2 > \omega_0^2$, has general solution in the form
+\begin{equation}
+x(t) = Ae^{-\gamma_1t} + Be^{-\gamma_2t}
+\end{equation}
+Where
+\[ \begin{cases}
+- \gamma_1 = -\beta + \sqrt{\beta^2 - \omega_0^2} \\
+- \gamma_2 = -\beta - \sqrt{\beta^2 - \omega_0^2}
+\end{cases} \]
+The values of the constants $A$ and $B$ are determined by enforcing the initial condition on $x$ and $\Dot{x}$.
+\end{definition}
+
+\subsubsection{The Critically Damped Oscillator: $\beta^2 = \omega_0^2$}
+
+Notice that when $\beta^2 = \omega_0^2$, the term under the square root becomes $0$, and the exponent $\lambda$ becomes a single value, 
+\[ \lambda = - \beta \]
+
+One may immediately conclude that 
+\[ x_1 = Ae^{-\beta t} \]
+Is a solution to the critically damped oscillator. That is indeed correct. However, this solution is not complete. In general, an $n$-th order differential equation (i.e. the highest order of derivative in the equation of motion is $n$) has $n$ independent solutions. It turns out that
+\[ x_2 = Bte^{-\beta t} \]
+Is also a solution to the system. Thus
+\[ x = Ae^{-\beta t} + Bte^{-\beta t} \]
+Gives the full solution to the equation of motion. \\ 
+If you are not convinced easily by words without mathematical justification, you could take the derivatives of $x$ and plug the results into the equation of motion, and find that the equation is indeed satisfied when $\beta^2 = \omega_0^2$, or $\beta = \omega_0$. I regret leaving these results unproven, but I must tell you again that typing these notes has been an excruciating (while also enjoyable) effort, and I will omit typing those long derivations here. 
+
+\begin{definition}
+Solution to the Critically Damped Oscillator \\
+A critically damped oscillator, given by the condition $\beta^2 = \omega_0^2$, has general solution in the form
+\begin{equation}
+x(t) = Ae^{-\beta t} + Bte^{-\beta t}
+\end{equation}
+For some constants $A$ and $B$, whose values are determined by enforcing the initial condition on $x$ and $\Dot{x}$. 
+\end{definition}
+
+In Note 1, we provided a detailed solution for underdamped oscillators ($\beta^2 < \omega_0^2$); we shall skip the in-depth discussions here. 
+
+\subsection{Summary on Damped Oscillators}
+
+Notice the parameters of the oscillator that we defined, $\beta = b/2m$, and $\omega_0 = \sqrt{k / m}$: $\beta$ measures the strength of the damper/friction force, and $\omega_0$ describes the strength of the spring force. 
+
+\begin{itemize}
+\item For the \textbf{Underdamped} case, 
+\[ \beta^2 < \omega_0^2 \implies x = Ce^{-\beta t}\cos(\omega_1 t + \phi) \]
+The force from the damper/friction is weak compared to the spring, and the oscillatory motion is largely conserved. However, as $F_D = -bv$ is a neoconservative force, energy is gradually lost, and the oscillation amplitude decreases until the system comes to rest at the equilibrium position. 
+\item For the \textbf{Overdamped} case, 
+\[ \beta^2 > \omega_0^2 \implies x = Ae^{-\gamma_1t} + Be^{-\gamma_2t} \]
+The force from the damper/friction completely dominates over the spring. Rather than oscillating, the solution resembles an exponential decay down to equilibrium -- Similar to the example in Note 1, where a bacterium feels a drag force in viscous liquid. 
+\item For the \textbf{Critically Damped} case, 
+\[ \beta^2 = \omega_0^2 \implies x = Ae^{-\beta t} + Bte^{-\beta t} \]
+The spring is not strong enough to overcome the damper/friction, nor does the damper/friction dominate over the spring. The motion in this case is thus somewhere in between the other two cases. 
+\end{itemize}
+
+\fig{figs/n2/oscillators.jpg}{The motion of Damped Oscillators: (a) The Overdamped Case; (b) The Critically Damped Case; (c) The Underdamped Case. }{0.6}{0}
+
+\pagebreak
+
+\section{Driven Oscillators}
+\subsection{The Driven Spring-Mass-Damper System}
+
+Now, let us consider the motion of a spring-mass-damper oscillator, where the spring and damper are connected in parallel, and the mass is subject to an external, sinusoidal driving force $F(t) = F_0\cos(\omega t)$. \textit{(Note that $\omega$ need not equal to $\omega_0$)} 
+\fig{figs/n2/damper.png}{The Spring-Mass-Damper System}{1.25}{0}
+The equation of motion is
+\[ F = m\Ddot{x} = -b\Dot{x} - kx + F_0\cos(\omega t) \]
+Thus
+\[ \Ddot{x} + \frac{b}{m}\Dot{x} + \frac{k}{m}x = \frac{F_0}{m}\cos(\omega t) \]
+Or in terms of the parameters $\beta = b/2m$, $\omega_0 = \sqrt{k / m}$, and $f_0 = \frac{F_0}{m}$, 
+\[ \Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = f_0\cos(\omega t) \]
+Equivalently, we can write this expression in terms of complex phasors, and convert our solution back into the real form at the end. Because
+\[ \Re(e^{i\omega t}) = \cos(\omega t) \]
+Therefore
+\[ \Ddot{\Tilde{x}} + 2\beta\Dot{\Tilde{x}} + \omega_0^2\Tilde{x} = f_0e^{i\omega t} \]
+We can use the same technique as in Note 1 to break down this differential equation, 
+\[ \Ddot{\Tilde{x}} + 2\beta\Dot{\Tilde{x}} + \omega_0^2\Tilde{x} = 0 + f_0e^{i\omega t} \]
+And solve these two cases separately
+\[ \begin{cases}
+\Ddot{\Tilde{x}} + 2\beta\Dot{\Tilde{x}} + \omega_0^2\Tilde{x} = 0 \\
+\Ddot{\Tilde{x}} + 2\beta\Dot{\Tilde{x}} + \omega_0^2\Tilde{x} = f_0e^{i\omega t}
+\end{cases} \]
+The first of which is the unforced damped oscillator that we solved in the previous section. I will omit this unforced solution in our following discussions on driven oscillators. As one may conclude from the mathematical expressions or the position-versus-time graphs above, 
+\[ \Tilde{x}(t = \infty) \rightarrow 0 \]
+The motion dies down to the equilibrium position without the sustainment of an external force. I shall make this physical justification, which you could prove experimentally -- the typical damped oscillator without an external force in the real world, whether a spring-mass-damper system or a resistor-inductor-capacitor circuit, reaches $x = 0$ within one millisecond, and the unforced motion is indeed negligible. \\
+
+The forced solution, on the other hand, demands a particular solution that oscillates at the same frequency. i.e.
+\[ \Tilde{x} = Ae^{i(\omega t + \phi)} \]
+Where $A$ is the Amplitude of motion, and $\phi$ is a Phase Shift between the input force and the output oscillating position. 
+
+Mathematically, the right-hand side of the equation is an exponential function $e^{i\omega t}$. On the left-hand side, differentiating an exponential function cannot yield exponential functions with different exponents. Therefore, the equation of motion can only be satisfied if $\Tilde{x}$ oscillates at the same frequency. 
+
+Therefore, 
+\[ \Dot{\Tilde{x}} = i\omega Ae^{i(\omega t + \phi)} \]
+\[ \Ddot{\Tilde{x}} = -\omega^2 Ae^{i(\omega t + \phi)} \]
+Plugging into the equation of motion, 
+\[ -\omega^2 Ae^{i(\omega t + \phi)} + 2\beta i\omega Ae^{i(\omega t + \phi)} + \omega_0^2 Ae^{i(\omega t + \phi)} = f_0e^{i\omega t} \]
+Since 
+\[ e^{i(\omega t + \phi)} = e^{i\omega t}e^{i\phi} \]
+We can cancel out the common factor, 
+\[ -\omega^2 Ae^{i\phi} + 2\beta i\omega Ae^{i\phi} + \omega_0^2 Ae^{i\phi} = f_0 \]
+Thus, 
+\[ Ae^{i\phi} = \frac{f_0}{\omega_0^2 - \omega^2 + 2i\beta\omega} \]
+Where the Amplitude $A$ can be solved using the properties of complex numbers: 
+\[ A = |Ae^{i\phi}| = \sqrt{(Ae^{i\phi})^*(Ae^{i\phi})} \]
+\[ A = \sqrt{\frac{f_0}{\omega_0^2 - \omega^2 - 2i\beta\omega} \cdot \frac{f_0}{\omega_0^2 - \omega^2 + 2i\beta\omega}} \]
+\[ A = \frac{f_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2\beta\omega)^2}} \]
+And the Phase $\phi$,
+\[ \phi = \arctan(\frac{\Im(Ae^{i\phi})}{\Re(Ae^{i\phi})}) \]
+\[ \phi = -\arctan(\frac{2\beta\omega}{\omega_0^2 - \omega^2}) \]
+The position of the driven oscillator as a function of time is thus given by
+\[ x = A\cos(\omega t + \phi) \]
+We can reconcile this solution with our physical intuitions. Imagine yourself holding a spring whose other end connects to a block on a rough surface. If we move our end of the spring back and forth, our external work induces an oscillatory motion on the mass, explaining the overall behavior of a cosine function. And because of the elasticity of the spring, it takes some time for the force that we apply to be reflected on the mass, giving rise to a phase change $\phi$. 
+
+\begin{definition}
+Solution to the Driven Spring-Mass-Damper Oscillator. \\
+A spring-mass-damper oscillator under the driving force $F(t) = F_0\cos(\omega t)$ with equation of motion
+\begin{equation}
+\Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = f_0\cos(\omega t)
+\end{equation}
+Has the solution
+\begin{equation}
+x = A\cos(\omega t + \phi)
+\end{equation}
+Where
+\begin{equation}
+A = \frac{f_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2\beta\omega)^2}}
+\end{equation}
+And
+\begin{equation}
+\phi = -\arctan(\frac{2\beta\omega}{\omega_0^2 - \omega^2})
+\end{equation}
+\end{definition}
+
+\subsection{Transfer Function}
+
+Since the spring constant $k$ has units of $N/m$, we can write the amplitude of the external force as a product of $F_0 = kA_0$, where $k$ is the spring constant of the spring in the system, and $A_0$ is a constant with units of length that makes the math consistent. 
+\[ F_0 = kA_0 \implies f_0 = \frac{k}{m}A_0 = \omega_0^2A_0 \]
+In a sense, we can treat $A_0$ as the "input signal" to our physical system -- the behavior of the mass with the driving force as if no springs or dampers are attached. 
+\[ \Tilde{x}_{in} = A_0e^{i\omega t} \]
+And the "output signal" is the response of our physical system -- the motion of the mass under the influence of the spring and damper. 
+\[ \Tilde{x}_{out} = Ae^{i\phi}e^{i\omega t} \]
+Which we have solved for in the previous section, 
+\[ \Tilde{x}_{out} = \frac{\omega_0^2A_0e^{i\omega t}}{\omega_0^2 - \omega^2 + 2i\beta\omega} = \frac{A_0e^{i\omega t}}{1 - (\frac{\omega^2}{\omega_0^2}) + 2i(\frac{\beta\omega}{\omega_0^2})} \]
+For such a system that receives a signal \textit{$\Tilde{x}_{in}$} and outputs a signal \textit{$\Tilde{x}_{out}$}, we define its \textbf{Transfer Function} $H$ as the ratio between the output and input signals. 
+
+\begin{definition}
+Transfer Function. \\
+For a system that receives a signal $\Tilde{x}_{in}$ and outputs a signal $\Tilde{x}_{out}$, 
+\fig{figs/n2/system.jpg}{A Mechanical System}{0.25}{0}
+Its transfer function is given by
+\begin{equation}
+H(i\omega) = \frac{\Tilde{x}_{out}}{\Tilde{x}_{in}}
+\end{equation}
+\end{definition}
+
+The mathematical expression inside the brackets, $i\omega$, means that the input frequency $\omega$ always appears with a factor of $i$ attached to it \textit{(Note: $-\omega^2 = \big[ i\omega \big]^2$)}. If that is not the case, then unfortunately the transfer function must be incorrect. 
+
+The transfer function of our damped harmonic oscillator is
+\[ H(i\omega) = \frac{1}{1 - (\frac{\omega^2}{\omega_0^2}) + 2i(\frac{\beta\omega}{\omega_0^2})} \]
+
+With the transfer function, we can determine how much the system transmits or attenuates input signals of different frequencies. For example, consider the critically damped case where $\beta = \omega_0$, 
+\[ H(i\omega) = \frac{1}{1 - (\frac{\omega^2}{\omega_0^2}) + 2i(\frac{\omega}{\omega_0})} \]
+At small frequencies ($\omega \ll \omega_0$), 
+\[ H(i\omega) \rightarrow \frac{1}{1} \rightarrow 1 \]
+The signal gets transmitted. \\
+At large frequencies ($\omega \gg \omega_0$), 
+\[ H(i\omega) \rightarrow \frac{1}{1 - \infty^2 + 2i\infty} \rightarrow 0 \]
+The signal is greatly attenuated. 
+\pagebreak
+
+\section{Exercises}
+
+\begin{problem}
+A Stricken Critically Damped Oscillator. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 11.7} \\
+A critically damped oscillator is at rest at equilibrium. At $t = 0$, it is given a blow, increasing its velocity by $V$. Sketch the motion, and find the time at which the velocity starts to decrease.
+\end{problem}
+
+\begin{problem}
+Phase of the Velocity and Driving Force. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 11.9} \\
+Find the driving frequency for which the velocity of a driven damped oscillator is exactly in phase with the driving force $\phi = 0$.
+\end{problem}
+
+\begin{problem}
+Behavior of Critically Damped Oscillator. \\
+\textit{Physics 105, Fall 2023 (Chiang)} \\
+An overdamped oscillator is released at location $x_0$ with initial velocity $v_0$. Prove that it can only cross the origin $x = 0$ at most once. Find the condition on $x_0$ and $v_0$ for the oscillator to be able to cross the origin. 
+\end{problem}
+
+\begin{problem}
+Maximum Speed of an Overdamped Oscillator. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 4.27} \\
+An overdamped oscillator with natural frequency $\omega_0$ and damping coefficient $\beta$ starts out at position $x_0 > 0$. What is the maximum initial speed (directed toward the origin) it can have and not cross the origin?
+\end{problem}
+
+\begin{problem}
+No Damping Force. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 4.30} \\
+A particle of mass $m$ is subject to a spring force, $F_s = -kx$, and also a driving force, $F = F_0\cos(\omega t)$. But there is no damping force. Find the particular solution for $x(t) = A\cos(\omega t + \phi)$. What are $A$ and $\phi$? \textit{(Be careful: You need to consider two cases separately, $\omega < \omega_0$ and $\omega > \omega_0$.)}
+\end{problem}
+
+\begin{problem}
+Frequency Response. \\
+\textit{EECS 16B, Fall 2023 (Wu, Tennant, Parekh)} \\
+Given the transfer function
+\[ H(i\omega) = \frac{1}{(1 + i\frac{\omega}{\omega_1})(1 + i\frac{\omega}{\omega_2})} \]
+Where $\omega_1 \ll \omega_2$. \\
+Describe the system's output when (a) $\omega \ll \omega_1$, (b) $\omega_1 \ll \omega \ll \omega_2$, and (c) $\omega_2 \ll \omega$. 
+\end{problem}
 
 \end{document}

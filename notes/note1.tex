@@ -65,7 +65,7 @@
 \begin{center}
 \vspace{3in}
 {\Large Note 1 } \\[0.05in]
-Differential Equations, Damped Oscillator  \\ 
+Differential Equations, Damped Oscillators (Part 1)  \\ 
 \blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
 \end{center}
 
@@ -78,7 +78,7 @@ Learning the techniques to solve \textbf{Differential Equations} will be very he
 
 \subsection*{Review}
 
-You should be familiar with the following relationships that we will use in this note. 
+Having read Note 0, especially the section on Complex Numbers, would be helpful. Additionally, you should be familiar with the following relationships that we will use in this note. 
 
 \begin{itemize}
 \item The relationships between Position, Velocity, and Acceleration: 
@@ -89,7 +89,7 @@ You should be familiar with the following relationships that we will use in this
 \item Newton's Second Law of Motion: 
 \[ F = ma \]
 \item Mathematical expressions of certain Forces that we will study, including: \\
-Viscosity, given by a velocity-dependent Friction: 
+Viscosity, given as a velocity-dependent Friction: 
 \[ F_v = -cv \]
 Elastic Force, given by Hooke's Law: 
 \[ F_s = -kx \]
@@ -106,7 +106,7 @@ Elastic Force, given by Hooke's Law:
 \section{First Order Differential Equation}
 \subsection{Separation of Variables}
 
-We will motivate the notion of differential equations through a few types of motion commonly seen in physics. We shall start by reviewing the technique of Separation of Variables one may have learned from Calculus. 
+We will motivate the notion of differential equations through a series of commonly seen physical systems. We shall start by reviewing the technique of Separation of Variables one may have learned from Calculus. 
 
 \begin{example}
 A Bacterium with a Viscous Drag Force \\
@@ -160,7 +160,7 @@ Consistent with the results we found with Separation of Variables.
 
 \begin{example}
 Falling Raindrop \\
-\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.9} \\
+çç\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.9} \\
 The Earth’s atmosphere normally contains a large number of very small particles, for instance water droplets and carbon soot, generally called aerosols. Consider a spherical water droplet in still air falling under gravity, when also subject to a drag force $F_v = -bv$. Solve the equation of motion to find the speed at any time after the droplet is released from rest. \\
 
 \textbf{Solution:} Per Newton's Second Law, 
@@ -192,7 +192,7 @@ Thus we have,
 Here, $v_T = mg/b$ is the terminal velocity. The raindrop starts from rest, and accelerates to terminal velocity. At terminal velocity, the Drag force and Gravity have equal magnitudes, preventing the object from accelerating further. 
 \end{example}
 
-You could verify these results with Separation of Variables, but I shall omit the derivation here. If you continue your career in the Physical Sciences, differential equations like these will appear frequently. As the physical systems you study become increasingly complicated, older methods become slow, or perhaps straight up unfeasible. Although Physics 7A may not demand you to learn these new techniques, I still suggest you pick up these skills sooner rather than later. 
+You could verify these results with Separation of Variables, but I shall omit the derivation here. If you continue your career in the Physical Sciences, differential equations like these will appear frequently. As the physical systems you study become increasingly complicated, older methods become slow, or perhaps straight up unfeasible. Although Physics 7A may not demand you to learn these new techniques yet, I still suggest you pick up these skills sooner rather than later. 
 
 \subsection{Conclusion: First Order Differential Equation}
 
@@ -202,11 +202,11 @@ We make these conclusions from the examples above.
 Solution to First Order Homogeneous Differential Equations. \\
 Given a function $y(x)$ and its derivative $y'(x)$, and its initial value $y(x = 0) = y_0$, related by the following equation, 
 \begin{equation}
-y' - ay = 0
+y' + ay = 0
 \end{equation}
 For some constant $a$, its solution is given by
 \begin{equation}
-y(x) = Ae^{ax}
+y(x) = Ae^{-ax}
 \end{equation}
 For some constant $A$, whose value is determined by enforcing the initial condition on $y$. 
 \end{definition}
@@ -215,24 +215,24 @@ For some constant $A$, whose value is determined by enforcing the initial condit
 Solution to First Order Nonhomogeneous Differential Equations. \\
 Given a function $y(x)$ and its derivative $y'(x)$, and its initial value $y(x = 0) = y_0$, related by the following equation, 
 \begin{equation}
-y' - ay = b
+y' + ay = b
 \end{equation}
 For some constants $a$ and $b$, we separately consider these two equations, 
 \begin{equation}
-y_1' - ay_1 = 0
+y_1' + ay_1 = 0
 \end{equation}
 \begin{equation}
-y_2' - ay_2 = b
+y_2' + ay_2 = b
 \end{equation}
 Where, \\
 The first equation has the solution
 \begin{equation}
-y_1 = Ae^{ax} 
+y_1 = Ae^{-ax} 
 \end{equation}
 For some constant $A$. \\
 The second equation has the solution
 \begin{equation}
-y_2 = \frac{-b}{a}
+y_2 = \frac{b}{a}
 \end{equation}
 And the full solution is given by 
 \begin{equation}
@@ -240,6 +240,7 @@ y = y_1 + y_2
 \end{equation}
 The value of $A$ is determined by enforcing the initial condition on $y$. 
 \end{definition}
+\pagebreak
 
 \section{Second Order Differential Equation}
 \subsection{Simple Harmonic Motion}
@@ -276,10 +277,185 @@ Thus we have,
 \fig{figs/n1/cos.jpg}{Position-Time Graph of Simple Harmonic Motion}{0.5}{0}
 \end{example}
 
-e
+\subsection{Complex Exponentials}
+
+In the previous sections, we have established that the first derivative of an exponential function is proportional to itself, and the second derivative proportional to the first. It turns out that exponential functions are perfectly fine in solving Simple Harmonic Motions, though with some extra complexities, which we will discuss below. 
+
+\begin{example}
+A Mass on a Spring \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.10 (Continued)} \\
+In the mid-seventeenth century Robert Hooke (a contemporary of Newton) discovered that the extension of a spring is proportional to the applied force, for both positive and negative displacements. The force $F_s$ exerted by a spring is given by Hooke’s law, $F_s = -k(x - x_0)$, where $k$ is a constant called the spring constant and $x - x_0$ is the displacement of the end of the spring from its equilibrium position $x_0$. At time $t = 0$, we pull the block for a distance $X$ and release it from rest. Take the zero of the coordinate system to lie at the equilibrium position. Solve for the motion of the block. \\
+
+\textbf{Alternative Solution:} The equation of motion is
+\[ F_s = m\Ddot{x} = -kx \implies \Ddot{x} = \frac{-k}{m}x \]
+We propose an exponential solution to this differential equation: 
+\[ \Tilde{x} = Ce^{\Omega t + \delta} \]
+For some constants $C$, $\Omega$, and $\delta$. Thus
+\[ \Ddot{\Tilde{x}} = C\Omega^2e^{\Omega t + \delta} \]
+Substitute these results into the equation of motion, 
+\[ C\Omega^2e^{\Omega t + \delta} = \frac{-k}{m}Ce^{\Omega t + \delta} \implies \Omega^2 = \frac{-k}{m} \]
+And we have, 
+\[ \Omega = \sqrt{\frac{-k}{m}} = i\sqrt{\frac{k}{m}} \]
+For consistency with our solution in the last example, we let $\omega = \sqrt{k/m}$ and $\delta = i\phi$, so that
+\[ \Tilde{x} = Ce^{i(\omega t + \phi)} \]
+We use the symbol $\ \Tilde{ } \ $ to denote a complex exponential solution to this equation of motion. Its real form is
+\[ x = \Re(\Tilde{x}) = C\cos(\omega t + \phi) \]
+Given the initial condition $x(t = 0) = X$, we find
+\[ x = X\cos(\omega t) \]
+\end{example}
+
+In conclusion, both sinusoidal and complex exponential functions are perfectly fine to describe Simple Harmonic Motion. It's a matter of personal preference for which method to use when solving a physical problem. However, if you prefer the latter, you must take this warning to heart. 
 
 \begin{warning}
 We live in a real world where physical systems are denoted by real-valued quantities. We can use complex numbers to simplify our calculations, but only the Real part of our solution describes the actual motion of the system. 
 \end{warning}
+
+\subsection{Conclusion: Second Order Differential Equation}
+
+We make these conclusions from the examples above. 
+\begin{definition}
+Sinusoidal Solution to Second Order Homogeneous Differential Equations. \\
+Given a function $y(x)$, its first derivative $y'(x)$ second $y''(x)$, and its initial value $y(x = 0) = y_0$, initial velocity $y'(x = 0) = y'_0$ related by the following equation, 
+\begin{equation}
+y'' + \omega^2y = 0
+\end{equation}
+For some constant $\omega$, its solution is given by
+\begin{equation}
+y(x) = A\cos(\omega x) + B\sin(\omega x)
+\end{equation}
+Where $\omega = \sqrt{k / m}$. Or equivalently
+\begin{equation}
+y(x) = C\cos(\omega x + \phi)
+\end{equation}
+For some constants $A$, $B$, $C$, and $\phi$, whose values are determined by enforcing the initial condition on $y$, $y'$. 
+\end{definition}
+
+\begin{definition}
+Complex Exponential Solution to Second Order Homogeneous Differential Equations. \\
+Given a function $y(x)$, its first derivative $y'(x)$ second $y''(x)$, and its initial value $y(x = 0) = y_0$, initial velocity $y'(x = 0) = y'_0$ related by the following equation, 
+\begin{equation}
+y'' + \omega^2y = 0
+\end{equation}
+For some constant $\omega$, its solution, as a complex exponential, is given by
+\begin{equation}
+\Tilde{y}(x) = Ce^{\Omega x + \delta}
+\end{equation}
+For some constants $C$, $\Omega$, and $\delta$ which are possibly complex. \\
+Or equivalently, 
+\begin{equation}
+\Tilde{y}(x) = Ce^{i(\omega x + \phi)} \implies y(x) = C\cos(\omega x + \phi)
+\end{equation}
+For some constants $A$, $B$, $C$, and $\phi$, whose values are determined by enforcing the initial condition on $y$, $y'$. 
+\end{definition}
+\pagebreak
+
+\section{Underdamped Harmonic Motion}
+With all the mathematical tools we have so far, we can proceed to solve a more complex physical phenomenon -- the damped harmonic oscillator, which combines the mass-spring oscillatory motion with a velocity-dependent friction force. 
+
+\subsection{Example: A Mass on a Spring under Water}
+
+\begin{example}
+A Mass on a Spring under Water \\
+\textit{Physics 105, Fall 2023 (Chiang)} \\
+A block of mass $m$ is placed on a frictionless horizontal surface and is connected with a spring of spring constant $k$. The whole system is then immersed in water. We set the horizontal coordinate x of the block such that the spring is relaxed when $x = 0$. As such the spring force on the block is given by $F_s = -kx$. When the block moves in the water, we assume it experiences a drag force $F_D = -bv_x$, where $v_x = \Dot{x}$ is the velocity of the block. We define the parameters $\beta = b/2m$, and $\omega_0 = \sqrt{k / m}$. The block is only allowed to move along the x-axis. Find the general solution of motion under the condition $\beta^2 < \omega_0^2$. \\
+
+\textbf{Solution:} From Newton's Second Law of Motion, 
+\[ F = m\Ddot{x} = -b\Dot{x} - kx \]
+\[ \Ddot{x} + \frac{b}{m}\Dot{x} + \frac{k}{m}x = 0 \]
+Thus 
+\[ \Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = 0 \]
+Since both the spring force and the drag force have a solution of an exponential function, we will propose a solution
+\[ \Tilde{x} = \Tilde{A}e^{\lambda t} \]
+For some constants $\Tilde{A}$ and $\lambda$, possibly complex. Thus
+\[ \Dot{\Tilde{x}} = \Tilde{A}\lambda e^{\lambda t} \]
+\[ \Ddot{\Tilde{x}} = \Tilde{A}\lambda^2 e^{\lambda t} \]
+Plugging these terms into the equation of motion, 
+\[ \Tilde{A}\lambda^2 e^{\lambda t} + 2\beta \Tilde{A}\lambda e^{\lambda t} + \omega_0^2 \Tilde{A}e^{\lambda t} = 0 \]
+Cancelling out the common factor, 
+\[ \lambda^2 + 2\beta\lambda + \omega_0^2 = 0 \]
+We can then solve for $\lambda$ using the quadratic formula,
+\[ \lambda = \frac{-2\beta \pm \sqrt{4\beta^2 - 4\omega_0^2}}{2} = -\beta \pm \sqrt{\beta^2 - \omega_0^2} \]
+Since $\beta^2 < \omega_0^2$, 
+\[ \lambda = -\beta \pm i \sqrt{\omega_0^2 - \beta^2} = -\beta \pm i \omega_1 \]
+We define $\omega_1 = \sqrt{\omega_0^2 - \beta^2}$ as the new oscillatory frequency of our system -- The addition of the drag force changes the frequency of motion. \\
+And our solution, in the complex exponential form, can be written as the sum of the two roots of $\lambda$. 
+\[ \Tilde{x} = \Tilde{A}e^{-\beta t +i\omega_1t} + \Tilde{B}e^{-\beta t -i\omega_1t} \]
+Since 
+\[ e^{a + b} = e^a \cdot e^b \]
+We can write
+\[ \Tilde{x} = e^{-\beta t}(\Tilde{A}e^{i\omega_1 t} + \Tilde{B}e^{-i\omega_1 t}) \]
+Since
+\[ \begin{cases}
+\Re(e^{i\omega_1 t}) = \cos(\omega_1 t) \\
+\Re(ie^{-i\omega_1 t}) = \sin(\omega_1 t)
+\end{cases} \]
+The real form of our solution can be written as
+\[ x = e^{-\beta t}(A\cos(\omega_1 t) + B\sin(\omega_1 t)) \]
+Or equivalently
+\[ \Tilde{x} = \Tilde{C}e^{-\beta t}e^{i(\omega_1t + \phi)} \implies x = Ce^{-\beta t}\cos(\omega_1 t + \phi) \]
+The constants $C$ and $\phi$ are determined by the initial conditions. 
+
+\fig{figs/n1/damp.jpg}{The Underdamped Oscillator}{0.6}{0}
+\end{example}
+
+I have intentionally omitted commenting on the relationships between $\Tilde{A}$, $\Tilde{B}$, $\Tilde{C}$, $A$, $B$, $C$, and $\phi$. These constant terms purely depend on the conditions given in the problem (initial position or velocity). Each formula above is equally valid in expressing $x(t)$, yielding equivalent solutions when solved for the appropriate constant terms. \\
+If you are not satiated by this qualitative explanation, please refer to these textbooks (listed in increasing complexity) for a more thorough discussion: 
+\begin{itemize}
+\item Kleppner and Kolenkow, An Introduction to Mechanics, Section 11.3
+\item Morin, Introduction to Classical Mechanics, Section 3.2.2
+\item Helliwell and Sahakian, Modern Classical Mechanics, Section 1.4
+\item Taylor, Classical Mechanics, Section 5.4
+\end{itemize}
+
+\subsection{Conclusion: Underdamped Harmonic Oscillator}
+
+We make these conclusions from the example above. 
+\begin{definition}
+Solution to the Underdamped Harmonic Oscillator. \\
+Given the equation of motion in the form
+\begin{equation}
+\Ddot{x} + 2\beta\Dot{x} + \omega_0^2x = 0
+\end{equation}
+Where $\beta^2 < \omega_0^2$. We define $\omega_1 = \sqrt{\omega_0^2 - \beta^2}$. The solution to the equation of motion is given by: \\
+In the complex exponential form, 
+\[ \Tilde{x} = e^{-\beta t}(\Tilde{A}e^{i\omega_1 t} + \Tilde{B}e^{-i\omega_1 t}) = \Tilde{C}e^{-\beta t}e^{i(\omega_1t + \phi)} \]
+Or in the real, sinusoidal form, 
+\[ x = e^{-\beta t}(A\cos(\omega_1 t) + B\sin(\omega_1 t)) = Ce^{-\beta t}\cos(\omega_1 t + \phi) \]
+For some constants $\Tilde{A}$, $\Tilde{B}$, $\Tilde{C}$, $A$, $B$, $C$, and $\phi$, whose values are determined by enforcing the initial condition on $x$, $\Dot{x}$. 
+\end{definition}
+I hope that through these examples, you can gain some appreciation for these new methods of approaching differential equations. Indeed, differential equations involve more complexities than we could ever discuss here -- one could teach a sequence of courses on differential equations (Like Math 54, 123, 126, 204, 222 at UC Berkeley). However, the methods that we went over in these notes should be sufficient to carry you through the intermediate upper-division Physics classes (105, 110, and 137), or similar classes in Natural Science and Engineering. 
+
+\pagebreak
+
+\section{Exercises}
+
+\begin{problem}
+The Method of Undetermined Coefficients. \\
+\textit{Nagle, Saff, and Snider, Fundamentals of Differential Equations, Problem 4.4.12} \\
+Find the solution $x(t)$ to the following differential equation. 
+\[ 2\Dot{x} + x = 3t^2 \]
+\end{problem}
+
+\begin{problem}
+Retarding Force. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 3.24} \\
+A particle of mass m moving along a straight line is acted on by a retarding force (one always directed against the motion) $F = -be^{av}$, where $b$ and $a$ are constants and $v$ is the velocity. At $t = 0$ it is moving with velocity $v_0$. Find the velocity at later times.
+\end{problem}
+
+\begin{problem}
+Full Solution to the Underdamped Harmonic Oscillator. \\
+\textit{Physics 105, Fall 2023 (Chiang)} \\
+The solution of the underdamped harmonic oscillator is $x(t) = Ce^{-\beta t}\cos(\omega_1 t + \phi)$, where $\omega_1 = \sqrt{\omega_0^2 - \beta^2}$. Find the arbitrary constants $C$ and $\phi$ in terms of the initial position $x_0$ and the initial velocity $v_0$. 
+\end{problem}
+
+\begin{problem}
+RLC Circuit with an AC Input. \\
+\textit{EECS 16B, Fall 2023 (Wu, Tennant, Parekh)} \\
+Suppose an RLC circuit with an AC battery input can be modeled by the differential equation
+\[ \Ddot{x} + 5\Dot{x} + 6x = 2\Dot{y} \]
+Where
+\[ y(t) = Y_0\cos(\omega t + \frac{\pi}{2}) \]
+Find the solution $x(t)$ of the system, up to a pair of constants $C_1$ and $C_2$ to be determined by the initial conditions of the circuit. 
+\end{problem}
 
 \end{document}

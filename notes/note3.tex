@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 2}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -35,17 +64,337 @@
 
 \begin{center}
 \vspace{3in}
-{\Large Note 3 } \\[0.05in]
-Coupled Oscillators \\ [0.5in]
+{\Large Note 3} \\[0.05in]
+Coupled Oscillators  \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
 \end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+We will wrap up our discussion on Harmonic Motion with \textbf{Coupled Oscillators}. Coupled Oscillators are among the most frequently seen topics in Physics, appearing in Analytic Mechanics and Electromagnetism, and having significant implications in Engineering. This phenomenon also manifests itself in Quantum Mechanics. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item The relationships between Position, Velocity, and Acceleration: 
+\[ x = \int v \ dt \]
+\[ v = \int a \ dt \]
+\[ v = \frac{dx}{dt}\]
+\[ a = \frac{dv}{dt} \]
+\item Newton's Laws of Motion: 
+\[ F = 0 \implies \Delta v = 0 \]
+\[ F = ma \]
+\[ F_{1\rightarrow2} = -F_{2\rightarrow1} \]
+\item Mathematical expressions of the Elastic Force, given by Hooke's Law: 
+\[ F_s = -kx \]
+\item The equation of motion of a harmonic oscillator: 
+\[ \Ddot{x} = -\frac{k}{m}x \]
+With the solution
+\[ x(t) = A\cos(\omega t) \]
+For now, will drop the phase shift $\phi$ as it is not the main point of the discussion in these notes. 
+\item The equation of motion of a pendulum: 
+\[ \Ddot{\theta} = -\frac{g}{l}\sin\theta \]
+Which we can use Taylor Expansion
+\[ \sin\theta = \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5} \ ... \]
+To approximate pendulum as a harmonic oscillator
+\[ \Ddot{\theta} = -\frac{g}{l}\theta \]
+For sufficiently small angles $\theta \approx 0$. 
+\item Some common derivatives: 
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\end{itemize}
+\pagebreak
 
 % this is a comment
 
-\section{1}
-1
+\section{Formulation}
+\textit{“The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction.”
+\begin{flushright}
+-- Sidney Colman
+\end{flushright}}
 
-\subsection{11}
+\subsection{Linear Systems of Masses and Springs}
 
-1
+The study of simple harmonic motion began with a simple spring-mass system, connected to a wall. Now we remove the constraint that the other end of the spring is immobile. We will discuss the motion of the following system, where two blocks with equal mass $m$ are connected by a spring with spring constant $k$. 
+
+\fig{figs/n3/twomass.jpg}{Two Masses Connected by One Spring}{1}{0}
+
+Denote $x_1$ as the displacement from equilibrium of the left mass, and $x_2$ as the displacement of the right mass. Both masses are free to move, but the spring force between them will cause the masses to oscillate back and forth. The equation of motions of the two masses are: 
+\[ m\Ddot{x}_1 = -k(x_1 - x_2) \]
+\[ m\Ddot{x}_2 = k(x_1 - x_2) \]
+If you ever get confused with the signs of the spring forces when setting up the problem, you can deduce them with physical intuition. 
+
+For example, think about what forces could act on mass $1$. If mass $1$ displaces toward the right, the spring would get compressed, releasing a force that accelerates $x_1$ towards the right. If mass $2$ were to displace toward the right, the spring would be stretched, and the spring would pull $x_1$ toward the right -- Hence $m\Ddot{x}_1$ is negatively proportional to $x_1$ and positively proportional to $x_2$. We can apply the same logic on mass $2$ to get the second equation of motion. 
+
+Indeed, their motion can be quite chaotic. However, we will focus on a special case, where both masses oscillate at the same frequency, and a mathematical solution is possible. 
+
+\begin{definition}
+Normal Modes of Oscillation. \\
+Normal modes of a coupled oscillator are the cases where every component oscillates at the same frequency and the system exhibits geometric symmetry. The oscillatory frequencies at normal modes are the characteristic frequencies of the coupled oscillator. In general, the number of normal modes equals the degrees of freedom of the system, or the number of masses that are free to move. 
+\end{definition}
+
+We present two ways to solve for the normal modes of coupled oscillatory motion. 
+
+\subsection{Simplifications from Geometric Symmetry}
+
+Notice that there are two ways the system can exhibit some sort of symmetry. 
+
+\begin{itemize}
+\item Case 1: $x_1 = x_2$. In this case, the two masses move in phase with each other, having equal displacements in the same direction. 
+\fig{figs/n3/same.jpg}{Case 1: $x_1 = x_2$}{1}{0}
+\item Case 2: $x_1 = -x_2$. In this case, the two masses move in opposite directions with each other, with displacements of the same magnitude. 
+\fig{figs/n3/opposite.jpg}{Case 2: $x_1 = -x_2$}{1}{0}
+\end{itemize}
+
+\subsubsection{First Normal Mode: Equal Displacement}
+
+In the case where $x_1 = x_2$, we can define the variable $x = x_1 = x_2$. Plugging $x$ into the equation of motion, 
+\[ m\Ddot{x} = -k(x - x) = 0 \]
+\[ m\Ddot{x} = k(x - x) = 0 \]
+These equations say there's no motion! But does this result even make sense? If we let both masses displace from equilibrium by the same amount in the same direction, this does not stretch the spring at all, as if the spring between them is still at equilibrium. At the end, the spring does not care where it is located, but only responds to a stretch or squeeze between its two ends. 
+
+Indeed there is nothing interesting happening in this system. This normal mode would only mean that
+\[ x_1 = x_2 = 0 \]
+And since there is no oscillation, its frequency is
+\[ \omega_1 = 0 \]
+A more realistic explanation could be that the masses could still move at the same velocity:
+\[ \Dot{x}_1 = \Dot{x}_2 = v \]
+But since there are no external forces on the masses, they remain "motionless" when viewed from the reference frame of the center-of-mass. 
+
+\subsubsection{Second Normal Mode: Opposite Displacement}
+
+In the case where $x_1 = -x_2$, we can define the variable $x = x_1 = -x_2$. We can write the equation of motion as
+\[ m\Ddot{x} = -k(x + x) \]
+\[ -m\Ddot{x} = k(x + x) \]
+The two equations agree with each other -- this is a good sign as we can now simplify our equations into
+\[ m\Ddot{x} = -2kx \implies \Ddot{x} = -\frac{2k}{m}x \]
+If you can recall the equation of motion of the regular spring-mass system connected to a wall, you might recognize this equation having the same form, only the term $-k / m$ is replaced by $-2k / m$. Therefore it has the solution
+\[ x = A\cos(\omega_2 t) \]
+Where $A$ is a constant determined by the initial condition of the oscillator, and 
+\[ \omega_2 = \sqrt{\frac{2k}{m}} \]
+Thus
+\[ \begin{cases}
+x_1 = A\cos(\omega_2 t) \\
+x_2 = - A\cos(\omega_2 t)
+\end{cases} \]
+Mass $1$ oscillates back and forth, while mass $2$ oscillates forth and back, both at the same frequency. We have exploited the geometric symmetry of our physical system to arrive at these normal modes, and they indeed show the symmetries we expected. In the next section, we will use a more mathematical approach and arrive at the same results. \\
+
+\subsection{Change of Variables}
+
+Consider the equations of motion 
+\[ m\Ddot{x}_1 = -k(x_1 - x_2) \]
+\[ m\Ddot{x}_2 = k(x_1 - x_2) \]
+Notice that the right-hand side of both equations contains the term $x_1 - x_2$. We can take the first equation and subtract the second, 
+\[ m\Ddot{x}_1 - m\Ddot{x}_2 = - k(x_1 - x_2) - k(x_1 - x_2) \]
+\[ m(\Ddot{x}_1 - \Ddot{x}_2) = -2k(x_1 - x_2) \]
+We again exploit the fact that the derivative of a sum is distributive. Define a new variable
+\[ y = x_1 - x_2 \]
+Thus
+\[ \Ddot{y} = \Ddot{x}_1 - \Ddot{x}_2 \]
+And
+\[ m\Ddot{y} = -2ky \]
+\[ \Ddot{y} = -\frac{2k}{m}y \]
+We can solve the equation of motion from the perspective of the center-of-mass reference frame. 
+
+\subsubsection{First Normal Mode}
+
+Given how the variable $y$ is defined, there are two situations that can satisfy the equation of motion of $y$. The first one is where 
+\[ x_1 = x_2 \implies y = 0 \]
+And thus
+\[ \Ddot{y} = 0 \]
+There is no net force on the two masses, thus the blocks must have no relative motion in the center-of-mass frame. Hence, 
+\[ x_1 = x_2 = 0 \]
+And
+\[ \omega_1 = 0 \]
+
+\subsubsection{Second Normal Mode}
+
+In the nontrivial case where $y \neq 0$, the equation of motion has the solution
+\[ y = C\cos(\omega_2 t) \]
+For some constant $C$, and
+\[ \omega_2 = \sqrt{\frac{2k}{m}} \]
+Since $y = x_1 - x_2$, 
+\[ x_1 - x_2 = C\cos(\omega_2 t) \]
+As the only term on the right-hand side is a cosine function with frequency $\omega_2$, the only way that this equation can be satisfied is that both $x_1$ and $x_2$ are in terms of $\cos(\omega_2 t)$. Thus we can say
+\[ x_1 = A\cos(\omega_2 t) \]
+\[ x_2 = B\cos(\omega_2 t) \]
+For some constants $A$ and $B$ where
+\[ A - B = C \]
+Since the two blocks have equal masses, the center-of-mass of the system must be exactly at the midpoint between the two masses, and their positions must have equal magnitudes and opposite directions about their center-of-mass. Thus, 
+\[ x_1 = -x_2 \]
+And
+\[ A = -B \implies A = \frac{1}{2}C \]
+Therefore, 
+\[ \begin{cases}
+x_1 = A\cos(\omega_2 t) \\
+x_2 = - A\cos(\omega_2 t)
+\end{cases} \]
+Consistent with the results derived from the previous method. 
+
+\subsection{Conclusion}
+That's it! There's only so much about coupled oscillators: Write down the equations of motion, find the geometric symmetries in the system, and speculate the possible normal modes. I have avoided using any Linear Algebra methods that one may learn from Math 54/Physics 89/EECS 16B. When you become familiar with those techniques, you will be able to analyze the motion of more sophisticated coupled oscillators -- Hopefully that's some more reasons to get you excited about those classes! 
+
+\pagebreak
+
+\section{Worked Examples}
+
+We will work through two more examples of coupled oscillators, to help you build intuition and become familiar with these types of problems. 
+
+\subsection{Example: Two Masses, Three Springs}
+\begin{example}
+Two Masses, Three Springs \\
+\textit{Morin, Introduction to Classical Mechanics, Example 3.6} \\
+Consider two masses, $m$, connected to each other and to two walls by three springs, as shown below. The three springs have the same spring constant $k$. What are the normal modes? Find the positions of the masses as functions of time. 
+\fig{figs/n3/twomasswall.jpg}{Two Masses, Three Springs}{0.75}{0}
+
+\textbf{Solution:} Let $x_1$ be the position of the left mass, and $x_2$ be the position of the right mass. The equations of motion are
+\[ m\Ddot{x}_1 = -kx_1 - k(x_1 - x_2) \]
+\[ m\Ddot{x}_2 = k(x_1 - x_2) - kx_2 \]
+We could speculate that the two ways this system could exhibit symmetry are: 
+\begin{itemize}
+\item \textbf{First Normal Mode: $x_1 = x_2$} \\
+The $(x_1 - x_2)$ terms are thus zero. The equations of motion become
+\[  m\Ddot{x}_1 = -kx_1 \]
+\[  m\Ddot{x}_2 = -kx_2 \]
+Because the positions $x_1$ and $x_2$ displace equally from equilibrium at all times, the middle spring is always unstretched, and the system's motion is only subject to the springs on the ends. \\
+Therefore, 
+\[ x_1 = x_2 = A\cos(\omega_1 t) \]
+Where 
+\[ \omega_1 = \sqrt{\frac{k}{m}} \]
+
+\item \textbf{Second Normal Mode: $x_1 = -x_2$} \\
+Let $x = x_1 = -x_2$. The equations of motion become
+\[ m\Ddot{x} = -kx - 2kx \]
+\[ -m\Ddot{x} = 2kx + kx \]
+Or
+\[ \Ddot{x} = -\frac{3k}{m}x \]
+Therefore the second normal mode has the solution
+\[ \begin{cases}
+x_1 = A\cos(\omega_2 t) \\
+x_2 = - A\cos(\omega_2 t)
+\end{cases} \]
+Where
+\[ \omega_2 = \sqrt{\frac{3k}{m}} \]
+\end{itemize}
+\end{example}
+
+\subsection{Example: Coupled Pendulums}
+\begin{example}
+Coupled Pendulums \\
+\textit{Helliwell and Sahakian, Modern Classical Mechanics, Example 13.2} \\
+Two balls, each of mass $m$, are attached to two strings of equal length $l$ to form side-by-side pendulums of equal period. A weak spring $k$ is attached to the two balls, as shown in the figure below. When the pendula hang down, the spring is unstretched. All oscillations are assumed to be in the same plane. Find the motion of each ball in the small-amplitude limit, in which the angles $\theta_1$ and $\theta_2$ are both very small. 
+\fig{figs/n3/pendulum.jpg}{Coupled Pendulums}{0.5}{0}
+\textbf{Solution:} As the pendula are hung from strings of equal length, they cannot move radially in/outward in the direction of the pivot. The motion of each pendulum is constrained in the tangential direction. The position of the masses $x_{1, 2}$ can be found using the arc length formula of a circle, 
+\[ x_{1, 2} = l\theta_{1, 2} \]
+Newton's Second Law gives, 
+\[ ml\Ddot{\theta_1} = -mg\sin\theta_1 - k(x_1 - x_2) \]
+\[ ml\Ddot{\theta_2} = -mg\sin\theta_2 + k(x_1 - x_2) \]
+Since the angles $\theta_{1, 2}$ are very small, we can further approximate the tangential direction as the horizontal direction, and substitute $\sin\theta \approx \theta$ from Taylor Approximation. 
+\[ \Ddot{\theta_1} = -\frac{g}{l}\theta_1 - \frac{k}{m}(\theta_1 - \theta_2) \]
+\[ \Ddot{\theta_2} = -\frac{g}{l}\theta_2 + \frac{k}{m}(\theta_1 - \theta_2) \]
+Again, the two possible geometric symmetries of the system are: 
+\begin{itemize}
+\item \textbf{First Normal Mode: $\theta_1 = \theta_2$} \\
+The $(\theta_1 - \theta_2)$ become zero. Thus
+\[ \Ddot{\theta_1} = -\frac{g}{l}\theta_1 \]
+\[ \Ddot{\theta_2} = -\frac{g}{l}\theta_2 \]
+Each individual equation of motion has the solution
+\[ \theta_1 = \theta_2 = A\cos(\omega_1 t) \]
+For 
+\[ \omega_1 = \sqrt{\frac{g}{l}} \]
+\item \textbf{Second Normal Mode: $\theta_1 = - \theta_2$} \\
+Define $\theta = \theta_1 = -\theta_2$. The equations of motion become
+\[ \Ddot{\theta} = -\frac{g}{l}\theta - \frac{2k}{m}\theta \]
+\[ -\Ddot{\theta} = \frac{g}{l}\theta + \frac{2k}{m}\theta \]
+Or
+\[ \Ddot{\theta} = -(\frac{g}{l} + \frac{2k}{m})\theta \]
+The second normal mode has the solution
+\[ \begin{cases}
+\theta_1 = A\cos(\omega_2 t) \\
+\theta_2 = - A\cos(\omega_2 t)
+\end{cases} \]
+Where
+\[ \omega_2 = \sqrt{\frac{g}{l} + \frac{2k}{m}} \]
+\end{itemize}
+\end{example}
+
+\pagebreak
+
+\section{Exercises}
+\begin{problem}
+The Reduced Mass Method \\
+\textit{Helliwell and Sahakian, Modern Classical Mechanics, Problem 13.1} \\
+Two blocks, of masses $m$ and $M$, are connected by a single spring of force constant $k$. The blocks are free to slide on a frictionless table. Define the \textit{Reduced Mass} of the system as $\mu = mM / (m + M)$. Find the equation of the motion of the reduced mass, and find its solution. Pay specific attention to the case where $m = M$. 
+\end{problem}
+
+\begin{problem}
+Angled Rails. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 4.16} \\
+Two particles of mass $m$ are constrained to move along two horizontal frictionless rails that make an angle $2\theta$ with respect to each other. They are connected by a spring with spring constant $k$, whose relaxed length is at the position shown in the figure below. What is the frequency of oscillations for the motion where the spring remains parallel to the position
+shown?
+\fig{figs/n3/angled.jpg}{Morin, Problem 4.16}{0.5}{0}
+\end{problem}
+
+\begin{problem}
+Normal Modes and Symmetry. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 6.3} \\
+Four identical masses $m$ are joined by three identical springs, of spring constant $k$, and are constrained to move on a line, as shown. Find the normal mode solutions to this system. 
+\fig{figs/n3/kk.jpg}{Kleppner and Kolenkow, Problem 6.3}{0.5}{0}
+\textit{Hint: Exploit the Symmetry in this system: The four possible solutions are the four combinations of $x_1 = \pm x_4$ and $x_2 = \pm x_3$. }
+\end{problem}
+
+\begin{problem}
+Springs on a Circle. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 3.6} \\
+\begin{enumerate}
+\item Two identical masses are constrained to move on a circle. Two identical springs connect the masses and wrap around a circle (see Fig. 3.17). Find the normal modes.
+\item Three identical masses are constrained to move on a circle. Three identical springs connect the masses and wrap around a circle (see Fig. 3.18). Find the normal modes.
+\end{enumerate}
+\fig{figs/n3/morin.jpg}{Morin, Problem 3.6}{0.4}{0}
+\end{problem}
+
+\begin{problem}
+Masses, Springs, and Dampers \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 11.13} \\
+Two identical masses $M$ are hung between three identical springs. Each spring is massless and has spring constant $k$. The masses are connected as shown to a dashpot of negligible mass. Neglect gravity. The dashpot exerts a force $F = -bv$ opposing motion, where $v$ is the relative velocity of its two ends. Let $x_1$ and $x_2$ be the displacements of the two masses from equilibrium.
+\fig{figs/n3/dampers.jpg}{Kleppner and Kolenkow, Problem 11.13}{0.5}{0}
+\begin{enumerate}
+\item Find the equation of motion for each mass.
+\item Show that the equations of motion can be solved by change of variables: $y_1 = x_1 + x_2$, and $y_2 = x_1 - x_2$. 
+\item Show that if the masses are initially at rest and mass 1 is given an initial velocity $v_0$, the motion of the masses after a sufficiently long time is
+\[ x_1 = x_2 = \frac{v_0}{2\omega}\sin(\omega t) \]
+And find $\omega$. 
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Springs to Mind. \\
+\textit{Physics 5A, Spring 2023 (Charman)} \\
+Three rigid, cubical blocks, each of mass $m$ and horizontal length $L$, are connected in sequence by two ideal, massless, horizontal springs, each of spring constant $k$ and un-stretched length $L$. Then the middle mass is cut exactly in half vertically, and the two sub-systems are temporarily separated, only to have the left one launched toward the right one. Before the collision, both connected masses on the left are moving rightward, with the adjoining spring remaining un-stretched, while both connected masses on the right are initially motionless, with the adjoining spring also un-stretched.
+\fig{figs/n3/charman.jpg}{Springs to Mind}{0.5}{0}
+All masses slide without appreciable friction on a long, immovable, horizontal surface. Any drag forces or internal damping or dissipation in the springs remain negligible. When the split masses suddenly collide, the collision is impulsive, and subsequently they stick together permanently. \\
+
+\hspace{0.8cm} Immediately after the collision:
+\begin{enumerate}
+\item What are the horizontal velocities of (i) the left mass, (ii) the recombined center
+mass, and (iii) the right mass? \\
+
+Following the recombination:
+\item What are the three distinct normal modes of this system? 
+\item For each normal mode, what is the corresponding frequency? \\
+
+During the subsequent motion:
+\item (i) What fraction of the pre-collision, bulk kinetic energy has been lost? (ii) What fraction resides in the motion of the center-of-mass of the recombined mass-spring system; and (iii) What fraction is associated with the motion of the rest of the system about the center-of-mass?
+\item What are the minimum and maximum speeds of the central mass?
+\item How much time elapses from the time of collision until the earliest subsequent moment when the left mass is instantaneously at rest?
+\end{enumerate}
+\end{problem}
 
 \end{document}

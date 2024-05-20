@@ -120,7 +120,7 @@ If we want to express every vector on the 2-D coordinate plane, we would need a 
 \[ \Hat{\theta} = -sin\theta\Hat{x} + cos\theta\Hat{y} \]
 Both unit vectors $\Hat{r}$ and $\Hat{\theta}$ point in the direction of increasing $r$ and $\theta$. 
 
-\fig{figs/n0/polar.jpg}{An illustration of the Polar Coordinates.}{0.1}{0}
+\fig{figs/n0/polar.jpg}{An illustration of the Polar Coordinates}{0.1}{0}
 
 Since circular motion and radial forces play a prominent role in physics, we can greatly simplify our calculations by adopting this new coordinate system, named the \textit{Polar Coordinate System}, defined by the parameters $r$ (distance from origin) and $\theta$ (angle from x-axis). 
 
@@ -166,7 +166,7 @@ And,
 \end{equation}
 \end{definition}
 
-\fig{figs/n0/unit-vectors.jpg}{Polar and Cartesian unit vectors.}{0.1}{0}
+\fig{figs/n0/unit-vectors.jpg}{Polar and Cartesian unit vectors}{0.1}{0}
 
 \subsection{Velocity and Acceleration in Polar Coordinates}
 Unlike the Cartesian unit vectors, which have constant orientations regardless of time and space, we notice that the Polar unit vectors are dependent on the polar angle $\theta$. 
@@ -178,7 +178,7 @@ Where $\Dot{\theta}$ is the rate of change of the angle $\theta$. Thus,
 Applying the chain rule on the position vector, 
 \[ \frac{d}{dt} \Vec{r} = \frac{d}{dt} (r\Hat{r}) = \frac{dr}{dt}\Hat{r} + r\frac{d\Hat{r}}{dt} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta} \]
 
-\fig{figs/n0/change.jpg}{The spatial evolution of Polar unit vectors.}{0.1}{0}
+\fig{figs/n0/change.jpg}{The spatial evolution of Polar unit vectors}{0.1}{0}
 
 \begin{definition}
 Velocity in Polar Coordinates. \\
@@ -223,7 +223,7 @@ We have proven these results algebraically in the previous section. But what do 
 
 Note that the polar unit vectors only depend on the value of $\theta$. This means that the unit vectors cannot change if we only move radially inward/outward. Indeed, the time derivatives of $\Hat{r}$ and $\Hat{\theta}$ only depend on the rate of change of $\theta$. Consider the $\Hat{r}$ vector rotating for an infinitesimal angle $d\theta$ counterclockwise. 
 
-\fig{figs/n0/rotate.jpg}{Rotation of the polar unit vector. \textit{Graph is VERY not to scale.}}{0.12}{0}
+\fig{figs/n0/rotate.jpg}{Rotation of the polar unit vector. \textit{Graph is VERY not to scale}}{0.12}{0}
 
 Here, $|dr|$ is the arc length of the infinitesimal section of the circle spanned by this rotation. By the arc length formula, $|dr| = |r| d\theta = d\theta$, as the magnitude of the unit vector $\Hat{r}$ is 1. Its direction is $90\degree$ counterclockwise with respect to the original $\Hat{r}$ vector -- That is exactly how we defined the $\Hat{\theta}$ direction. 
 
@@ -239,7 +239,7 @@ At this point, I must tell you it's excruciating to type these notes due to my l
 \begin{example}
 Bead on a Rotating Rod. \\ 
 \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 1.18} \\
-A bead moves outward with constant speed $u$ outward along a rod. The bead starts at the center at $t = 0$. The angular position of the rod is given by $\theta = \omega t$, where $\omega$ is a constant. Find the position, velocity, and acceleration of the bead. \\
+A bead moves outward with constant speed $u$ along a rod. The bead starts at the center at $t = 0$. The angular position of the rod is given by $\theta = \omega t$, where $\omega$ is a constant. Find the position, velocity, and acceleration of the bead. \\
 
 \textbf{Solution:} Using
 \[ \begin{cases}
@@ -259,7 +259,7 @@ Therefore,
 \Vec{a} = -u\omega^2t\Hat{r} + 2u\omega\Hat{\theta}
 \end{cases} \]
 
-\fig{figs/n0/ex1.jpg}{The trajectory and velocity of the bead at different times.}{0.5}{0}
+\fig{figs/n0/ex1.jpg}{The trajectory and velocity of the bead at different times}{0.5}{0}
 \end{example}
 
 \pagebreak
@@ -362,7 +362,7 @@ b = r\sin\phi
 \end{equation}
 \end{definition}
 
-\fig{figs/n0/complex.jpeg}{Illustration of Complex Numbers in Polar Form.}{0.1}{0}
+\fig{figs/n0/complex.jpeg}{Illustration of Complex Numbers in Polar Form}{0.1}{0}
 
 Specifically, when $|r| = 1$, the above relationship becomes the \textit{Euler's Formula}. You will see this identity coming up very frequently if you continue taking more advanced physics classes. 
 \begin{definition}
@@ -406,7 +406,7 @@ Consider a particle that feels an angular force only, of the form $\Vec{F} = 3m\
 \end{problem}
 
 \begin{problem}
-Spiraling particle.  \\
+Spiraling particle. \\
 \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 1.25} \\
 A particle moves outward along a spiral. Its trajectory is given by $r = A\theta$, where $A = \frac{1}{\pi}$ is a constant. $\theta$ increases in time according to $\theta = \alpha t^2 / 2$, where $\alpha$ is a constant. \\ 
 
