@@ -1,0 +1,393 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{MT 1 Review}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Midterm 1 Review } \\ [0.05in]
+\end{center}
+
+\section*{Topics}
+This review packet contains exam-level review problems on the following topics. 
+\begin{itemize}
+\item Calculus and Vector Algebra
+\item Kinematics
+\item Dynamics
+\item Uniform Circular Motion
+\end{itemize}
+Most of the problems that were taken from previous exams are longer than what you'll see on your actual exam. We recommend you spend around 30 minutes on them. 
+
+\pagebreak
+
+\section{Calculus and Vector Algebra}
+\textbf{1.} \textit{Physics 7A Past Exam Problems} 
+
+\textbf{1.1.} The acceleration of a small object is given by
+\[ \Vec{a}(t) = Bt^2 \Hat{x} + C\cos(\omega t) \Hat{y} \]
+Its initial velocity and position are
+\[ \Vec{v}(0) = D\Hat{x} \]
+\[ \Vec{r}(0) = E\Hat{y} \]
+Where $B$, $C$, $D$, $E$, $\omega$ are constants. 
+
+(a) Find $\Vec{v}(t)$. 
+
+(b) Find $\Vec{r}(t)$. \\
+
+\textbf{1.2.} A particle's position is given by
+\[ \Vec{r}(t) = R\cos(\omega t) \Hat{x} + R\sin(\omega t) \Hat{y} \]
+Where $R$, $\omega$ are constants. 
+
+(a) Find $\Vec{v}(t)$. 
+
+(b) Find $\Vec{a}(t)$. 
+
+(c) Find the magnitudes of $r$, $v$, and $a$. 
+
+Relate your results to well-known properties of uniform circular motion. 
+
+\pagebreak
+
+\textbf{2.} \textit{Griffiths, Introduction to Quantum Mechanics, Problem 1.16} \\
+We define a Probability Density Function of an event, $P(x)$, as: 
+\[ P(x) = A^2(a^2 - x^2)^2, \ \ -a \leq x \leq a \]
+Where $A$, $a$ are positive constants. 
+
+(a) From statistics, it is defined that the total probability of an event is $1$. 
+\[ I_0 = \int_{-a}^{a} P(x) \ dx = 1 \]
+What is the value of $A$ that satisfies this condition? 
+
+(b) Evaluate the following integrals, using the value of $A$ you just found. 
+\[ I_1 = \int_{-a}^{a} x P(x) \ dx \]
+\[ I_2 = \int_{-a}^{a} x^2 P(x) \ dx \]
+
+\pagebreak
+
+\textbf{3.} \textit{Griffiths, Introduction to Electrodynamics, Problem 1.7} 
+
+Find the displacement vector $\Vec{r}$ from the source point $(2,8,7)$ to the end point $(4,6,8)$. Determine its magnitude $r$, and find the unit vector $\Hat{r}$.
+
+\pagebreak
+
+\section{Kinematics}
+
+\textbf{1.} \textit{Physics 7A Past Exam Problem}
+
+During the final point of a Cal vs. Stanford tennis match, the Cal player makes a spectacular dive for the ball and manages to hit it from ground level so that it lobs just over the top of the racket of the Stanford player. You may neglect air resistance in this problem.
+
+\fig{figs/mt1/f221.png}{Men’s tennis match against Stanford}{0.6}{0}
+
+(a) If the Cal player hits the ball from ground level so that it reaches its highest point at a height of $h_s$ above the ground, just over the Stanford player’s racket, then how long will it take to reach that point? The Stanford player is located a horizontal distance $d_s$ from the Cal player. Express your answer as a function of any subset of $h_s$, $d_s$, and any relevant physical constants.
+
+(b) In that case, what is that initial horizontal component of the ball’s velocity immediately after it is hit?
+
+(c) What is the magnitude of the ball’s acceleration at its highest point?
+
+(d) However, if the Cal player hit the ball this way, it would land beyond the baseline and be out of bounds. Instead, the Cal player hits the ball so that it reaches its highest point before reaching the Stanford player but it still passes just over the racket. If the baseline is a horizontal distance $D$ from the Cal player, then what is the total amount of time $t_f$, that it takes for the ball to hit the ground right at the baseline? Express your answer in terms of $t_s$ (the time it takes the ball to reach the Stanford player), $d_s$, $D$, and any relevant physical constants. 
+
+(e) In that case, what is the vertical component of the ball’s velocity immediately after it is hit by the Cal player? Express your answer in terms of $d_s$, $t_f$, $D$, and any relevant physical constants. 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{2.} \textit{Physics 7A Past Exam Problem}
+
+In the final seconds of the Cal vs. Stanford rugby match, Stanford leads by 2 points, but Cal has the ball and the ball carrier attempts a “drop-goal”, which is worth 3 points if successful. The Cal player kicks the ball with an initial speed of $v_0$ at an initial angle $\theta$ above the horizontal, as shown in the diagram. The ball is kicked from a height of ho above the ground, and the goal posts are a horizontal distance $D$ from the Cal player, and a height $H$ above the ground. 
+
+\fig{figs/mt1/f191.png}{Men’s Rugby match against Stanford}{0.5}{0}
+
+(a) How high above the ground does the ball get before it begins to fall back down? Express your answer as a function of any subset of $h_0$, $v_0$, $\theta$, and any relevant physical constants. 
+
+(b) How long does it take for the ball to reach its highest point?
+
+(c) What is the relative velocity of the goal posts with respect to the ball just as the ball reaches its highest point? Express your answer as a vector and clearly label your axes. 
+
+(d) If the ball successfully passes over the horizontal cross bar between the goal posts, then what is the minimum possible value for $v_0$? Express your answer in terms of $h_0$, $\theta$, $H$, $D$, and any relevant physical constants.
+
+(e) A Stanford player charges the Cal player but he is not quick enough to knock the ball down with his upraised hands, which are at a height $h_s$ above the ground. If the Stanford player runs directly towards the Cal player at a constant speed of $v_s$, then what was the minimum possible horizontal distance $d_s$ between the two players when the ball was kicked?
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{3.} \textit{Physics 7A Past Exam Problem}
+
+Some short derivations on kinematics. 
+
+a) A falling stone takes time $t_w$ to travel past a window of height $h$ (see figure on the left). From what height above window did the stone fall? 
+
+b) The acceleration of gravity can be measured by sending a mass upward and measuring the time that it takes to pass two given points in both directions (up then down). The time it takes for the mass to pass the lower point $A$ twice is $T_A$, and the time for the upper point $B$ is $T_B$. Find an expression for the gravitational acceleration $g$ in terms of the height difference $h = y_B - y_A$, the times $T_A$ and $T_B$. To be clear, the time here is the time difference from when the mass passes a given point on the way up until it falls to the same height again (see figure on the right). 
+
+\fig{figs/mt1/s182.png}{Two Trajectory Problems}{0.4}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Taylor, Classical Mechanics, Problem 1.40} 
+
+A cannon shoots a ball at an angle $\theta$ above the horizontal ground. 
+
+(a) Neglecting air resistance, use Newton's second law to find the ball's position vector as a function of time. Use axes with $x$ measured
+horizontally and $y$ vertically. 
+
+(b) Let $r$ denote the ball's distance from the cannon. What is the
+largest possible value of $\theta$ if $r$ is to increase throughout the time during the ball's flight? 
+
+\pagebreak
+
+\textbf{5.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.14} 
+
+A ball is thrown with speed $v$ from the edge of a cliff of height $h$. 
+
+(a) At what inclination angle $\phi$ should it be thrown so that it travels the maximum horizontal distance? 
+
+(b) What is this maximum distance? 
+
+Assume that the ground below the cliff is horizontal. \\
+\textit{(Hint: A problem that we did in the first discussion section actually has the answer to this question. But you should make your own attempt first before peeking at the solution.)}
+
+\pagebreak
+
+\section{Dynamics}
+
+\textbf{1.} \textit{Physics 7A Past Exam Problem}
+
+Two blocks are tied together by an ideal rope that passes over an ideal pulley that is mounted to the top of a pair of stationary ramps, as shown in the diagram. The block on the left has a mass $M_1$, and it rests on an incline that forms an angle of $\theta$ with respect to the vertical, whereas the block on the right has a mass $M_2$, and it rests on an incline that forms an angle $\theta$ with respect to the horizontal. The static and kinetic coefficients of friction between block $M_2$ and the ramp on the right are $\mu_s$ and $\mu_k$, respectively. There is no friction between the block $M_1$ and the ramp on the left. Throughout the problem, assume there is non-zero tension in the rope.
+
+\fig{figs/mt1/s192.png}{Two Blocks on Inclines}{0.65}{0}
+
+(a) Assuming that the blocks are not sliding, draw two free body diagrams, one showing all forces acting on the left block alone, and a second diagram for the right block alone.
+
+(b) What is the magnitude of the normal force acting on the left block $M_1$?
+
+(c) If the blocks are not sliding, at what angle $\theta$ will there be no force of static friction on the right block? Express your answer in terms of $M_1$, $M_2$, and any relevant physical constants.
+
+(d) If the left block $M_1$, is sliding down the ramp to the left, then what is the tension in the rope?
+
+(e) If the left block $M_1$, is sliding down the ramp to the left, then what is the maximum possible value of the mass $M_2$ such that the blocks will not slow down as they slide? Express your answer in terms of $M_1$, $\mu_k$, $\theta$.
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{2.} \textit{Physics 7A Past Exam Problem}
+
+In the Lecture Demonstration Room we have several carts for transporting laboratory equipment. The large rectangle represents such a cart (Mass $M$, with massless wheels). All surfaces are frictionless. There is one massless string (the upper string) that connects $m_1$ to $m_2$, passing through a massless pulley. There is a second massless string (the lower string) that connects $m_2$ to $m_3$. Relative to the cart, $m_2$ and $m_3$ move purely vertically. 
+
+\fig{figs/mt1/s203.png}{Many Moving Masses}{0.65}{0}
+
+(a) You hold $M$ and $m_1$ so they do not move. Calculate the tensions in the upper string and the lower string. 
+
+(b) Next we do a different experiment. You hold $M$ so it doesn't move (You are not touching $m_1$). Draw a free-body diagram for the three small masses. Calculate the acceleration of $m_1$. 
+
+(c) Next, we do a different experiment. You apply a horizontal force to $M$, with magnitude $F$ towards the right (Again you are not touching $m_1$). The value of $F$ is carefully chosen such that the small masses do not move relative to $M$. Find $F$. 
+
+(d) Now suppose you double the magnitude of the applied force that you found in (c). Find the acceleration of $M$. 
+
+(e) Continuing from part (d), find the tensions in the upper string and the lower string. 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{3.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.27} 
+
+Consider the Atwood’s machine shown below. It consists of three pulleys, a short piece of string connecting one mass to the bottom pulley, and a continuous long piece of string that wraps twice around the bottom side of the bottom pulley, and once around the top side of the top two pulleys. The two masses are $m$ and $2m$. Assume that the parts of the string connecting the pulleys are essentially vertical. Find the accelerations of the masses. 
+
+\fig{figs/mt1/atwood1.png}{Atwood's Machine}{0.75}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.2} 
+
+A block of mass $m$ is held motionless on a frictionless plane of mass $M$ and angle of inclination $\theta$. The plane rests on a frictionless horizontal surface. The block is released. What is the horizontal acceleration of the plane?
+
+\fig{figs/mt1/morin2.png}{A Moving Ramp}{1.1}{0}
+
+\pagebreak
+
+\textbf{5.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.1} 
+
+(a) A block starts at rest and slides down a frictionless plane inclined at angle $\theta$. What should $\theta$ be so that the block travels a given horizontal distance in the minimum amount of time?
+
+(b) Same question, but now let there be a coefficient of kinetic friction, $\mu$, between the block and the plane.
+
+\pagebreak
+
+\section{Uniform Circular Motion}
+
+\textbf{1.} \textit{Physics 7A Past Exam Problem}
+
+A racecar is traveling around a circular track at a constant speed of $v$. The track is banked at an angle of $\theta$ with respect to the horizontal. As shown in the diagram, the race car is moving out of the page towards the viewer on the left side of the circular racetrack. The car has mass $M$, and it is traveling in a horizontal circle with a radius of $R$. All 4 of the wheels wheels are rolling without slipping.
+
+\fig{figs/mt1/car.png}{Rounding the Bend}{0.75}{0}
+
+a) Make a free body diagram of the car.
+
+b) What is the magnitude and direction of the acceleration of the car as viewed in the diagram? Express your answer in terms of $R$ and $v$.
+
+c) What is the magnitude of the combined force of static friction from the road acting on all the tires? Express your answer in terms of $R$, $v$, $\theta$, $m$, and any relevant physical constants.
+
+d) If $\theta = 45 \degree$, so that $\sin\theta = \cos\theta = \frac{1}{\sqrt{2}}$, then what is the condition that results in the force of static friction pointing down the hill? Express your answer in terms of $R$, $v$, and any relevant physical constants.
+
+e) If the car comes to a stop so $v = 0$, then what is the smallest possible value of the coefficient of static friction $\mu_s$ necessary for the car to not slide down towards the middle of the racetrack? Again
+assume that $\theta = 45 \degree$. 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{2.} \textit{Physics 7A Past Exam Problem}
+
+Half of a cylinder is cut out of a large block with mass $M$ sitting on a table. The side view is shown below. A small block of mass $m$ and negligible size is placed as shown. The coefficient of static friction between the small block and the large mass is $\mu_s$, where $0 < \mu_s < 1$. You may assume the friction between the large mass and the tabletop is negligible. Any applied force in this problem has magnitude $F$ and is directed toward the right. 
+
+\fig{figs/mt1/blok.png}{A Half-Pipe Block}{0.85}{0}
+
+At first, $F = 0$. The small mass $m$ is placed at an angle $\theta$ as shown above. 
+
+(a) Draw a Free Body Diagram for $m$. This Free Body Diagram should correspond to the scenario in part (b). 
+
+(b) If the large block is motionless, what is the largest value of $\theta$ so that the small block is also motionless? \\
+
+There is now an applied force $F$ toward the right. 
+
+(c) Draw Free Body Diagrams for  $M$ and $m$. These Free Body Diagrams should correspond to the scenario in part (d). 
+
+(d) Assuming $\theta$ is less than the value you calculated above. What is the maximum value of $F$ so that $\theta$ does not change? \\
+
+Now we glue the large block $M$ to the table (So that $M$ and $F$ are no longer needed). Suppose $m$ is sliding down the curved surface, its instantaneous speed is $v$ and angular position is $\theta$. There is kinetic friction $\mu_k$ between the small and large blocks. 
+
+(e) Draw a Free Body Diagram for $m$. Find the radial and tangential accelerations of $m$ at any given instant, using the variables above. 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{3.} \textit{Physics 7A Past Exam Problem}
+
+A bird bath near sea level consists of a rigid horizontal disk bordered by a vertical, ring-shaped wall of inner radius $R$, all fixed in place. The bird bath is almost dry, except for a very thin film of water on the horizontal surface, making that surface frictionless. However, the inner surface of the circular wall is dry, and can exert frictional forces. A small bug of mass $m$ slides inside the bird bath. The bug can only slide, and cannot crawl or otherwise propel itself. 
+
+At $t = 0$, the bug is located at an angle $\phi_0$ (as measured counterclockwise from some chosen $x$-axis), and is sliding with speed $v_0$ on the disk and along the the circular ring, in contact with, and moving tangential to, the inner wall. The coefficient of kinetic friction between the bug and wall is $\mu > 0$. Neglect any effects of wind or air resistance on the bug.
+
+\fig{figs/mt1/charman.png}{Roundabout Reasoning}{0.85}{0}
+
+(a) At $t = 0$, what is the bug’s acceleration $\Vec{a}$? What is its magnitude? Be sure to specify the magnitude of both radial and tangential components. 
+
+(b) What is the speed $v(t)$ of the bug at subsequent times? 
+
+(c) What is the position vector $\Vec{r}(t)$ of the bug at subsequent times? 
+
+(d) What is the net distance $d(t)$ traveled by the bug starting from its initial position, as of a later time $t$? 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{4.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.29} 
+
+If you paint a dot on the rim of a rolling wheel, the coordinates of the dot may be written as
+\[ \Vec{r} = (x, y) = (R\theta + R\sin\theta, R + R\cos\theta) \]
+The path of the dot is called a cycloid. Assume that the wheel is rolling at constant speed, which means $\theta = \omega t$ for some constant $\omega$. \\
+
+(a) Find $\Vec{v}(t)$ and $\Vec{a}(t)$ of the dot.
+
+(b) At the instant the dot is at the top of the wheel, it may be considered to be moving along the arc of a circle. What is the radius of this circle in terms of R? \\
+\textit{Hint: The dot is at the top of the wheel when its vertical position is at maximum. }
+
+\pagebreak
+
+\textbf{5.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 2.4} \\
+
+Two particles of mass $m$ and $M$ undergo uniform circular motion
+about each other at a separation $R$ under the influence of an attractive constant force $F$. The frequency is $f$ revolutions per second. 
+
+Show that 
+\[ R = \Big( \frac{F}{4\pi^2f^2} \Big) \Big( \frac{1}{m} + \frac{1}{M} \Big) \]
+
+\end{document}

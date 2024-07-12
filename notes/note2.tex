@@ -8,7 +8,7 @@
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
 	\fancyhead[R]{Note 2}
 \renewcommand{\headrulewidth}{0pt}
@@ -218,7 +218,7 @@ Notice the parameters of the oscillator that we defined, $\beta = b/2m$, and $\o
 \begin{itemize}
 \item For the \textbf{Underdamped} case, 
 \[ \beta^2 < \omega_0^2 \implies x = Ce^{-\beta t}\cos(\omega_1 t + \phi) \]
-The force from the damper/friction is weak compared to the spring, and the oscillatory motion is largely conserved. However, as $F_D = -bv$ is a neoconservative force, energy is gradually lost, and the oscillation amplitude decreases until the system comes to rest at the equilibrium position. 
+The force from the damper/friction is weak compared to the spring, and the oscillatory motion is largely conserved. However, as $F_D = -bv$ is a nonconservative force, energy is gradually lost, and the oscillation amplitude decreases until the system comes to rest at the equilibrium position. 
 \item For the \textbf{Overdamped} case, 
 \[ \beta^2 > \omega_0^2 \implies x = Ae^{-\gamma_1t} + Be^{-\gamma_2t} \]
 The force from the damper/friction completely dominates over the spring. Rather than oscillating, the solution resembles an exponential decay down to equilibrium -- Similar to the example in Note 1, where a bacterium feels a drag force in viscous liquid. 
@@ -374,13 +374,14 @@ No Damping Force. \\
 A particle of mass $m$ is subject to a spring force, $F_s = -kx$, and also a driving force, $F = F_0\cos(\omega t)$. But there is no damping force. Find the particular solution for $x(t) = A\cos(\omega t + \phi)$. What are $A$ and $\phi$? \textit{(Be careful: You need to consider two cases separately, $\omega < \omega_0$ and $\omega > \omega_0$.)}
 \end{problem}
 
+\pagebreak
+
 \begin{problem}
-Frequency Response. \\
-\textit{EECS 16B, Fall 2023 (Wu, Tennant, Parekh)} \\
-Given the transfer function
-\[ H(i\omega) = \frac{1}{(1 + i\frac{\omega}{\omega_1})(1 + i\frac{\omega}{\omega_2})} \]
-Where $\omega_1 \ll \omega_2$. \\
-Describe the system's output when (a) $\omega \ll \omega_1$, (b) $\omega_1 \ll \omega \ll \omega_2$, and (c) $\omega_2 \ll \omega$. 
+Vehicle on a Rough Road. \\
+\textit{Meirovitch, Fundamentals of Vibrations, Problem 3.14} \\
+The system shown in the figure below simulates the suspension of a vehicle traveling on a rough road. The height of the road is given by $y(x) = A\sin(\frac{2\pi x}{L})$. Let the horizontal velocity of the vehicle be uniform, $v =$ constant, and calculate the height of the mass, $z(t)$, as well as the force transmitted to the vehicle, $F(t)$.
+
+\fig{figs/n2/road.png}{Vehicle on a Rough Road}{0.4}{0}
 \end{problem}
 
 \end{document}

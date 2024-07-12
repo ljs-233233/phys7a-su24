@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\setlength{\arrayrulewidth}{1mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{2.5}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics, mathtools}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Lab Syllabus}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Physics 7A Section 103 } \\[0.05in]
+Lab Syllabus \\ [0.5in]
+\end{center}
+
+% this is a comment
+
+\begin{center}
+ \textit{It doesn't matter how beautiful your theory is, it doesn't matter how smart you are. \\
+If it doesn't agree with experiment, it's wrong.}   
+\end{center}
+\hfill \textit{--Richard Feynman}
+
+\section*{Section Information}
+Lab Time: MW 10 am - 12 pm, Physics Building 215 \\
+GSI: Jinsheng Li \\
+Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu} \\
+Office Hours: TuTh 4-5 PM, Physics Building 105 \\
+Gradescope: \href{https://www.gradescope.com/courses/801142}{Link}. This is where all pre-lab assignments and lab worksheets should be submitted. 
+
+\section*{Logistics and Expectations}
+
+Experimentation is one of the core pillars of physics. At the heart of experimental physics are measurements, their interpretation, and their analysis. The lab component of Physics 7A focuses on taking measurements, learning error analysis techniques, and interpreting your results under the guidance of the worksheets, skills that are all crucial in the career of a scientific researcher. 
+
+Lab sections will meet one day per week, on either Monday or Wednesday, depending on the lecture pace and schedule. The day that lab doesn't take place will be a discussion section. \textbf{Lab attendance and completion are mandatory.} While we will not be like elementary schools with roll calls, we will keep an eye on student attendance and engagement. If a lab experiment takes longer than expected to complete, or if you are absent, you can finish/make up for the lab on the next day that we meet in the lab room, or attend another GSI's section to complete it under their consent. 
+
+Lab worksheets will be posted in the Section 103 folder on BCourses prior to each week's labs. Alternatively, you can find them towards the end of the Physics 7A Workbook. \textbf{Some labs include pre-lab assignments, which should be submitted to Gradescope before the start of the corresponding labs.} The pre-lab questions will be discussed prior to starting the corresponding experiments. 
+
+Collaboration is the core of all scientific experiments. All labs are to be completed in approved groups of 2–4 students. All students in a group are expected to contribute meaningfully and substantially to both the experiment and the interpretation of the results. \textbf{However, Each student in a group is responsible for completing their own lab worksheet, and submitting it to Gradescope.} 
+
+\section*{Grading}
+
+Labs are worth 9\% of the total course grade. However, if you never complete one of the labs, your grade for the course will be reduced by 1/3 of a letter grade. If you fail to complete two or more labs, you will automatically get a failing grade in the course. 
+
+\textbf{For labs with a pre-lab assignment, the pre-lab is due before the corresponding lab section}, and is worth 5\% of that lab's total grade. Pre-labs are graded based on completion. However, if you did spot mistakes in your work, they should be corrected when submitting the final lab worksheet. 
+
+Lab worksheets will be graded holistically. Points are awarded for accurately applying physical theories and correctly following experimental procedures. In other words, you will not be penalized for getting results that are inconsistent with theory, as long as you did the correct things to get those results. However, if that is the case, we expect that you give a physical explanation as to why that might have happened, and identify possible sources of errors. 
+
+\textbf{Each lab's worksheet is due on Sunday at 11:59 PM on the week of that lab.} Assignments submitted after the deadline will receive a deduction of 5\% per each day it is late. 
+
+\section*{Accommodations}
+
+We respect each student's different learning needs and are committed to ensuring that you have the resources to succeed in class. If you need disability-related accommodations in this class, if you have emergency medical information you wish to share with the instructor, or if you need special arrangements for the lab sections, please reach out to us as soon as possible. 
+
+\begin{center}
+\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+\hline
+\multicolumn{3}{|c|}{Lab Schedule} \\
+\hline
+Week & Lab Day & Lab \\
+\hline
+June 24 - 28 & Wednesday & Kinematics 1 \\
+July 1 - 5 & Monday &  Kinematics 2 \\
+July 8 - 12 & Wednesday & Dynamics \\
+July 15 - 19 & Wednesday & Collisions \\
+July 22 - 26 & Monday & Rotation \\
+July 29 - Aug 2 & Wednesday & Oscillations \\
+\hline
+\end{tabular}
+
+\textit{This schedule is tentative and may be subject to changes.}
+\end{center}
+
+\end{document}

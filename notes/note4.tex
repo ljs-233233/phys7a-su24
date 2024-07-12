@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 4}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -35,17 +64,310 @@
 
 \begin{center}
 \vspace{3in}
-{\Large Note 4 } \\[0.05in]
-Momentum Flow, The Rocket Equation \\ [0.5in]
+{\Large Note 4} \\[0.05in]
+Momentum Flow, Inelastic Processes \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
 \end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+\textbf{Momentum Flow} is the backbone of many advanced topics in physics and engineering, such as Kinetic Theory and Fluid Mechanics. We will then discuss the nature of \textbf{Inelastic Processes}, a class of mechanics problems that directly applies the concepts of momentum flow.  
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item Momentum, Impulse, and the Impulse-Momentum Theorem: 
+\[ \Vec{p} = m\Vec{v} \]
+\[ \Vec{J} = \int \Vec{F} \ dt \]
+\[ \Vec{J} = \Delta \Vec{p} \]
+
+\item Kinetic Energy:
+\[ K = \frac{1}{2}m\Vec{v}^2 \]
+
+\item During a Collision: 
+
+Mass and Momentum are always conserved. 
+
+Energy is only conserved if the collision is elastic. \\
+
+\item Newton's Laws of Motion: 
+\[ \Vec{F} = 0 \implies \Delta \Vec{v} = 0 \]
+\[ \Vec{F} = \frac{d\Vec{p}}{dt} \]
+\[ \Vec{F}_{1\rightarrow2} = -\Vec{F}_{2\rightarrow1} \]
+
+\item Some common derivatives: 
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\ln x) = \frac{1}{x} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\end{itemize}
+\pagebreak
 
 % this is a comment
 
-\section{1}
-1
+\section{Momentum Flow and Force}
 
-\subsection{11}
+\subsection{Impulse of a Stream of Particles}
 
-1
+Consider a stream of particles, such as a beam of water particles, with an average distance of $l$ between them, each moving at a velocity $v$ towards a solid, immobile wall. After the particles collide with the wall, they fall down without rebounding, $v_f = 0$. 
+\fig{figs/n4/stream.png}{Stream of Particles Hitting a Wall}{0.5}{0}
+Although we do not know the exact values of the forces involved, nor the amount of time each collision takes, we can find the impulse delivered to each ball by the wall to be 
+\[ J_{particle} = p_f - p_0 = 0 - mv = -mv \]
+By Newton's Third Law of Motion, the impulse that each particle delivers to the wall is 
+\[ J_{wall} = -J_{particle} = mv \]
+If the stream consists of many particles, and the flow is consistent, then the wall would feel a constant, averaged force, rather than sudden shocks from individual particles. If $t$ represents the average time between collisions, per the Impulse-Momentum Theorem, 
+\[ F_{AVG}t = mv \implies F_{AVG} = \frac{mv}{t} \]
+Since $l = vt$, the average force that the wall feels per each collision is
+\[ F_{AVG} = \frac{mv^2}{l} \]
+\fig{figs/n4/force.png}{Shocks from Individual Particles versus Average Force}{0.45}{0}
+
+More realistically, the particles would not be in a straight line, but rather a beam with cross-section area $A$. Define the mass density of the beam as the ratio of mass per unit volume, 
+\[ \rho = \frac{m}{V} \]
+Thus the average force per particle on the wall is
+\[ F_{AVG} = \frac{(\rho V)v^2}{l} = \rho Av^2 \]
+
+\subsection{Pressure and Kinetic Theory}
+
+Consider $N$ gas molecules trapped in a box with side lengths $L_x$, $L_y$, and $L_z$. The particles move with an average speed of $v$. The walls are rigid and immobile. After a collision with the walls, the particles bounce back with the same velocity. 
+
+\fig{figs/n4/box.png}{Gas Particles in a Box}{0.45}{0}
+
+Consider the impulse dealt between one particle and the right wall of the box. 
+\[ J_{particle} = \Delta p = -2mv_x \]
+\[ J_{wall} = -J_{particle} = 2mv_x \]
+The force that the wall feels is
+\[ F_{AVG}t = 2mv_x \implies F_{AVG} = \frac{2mv_x}{t} \]
+
+The particle would have to travel back and forth for a total distance of $2L_x$ in the horizontal direction before it collides with the right wall again. Since $v_x$ is the average x-velocity of the particle, the time $t$ between collision is thus
+\[ t = \frac{2L_x}{v_x} \]
+Substitute $t$ into the expression for $F_{AVG}$, 
+\[ F_{AVG} = \frac{2mv_x^2}{2L_x} = \frac{mv_x^2}{L_x} \]
+Since $F_{AVG}$ gives the force on the wall from one particle, the total force on the right wall from $N$ particles is thus
+\[ F = \frac{mNv_x^2}{L_x} \]
+Substitute $m = \rho V$, where $\rho$ is the average mass density of the molecules in the box ($kg/m^3$), and $V$ is the volume of the box, 
+\[ F = \frac{\rho VNv_x^2}{L_x} = \rho A_xNv_x^2 \]
+Where $A_x$ is the area of the right wall. \\
+We define Pressure $P$ as the Force per unit Area on a surface. The pressure on the right wall is
+\[ P = \frac{F}{A_x} = \rho Nv_x^2 \]
+Multiplying the volume $V$ on both sides, we get
+\[ PV = \rho VNv_x^2 = Nmv_x^2 \]
+Since the number of gas molecules in the box is large, the molecules are equally likely to gain the same average speed in each of the three directions $(x, y, z)$ to start with. Therefore, we will make the assumption that, on average, $v_x = v_y = v_z$, and $\Vec{v}^2 = v_x^2 + v_y^2 + v_z^2 = 3v_x^2$. Therefore
+\[ PV = \frac{1}{3}Nm\Vec{v}^2 = \frac{2}{3}NK \]
+Where $K = \frac{1}{2}m\Vec{v}^2$ is the average kinetic energy of the particles. 
+
+\begin{definition}
+Macroscopic Kinetic Energy of Gas Molecules in Three Dimensions. \\
+For $N$ gas molecules trapped in a box of volume $V$ and are free to move in three dimensions, the average pressure on the surface of the box relates to the average kinetic energy of the molecules by
+\begin{equation}
+PV = \frac{2}{3}NK
+\end{equation}
+\end{definition}
+
+If you perhaps have studied Thermodynamics in high school physics or have taken some introductory courses in Chemistry or Mechanical Engineering, you may find this equation very similar to some thermodynamic equations \textit{(The Ideal Gas Law)}. In fact, we are very close to actually deriving the full form of ideal gas law, 
+\[ PV = Nk_BT \]
+But I would rather leave the full derivation to your Physics 7B professor (as it requires some concepts in thermodynamics that would take too many words to discuss here). Indeed, different branches of physics are not isolated and self-contained, but rather have connections on every level. Only through their interconnections can we gain a comprehensive understanding of our universe. 
+
+\pagebreak
+
+\section{Inherently Inelastic Processes}
+
+We will explore the dynamics of inherently inelastic processes, where objects gain or lose momentum by combining with another mass or losing a portion of their own mass. Often, analyzing the forces on a system where there is a flow of mass can be very confusing if we try to blindly apply Newton's Laws of Motion. \\
+Specifically, the momentum form of Newton's Second Law of Motion, $F = \frac{dp}{dt}$, is indeed valid and can be applied to all scenarios. However, when we use the integral form of the impulse-momentum equation, 
+\[ \int_{t_0}^{t_f} F \ dt = p_f - p_0 \]
+It is essential to deal with the same set of particles throughout the
+time interval $t_0$ to $t_f$; we must keep track of all the particles that
+were originally in the system. Consequently, the integral form applies
+correctly only to systems defined so that the system’s mass does not
+change during the time of interest. 
+
+\subsection{Example: Freight Car and Sand}
+
+Besides impulse and momentum, there isn't too much to add regarding the theories behind inelastic processes. However, the problem setups here could be quite nuanced, and we will walk through several examples in the spaces below. 
+
+\begin{example}
+Freight Car and Hopper \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 4.13} \\
+Sand falls from a stationary hopper onto a freight car with mass $M$ that moves with uniform velocity $v$. The sand falls at a constant rate of $\sigma = dm/dt$. What force is needed to keep the freight car moving at the speed $v$? \\
+\fig{figs/n4/hopper.png}{Freight Car and Hopper}{0.3}{0}
+
+\textbf{Solution:} Consider the system that consists the fright car of mass $M$ and the incoming mass $dm$ added in time $dt$. The initial horizontal speed of the sand is $v_{dm} = 0$. Taking the horizontal components of the momenta before and after the incoming mass reaches the car, we have
+\[ p(t) = Mv \]
+\[ p(t + dt) = (M + dm)v \]
+Thus
+\[ dp = p(t + dt) - p(t) = (M + dm)v - Mv = v \ dm \]
+Taking the time derivative of both sides, 
+\[ F = \frac{dp}{dt} = v\frac{dm}{dt} = v\sigma \]
+\end{example}
+
+\begin{example}
+Leaky Freight Car \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 4.14} \\
+Now consider a case related to the previous example. A freight car leaks sand at the rate $\sigma = dm/dt$. What force is needed to keep the freight car moving uniformly with speed $v$? \\
+
+\textbf{Solution:} Here, the mass of the cart is decreasing. However, the car does not exert a force on the leaking sand, and the velocity of the sand just after leaving the freight car is identical to its initial velocity, and its momentum does not change. 
+\[ p(t) = (M + dm)v \]
+\[ p(t + dt) = Mv + dm \ v \]
+Therefore
+\[ dp = 0 \implies F = 0 \]
+No force is required to sustain the motion. 
+\end{example}
+
+\subsection{Example: Rocket Motion}
+
+The acceleration of a rocket can be readily explained by momentum arguments. Suppose a rocket initially moves with velocity $v$. During a time interval $dt$ the engine exerts a force that accelerates some of the fuel of mass $dm$, expelling it with an exhaust velocity $u$ relative to the rocket. What is its velocity $v + dv$ after the time interval $dt$? 
+\textit{Note: $dm$ has an intrinsic negative sign as the rocket is losing mass, thus $-dm$ is a positive quantity; $u$ is a positive quantity, so the ejected particles lose a speed $u$ relative to the rocket.} 
+
+By Newton’s third law, there is an equal and opposite force on the rocket, propelling the rocket in the opposite direction. Comparing the momentum before and after $dm$ is ejected at a relative velocity $u$, 
+\[ p(t) = mv \]
+\[ p(t + dt) = (m + dm)(v + dv) + (-dm) \ (v - u) \]
+\fig{figs/n4/rocket.png}{Rocket and Exhaust}{0.35}{0}
+Therefore the total change of momentum in the system is
+\[ dp = \big[ (m + dm)(v + dv) + (-dm) \ (v - u) \big] - mv \]
+\[ dp = m \ dv + dm \ dv + dm \ u \]
+Since all differential quantities are extremely small, the double differential $(dm \ dv)$ is much less than the two other single differential quantities. 
+\[ dm \ dv \rightarrow 0 \]
+\[ dp = m \ dv + dm \ u \]
+Taking the time derivative of both sides, since $F = dp / dt$, 
+\[ F = m\frac{dv}{dt} + u\frac{dm}{dt} \]
+Where $F$ is the external force exerted on the rocket. \\
+
+\begin{warning}
+Validity of the Rocket Equation. \\
+The above equation describes rocket motion in general. However, you must be careful of the definition and sign of each variable. My convention is that 
+\begin{itemize}
+\item $m$ is the total mass that is currently on the rocket at any time $t$. $m$ is a positive quantity. 
+\item $v$ is the velocity of the rocket at any time $t$. $v$ is a positive quantity.
+\item $dm$ is the differential change in mass of the rocket from time $t \rightarrow t 
++ dt$. $dm$ is a negative quantity, as the rocket is losing mass. 
+\item $u$ is the relative velocity between the ejected exhaust and the remaining rocket from time $t \rightarrow t + dt$. $u$ is a positive quantity, as it is the velocity difference between the rocket and exhaust. 
+\end{itemize}
+You may see other textbooks write the Rocket Equation written in different forms and with contradicting signs. As long as each variable is clearly defined, their nature should be the same regardless of how this equation is presented. 
+\end{warning}
+
+\begin{example}
+Rocket in Free Space \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 4.16} \\
+Suppose that a rocket coasts in deep space with its engines turned off and that external forces are negligible. The rocket starts at rest with an initial mass of $M_0$. What is its velocity $v_f$ when it has mass $M_f$? \\ 
+
+\textbf{Solution:} By Newton's Second Law, 
+\[ F = 0 \implies dp = 0 \]
+Therefore
+\[ dp = m \ dv + dm \ u = 0 \]
+Rearranging the variables, 
+\[ dv = -u \frac{dm}{m} \]
+Integrate both sides,
+\[ \int_0^{v_f} dv = -u \int_{M_0}^{M_f} \frac{dm}{m} \]
+\[ v_f = -u \ln(\frac{M_f}{M_0}) \]
+Or equivalently, 
+\[ v_f = u \ln(\frac{M_0}{M_f}) \]
+This result is famously known as the Tsiolkovsky Rocket Equation. 
+\end{example}
+
+\begin{definition}
+The Tsiolkovsky Rocket Equation. \\
+For a rocket with initial mass $M_0$ that accelerates itself by expelling part of its mass at a relative velocity $u$, the velocity it gained when reaching a final mass $M_f$ is given by
+\begin{equation}
+v_f - v_0 = u \ln(\frac{M_0}{M_f})
+\end{equation}
+\end{definition}
+
+\begin{example}
+Rocket in a Constant Gravitational Field \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 4.17} \\
+Consider the scenario from the previous example, but the rocket takes off under the influence of a constant gravitational force, $F = - mg$. \\
+
+\textbf{Solution:} We use the equation that we derived earlier, 
+\[ F = -mg = m\frac{dv}{dt} + u\frac{dm}{dt} \]
+Rearranging the variables, 
+\[ \frac{dv}{dt} = \frac{-u}{m} \frac{dm}{dt} - g \]
+Integrating with respect to time, 
+\[ \int_{t_0}^{t_f} \frac{dv}{dt} \ dt = - \int_{t_0}^{t_f} \frac{u}{m} \frac{dm}{dt} \ dt - \int_{t_0}^{t_f} g \ dt \]
+\[ \int_{v_0}^{v_f} dv = -u \int_{M_0}^{M_f} \frac{dm}{m} - g(t_f - t_0) \]
+Therefore
+\[ v_f - v_0 = u \ln(\frac{M_0}{M_f}) - g(t_f - t_0) \]
+And if we let $v_0 = 0$ at $t_0 = 0$, 
+\[ v_f = u \ln(\frac{M_0}{M_f}) - gt_f \]
+
+As many other factors are in play when launching a real rocket, and the gravitational force quickly deviates from uniformity, this result is, at most, a very inaccurate estimate. However, it still gives us much insight into the workings of rockets. For example, we can see the benefits of burning fuel rapidly: the shorter the burn time, the quicker the rocket escapes the gravitational field, and the more velocity it retains at the end. This is why the takeoff of a large rocket is so spectacular--it is essential to burn the fuel as quickly as possible.
+\end{example}
+
+\pagebreak
+
+\section{Exercises}
+\begin{problem}
+The Equipartition Theorem. \\
+\textit{Physics 5C, Spring 2024 (Chiang)} \\
+Consider a system of $N$ particles of mass $m$ confined to moving on a two-dimensional plane (Electrons moving in graphene is an example of such). The plane is a square of area $A$ and side lengths $L$. We define the pressure on the walls of the two-dimensional system as $P = F / L$, where $L$ is the length of the wall. 
+\begin{enumerate}
+\item Similar to the three-dimensional gas example that we derived earlier, write the product of pressure and area, $PA$, in terms of the other variables and the kinetic energy, $K = \frac{1}{2}m\Vec{v}^2$. 
+\item Apply the Ideal Gas Law in three dimensions, 
+\[ PV = Nk_BT \]
+And the Ideal Gas Law in two dimensions, 
+\[ PA = Nk_BT \]
+Show that your answer from part $(1)$ and the results we derived for the three-dimensional example both satisfy the Equipartition Theorem given below. 
+\end{enumerate}
+\end{problem}
+
+\begin{definition}
+The Equipartition Theorem. \\
+For a collection of particles free to move in $n$ dimensions, its average kinetic energy under thermal equilibrium is given by 
+\begin{equation}
+K = \frac{n}{2}k_BT
+\end{equation}
+Where $k_B$ is the Boltzmann Constant, and $T$ is the temperature of the system. 
+\end{definition}
+
+\begin{problem}
+Reflected Particle Stream. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 4.20} \\
+A one-dimensional stream of particles of mass $m$ with density $\lambda$ particles per unit length, moving with speed $v$, reflects back from a surface, leaving with a different speed $v'$, as shown. Find the force on the surface. \\
+\textit{Hint: The answer is not $\lambda(mv^2 + mv'^2)$.}
+\fig{figs/n4/reflect.png}{Kleppner and Kolenkow, Problem 4.20}{0.4}{0}
+\end{problem}
+
+\begin{problem}
+Rope on a Table. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 4.16} \\
+A rope of mass $M$ and length $l$ lies on a frictionless table, with a short portion, $l_0$, hanging through a hole. Initially, the rope is at rest. Find the solution for $x(t)$, the length of rope through the hole.
+\end{problem}
+
+\begin{problem}
+Growing Raindrop. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 4.24} \\
+A raindrop of initial mass $M_0$ starts falling from rest under the influence of gravity. Assume that the drop gains mass from the cloud at a rate proportional to the product of its instantaneous mass and its instantaneous velocity:
+\[ \frac{dM}{dt} = kMv \]
+Where $k$ is a constant. \\
+Show that the speed of the drop eventually becomes effectively constant, and give an expression for the terminal speed. Neglect air resistance.
+\end{problem}
+
+\begin{problem}
+Leaky Bucket. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 4.16} \\
+At $t = 0$, a massless bucket contains a mass $M$ of sand. It is connected to a wall by a massless spring with constant tension T (that is, independent of length). The ground is frictionless, and the initial distance to the wall is $L$. At later times, let $x$ be the distance from the wall, and let $m$
+be the mass of sand in the bucket. The bucket is released. On its way to the wall, it leaks sand at a rate $dm/dx = M/L$. In other words, the rate is constant with respect to distance, not time. \\
+Note that $dx$ is negative, so $dm$ is also.
+\begin{enumerate}
+\item What is the kinetic energy of the (sand in the) bucket, as a function of the distance from the wall? What is its maximum value? \\
+\item What is the magnitude of the momentum of the bucket, as a function of the distance from the wall? What is its maximum value?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Another Leaky Bucket. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 4.17} \\
+Consider the setup in the previous problem, but now let the sand leak at a rate proportional to the bucket’s acceleration. That is, $dm/dt = b\Ddot{x}$. Note that $\Ddot{x}$ is negative, so $dm$ is also.
+\begin{enumerate}
+\item Find the mass as a function of time, $m(t)$.
+\item Find $v(t)$ and $x(t)$ for the times when the bucket contains a nonzero amount of sand. Also find $v(m)$ and $x(m)$. What is the speed right before all the sand leaves the bucket (assuming it hasn’t hit the wall yet)?
+\item What is the maximum value of the bucket’s kinetic energy, assuming it is achieved before it hits the wall?
+\item What is the maximum value of the magnitude of the bucket’s momentum, assuming it is achieved before it hits the wall?
+\item For what value of $b$ does the bucket become empty right when it hits the wall?
+\end{enumerate}
+\end{problem}
 
 \end{document}

@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics, mathtools}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 5}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -35,17 +64,433 @@
 
 \begin{center}
 \vspace{3in}
-{\Large Note 5 } \\[0.05in]
-Central Forces, Local Approximation of Oscillatory Motion \\ [0.5in]
+{\Large Note 5} \\[0.05in]
+Central Force Motion \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
 \end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+We shall discuss \textbf{Central Force Motion}, a series of classical mechanics problems involving a radial force from the origin of the coordinate system. Its most significant applications are astrophysics and planetary motion. One of the most studied quantum mechanical systems, the Hydrogen Atom, is also explained by this phenomenon. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item Velocity in Polar Coordinates:
+\[ \Vec{v} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta} \]
+\item Kinetic Energy:
+\[ K = \frac{1}{2}m\Vec{v}^2 \]
+\item Common forms of Potential Energies: \\
+Gravitation: 
+\[ U_G = \frac{-GMm}{r} \]
+Elastic:
+\[ U_s = \frac{1}{2}kr^2 \]
+\item The Conservative Force that arises from a Conserved Potential Energy:
+\[ \Vec{F} = -\frac{dU}{dr} \Hat{r} \]
+\item Torque:
+\[ \Vec{\tau} = \Vec{r} \times \Vec{F} \]
+\item Angular Momentum: 
+\[ \Vec{L} = \Vec{r}\times\Vec{p} = m\Vec{r}\times\Vec{v} \]
+\[ \Vec{L} = I\Vec{\omega} \]
+\item Moment of Inertia of a system of particles:
+\[ I = \sum m_ir_{i \perp}^2 \]
+Which for a point mass at distance $r$ from the origin, 
+\[ I = mr^2 \implies L = mr^2\Dot{\theta} \]
+\item Center of Mass of a system of particles: 
+\[ \Vec{R}_{cm} = \frac{\sum m_i\Vec{r}_i}{\sum m_i} \]
+\item Some common derivatives: 
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\end{itemize}
+\pagebreak
 
 % this is a comment
 
-\section{1}
-1
+\section{Central Force Motion}
+\subsection{Reduced Mass}
 
-\subsection{11}
+Consider two astronomical objects of masses $m_1$, $m_2$ at positions $\Vec{r}_1$, $\Vec{r}_2$, respectively. Each object has a kinetic energy
+\[ K_1 = \frac{1}{2}m_1\Dot{\Vec{r}}_1^2 \]
+\[ K_2 = \frac{1}{2}m_2\Dot{\Vec{r}}_2^2 \]
+And the potential energy depends on the distance between the objects
+\[ U = -\frac{Gm_1m_2}{|\Vec{r}_1 - \Vec{r}_2|} \]
+The total energy in the two-body system is
+\[ E = K_1 + K_2 + U \]
+\[ E = \frac{1}{2}m_1\Dot{\Vec{r}}_1^2 + \frac{1}{2}m_2\Dot{\Vec{r}}_2^2 - \frac{Gm_1m_2}{|\Vec{r}_1 - \Vec{r}_2|} \]
+We introduce the following variables: 
+\begin{itemize}
+\item The total mass of the system, $M$:
+\[ M = m_1 + m_2 \]
+\item The position of the center-of-mass, $\Vec{R}$:
+\[ \Vec{R} = \frac{m_1\Vec{r}_1 + m_2\Vec{r}_2}{m_1 + m_2} \]
+\item The reduced mass of the system, $\mu$:
+\[ \mu = \frac{m_1m_2}{m_1 + m_2} \]
+\item And the difference between the objects' radial positions, $\Vec{r}$:
+\[ \Vec{r} = \Vec{r}_1 - \Vec{r}_2 \]
+\end{itemize}
+The energy equation can be conveniently written as \textit{(if you want to verify this, start from the equation below and expand the first two terms, you will arrive at the original equation)}
+\[ E = \frac{1}{2}(m_1 + m_2)\Big(\frac{m_1\Dot{\Vec{r}}_1 + m_2\Dot{\Vec{r}}_2}{m_1 + m_2}\Big)^2 + \frac{1}{2}\frac{m_1m_2}{m_1 + m_2}\Big(\Dot{\Vec{r}}_1 - \Dot{\Vec{r}}_2 \Big)^2 - \frac{Gm_1m_2}{|\Vec{r}_1 - \Vec{r}_2|} \]
+Or in terms of the new variables, 
+\[ E = \frac{1}{2} M\Dot{\Vec{R}}^2 + \frac{1}{2}\mu\Dot{\Vec{r}}^2 - \frac{Gm_1m_2}{|\Vec{r}|} \]
 
-1
+Notice that the first term
+\[ E(\Vec{R}, \Dot{\Vec{R}}) = \frac{1}{2} M\Dot{\Vec{R}}^2 \]
+And the last two terms
+\[ E(\Vec{r}, \Dot{\Vec{r}}) = \frac{1}{2}\mu\Dot{\Vec{r}}^2 - U(|\Vec{r}|) \]
+Describe the motion of two separate physical systems. \\
+
+We have effectively decomposed a two-body system into two separate one-body systems, one being a free particle of mass $M$ and position $R$, and the other being a particle of mass $\mu$ and position $r$ under the potential $U$. These two equations carry no physical meaning. They are purely the result of mathematical abstraction. Once the motions of these new systems are solved, we can retrieve the motion of the original two-body system using the definitions of $M$, $\Vec{R}$, $\mu$, and $\Vec{r}$. \\
+The free particle $M$ travels in a straight line at a constant velocity, with no force acting on it. The other particle $\mu$ describes the motion under a central force -- a force that is directed only radially inward/outward from the origin. 
+\[ U = - \frac{Gm_1m_2}{r} \implies F = - \frac{Gm_1m_2}{r^2}\Hat{r} \]
+
+\fig{figs/n5/systems.jpeg}{Two-body System and Two One-body Systems}{0.2}{0}
+
+\begin{definition}
+The Reduced Mass of a Two-Body System. \\
+For a two-body system under a potential that only depends on the distance between the two objects, 
+\begin{equation}
+U(\Vec{r}_1, \Vec{r}_2) = U(|\Vec{r}_1 - \Vec{r}_2|)
+\end{equation}
+With total energy
+\begin{equation}
+E(\Vec{r}_1, \Dot{\Vec{r}}_1, \Vec{r}_2, \Dot{\Vec{r}}_2) = \frac{1}{2}m_1\Dot{\Vec{r}}_1^2 + \frac{1}{2}m_2\Dot{\Vec{r}}_2^2 + U(|\Vec{r}_1 - \Vec{r}_2|)
+\end{equation}
+Define the following variables, 
+\begin{equation}
+M = m_1 + m_2
+\end{equation}
+\begin{equation}
+\Vec{R} = \frac{m_1\Vec{r}_1 + m_2\Vec{r}_2}{m_1 + m_2}
+\end{equation}
+\begin{equation}
+\mu = \frac{m_1m_2}{m_1 + m_2}
+\end{equation}
+\begin{equation}
+\Vec{r} = \Vec{r}_1 - \Vec{r}_2
+\end{equation}
+We can treat the two-body system as two separate one-body systems: 
+\begin{equation}
+E(\Vec{R}, \Dot{\Vec{R}}) = \frac{1}{2} M\Dot{\Vec{R}}^2
+\end{equation}
+\begin{equation}
+E(\Vec{r}, \Dot{\Vec{r}}) = \frac{1}{2}\mu\Dot{\Vec{r}}^2 - U(|\Vec{r}|)
+\end{equation}
+Where the energy of each isolated system is conserved, and the total energy of the two-body system is the sum of the energies from the two one-body systems. 
+\end{definition}
+
+\subsection{Effective Potential}
+
+Consider the reduced mass portion of the two-body system. The reduced mass $\mu$ has a gravitational potential energy
+\[ U = -\frac{Gm_1m_2}{r} \]
+And thus experiences a gravitational force towards the origin, given by
+\[ \Vec{F} = -\frac{Gm_1m_2}{r^2}\Hat{r} \]
+Without the influence of a third object, there is no external force on the system, and the total energy is conserved. 
+\[ E = K + U \]
+\[ E = \frac{1}{2}\mu\Dot{\Vec{r}}^2 -\frac{Gm_1m_2}{r} \]
+We let the plane in which the two bodies are located be our axis plane. In terms of the Polar Coordinates defined in Note 0, the velocity vector can be written as
+\[ \Dot{\Vec{r}} = \Dot{r}\Hat{r} + r\Dot{\theta}\Hat{\theta} \]
+\[ \Dot{\Vec{r}}^2 = \Vec{v} \cdot \Vec{v} = \Dot{r}^2 + r^2\Dot{\theta}^2 \]
+Therefore
+\[ E = \frac{1}{2}\mu\Dot{r}^2 + \frac{1}{2}\mu r^2\Dot{\theta}^2 -\frac{Gm_1m_2}{r} \]
+Since the angular momentum of the reduced mass is
+\[ L = \mu r^2\Dot{\theta} \implies \Dot{\theta} = \frac{L}{\mu r^2} \]
+The second term can be rewritten as
+\[ E = \frac{1}{2}\mu\Dot{r}^2 + \frac{L^2}{2\mu r^2} - \frac{Gm_1m_2}{r} \]
+As the central force $\Vec{F} = F \Hat{r}$ does not produce a torque on the reduced mass, 
+\[ \Vec{\tau} = \Vec{r} \times \Vec{F} = \Vec{0} \]
+The angular momentum $L$ is conserved, eliminating the dependence of $\theta$ in the energy equation. The only independent variable that remains in the energy equation is $r$, the radial distance between the reduced mass and the origin. \\
+Because kinetic energy is a function of velocity, and potential energy is a function of position, the second term of our equation, $L^2/2mr^2$, can be treated mathematically as a form of potential energy. \\
+
+In terms of the distance $r$, we treat the first term as the kinetic energy 
+\[ K(\Dot{r}) = \frac{1}{2}\mu\Dot{r}^2 \]
+And we group the last two terms as an effective potential energy
+\[ U_{eff}(r) = \frac{L^2}{2\mu r^2} - \frac{Gm_1m_2}{r} \]
+Therefore
+\[ E(r, \Dot{r}) = K(\Dot{r}) + U_{eff}(r) \]
+And the effective force on the reduced mass becomes
+\[ \Vec{F}_{eff} = \frac{L^2}{\mu r^3}\Hat{r} + \Vec{F} \]
+
+\fig{figs/n5/ueff.jpg}{The Effective Potential}{0.5}{0}
+
+\begin{definition}
+Effective Potential of Central Forces. \\
+For a conservative Central Force $\Vec{F} = F \Hat{r}$ acting on an object of mass $\mu$ only in the radial direction with an associated potential $U(r)$, the total energy can be expressed as
+\begin{equation}
+E(r, \Dot{r}) = \frac{1}{2}\mu\Dot{r}^2 + \frac{L^2}{2\mu r^2} + U(r)
+\end{equation}
+We define the effective kinetic energy of the system as 
+\begin{equation}
+K(\Dot{r}) = \frac{1}{2}\mu\Dot{r}^2
+\end{equation}
+And the effective potential energy as 
+\begin{equation}
+U_{eff}(r) = \frac{L^2}{2\mu r^2} + U(r)
+\end{equation}
+Such that
+\begin{equation}
+E(r, \Dot{r}) = K(\Dot{r}) + U_{eff}(r)
+\end{equation}
+The effective potential eliminates the $\theta$-dependence and reduces the system into an equation of one variable $r$, where the effective force on the object is 
+\begin{equation}
+\Vec{F}_{eff} = \frac{L^2}{\mu r^3}\Hat{r} + \Vec{F}
+\end{equation}
+\end{definition}
+
+Using the technique of the effective potential, we can solve for $r(t)$ using the equation of motion
+\[ \mu\Ddot{r} = \frac{L^2}{\mu r^3} + F \]
+Then take the angular momentum equation, 
+\[ \Dot{\theta} = \frac{L}{\mu r^2} \]
+We can integrate $\Dot{\theta}$ with respect to time and get an expression for $\theta(t)$, arriving at a solution for the evolution of both polar coordinates $(r(t), \theta(t))$ as functions of time. \\
+
+Take the equation $\theta(t)$ and write $t$ in terms of $\theta$, then substitute into $r(t)$, we will end up with an equation of $r(\theta)$, relating variables $r$ and $\theta$. This equation $r(\theta)$ describes the orbit of the central force motion. 
+
+\subsection{u-Substitution}
+
+In the previous section, we described the method of effective potential to find the orbit $r(\theta)$ given a central force $\Vec{F} = F\Hat{r}$ and potential $U(r)$. However, sometimes we want to go the other way: Find the central force/potential that makes the planet stay in a specific orbit. \\
+
+A trick we must use is the $u$-substitution. We define the variable $u$ as the reciprocal of the distance $r$. 
+\[ u = \frac{1}{r} \implies r = \frac{1}{u} \]
+We can rewrite the time derivative using the Chain Rule: 
+\[ \frac{d}{dt} = \frac{d\theta}{dt}\frac{d}{d\theta} = \Dot{\theta}\frac{d}{d\theta} = \frac{L}{\mu r^2}\frac{d}{d\theta} = \frac{Lu^2}{\mu}\frac{d}{d\theta} \]
+And the time derivative of $r$ becomes
+\[ \frac{d}{dt}(r) = \frac{Lu^2}{\mu}\frac{d}{d\theta}(r) = \frac{Lu^2}{\mu}\frac{d}{d\theta}(\frac{1}{u}) \]
+The chain rule gives
+\[ \frac{d}{d\theta}(u^{-1}) = -u^{-2} \frac{du}{d\theta} \]
+Therefore
+\[ \Dot{r} = \frac{-L}{\mu}\frac{du}{d\theta} \]
+Thus we can solve for the second derivative of $r$: 
+\[ \Ddot{r} = \frac{d}{dt}(\Dot{r}) = \frac{Lu^2}{\mu}\frac{d}{d\theta}\Big( \frac{-L}{\mu}\frac{du}{d\theta} \Big) = \frac{-L^2u^2}{\mu^2}\frac{d^2u}{d\theta^2} \]
+Substitute this result back into the equation of motion, 
+\[ \frac{-L^2u^2}{\mu}\frac{d^2u}{d\theta^2} = \frac{L^2u^3}{\mu} + F \]
+Or rearranging the terms,
+\[ \frac{d^2u}{d\theta^2} = - u - \frac{\mu F}{L^2u^2} \]
+
+\begin{definition}
+Alternative Equation of Motion of Central Forces. \\
+Define 
+\begin{equation}
+u = \frac{1}{r}
+\end{equation}
+We can rewrite the time derivative $d/dt$ as
+\begin{equation}
+\frac{d}{dt} = \frac{Lu^2}{\mu}\frac{d}{d\theta}
+\end{equation}
+And arrive at an Alternative Equation of Motion of Central Force Motion. 
+\begin{equation}
+\frac{d^2u}{d\theta^2} = - u - \frac{\mu F}{L^2u^2}
+\end{equation}
+\end{definition}
+
+This equation is written purely in terms of $u$ and $\theta$, eliminating all time dependence. It comes with two perks: \\
+First, if we can directly solve for $u(\theta)$, we can immediate write the equation of orbit $r = 1 / u$, skipping the intermediate steps. \\
+Alternatively, if given a desired orbit $r(\theta)$, we can solve for the Force $F$ or energy $U$ required to sustain the orbit: 
+\[ F = - \frac{L^2u^3}{\mu} -\frac{L^2u^2}{\mu}\frac{d^2u}{d\theta^2} \]
+Using the chain rule to rewrite $d/dr$ in terms of $u$:
+\[ \frac{d}{dr} = \frac{du}{dr}\frac{d}{du} = \frac{d}{dr}(\frac{1}{r})\frac{d}{du} = -u^2\frac{d}{du} \]
+Since
+\[ F = - \frac{dU}{dr} \]
+\[ u^2\frac{dU}{du} = - \frac{L^2u^3}{\mu} -\frac{L^2u^2}{\mu}\frac{d^2u}{d\theta^2} \]
+\[ \frac{dU}{du} = - \frac{L^2u}{\mu} -\frac{L^2}{\mu}\frac{d^2u}{d\theta^2} \]
+Integrating the right-hand side with respect to $u$ gives the potential that executes the orbit. 
+
+\begin{definition}
+The Central Force and Potential of a Given Orbit. \\
+Given a desired orbit $r(\theta)$, define
+\begin{equation}
+u = \frac{1}{r}
+\end{equation}
+The Central Force and Potential required to sustain the orbit are
+\begin{equation}
+F = -\frac{L^2u^2}{\mu} \Big(u + \frac{d^2u}{d\theta^2} \Big)
+\end{equation}
+\begin{equation}
+U = - \frac{L^2}{\mu} \int u + \frac{d^2u}{d\theta^2} \ du
+\end{equation}
+\end{definition}
+
+\subsection{Examples: Linear and Spiral Orbits}
+\begin{example}
+The Orbit of a Free Particle \\
+\textit{Taylor, Classical Mechanics, Example 8.3} \\
+Solve for the orbit of a free particle, that is, a particle subject to no forces. \\
+
+\textbf{Solution:} Plug in the central force
+\[ F = 0 \]
+Into the equation of motion
+\[ \frac{d^2u}{d\theta^2} = - u - \frac{\mu F}{L^2u^2} \]
+We get
+\[ \frac{d^2u}{d\theta^2} = - u \]
+This equation has the same form as the simple harmonic motion, which has the solution
+\[ u = u_0\cos(\theta + \phi) \]
+For some constants $u_0$ and $\phi$. 
+\[ r = \frac{1}{u} \]
+Therefore the orbit equation is
+\[ r(\theta) = \frac{r_0}{\cos(\theta + \phi)} \]
+For some constants $r_0$ and $\phi$. \\
+One can verify with a \href{https://www.desmos.com/calculator/go5msiu9nc}{graphing calculator} that this solution $r(\theta)$ is indeed a straight line. 
+\end{example}
+
+\begin{example}
+The Spiral Orbit \\
+\textit{Helliwell and Sahakian, Modern Classical Mechanics, Problem 7.21} \\
+Find the potential $U(r)$ of a particle moving in a \href{https://www.desmos.com/calculator/dntfeetaj8}{spiral} orbit $r = r_0\theta^2$, where $r_0$ is a constant. \\
+
+\textbf{Solution:} Substitute
+\[ u = \frac{1}{r_0\theta^2} \implies \frac{d^2u}{d\theta^2} = \frac{6}{r_0\theta^4} = 6r_0u^2 \]
+Into the potential equation
+\[ U = - \frac{L^2}{\mu} \int u + \frac{d^2u}{d\theta^2} \ du = - \frac{L^2}{\mu} \int u + 6r_0u^2 \ du \]
+\[ U = - \frac{L^2}{\mu} \Big( \frac{u^2}{2} + 2r_0u^3 \Big) \]
+Or in terms of $r$, 
+\[ U(r) = - \frac{L^2}{\mu} \Big( \frac{1}{2r^2} + \frac{2r_0}{r^3} \Big) \]
+Gives the potential of a spiral orbit. 
+\end{example}
+
+\pagebreak
+
+\section{Applications}
+
+We will discuss some important consequences of central force motion, which have profound implications for astrophysics, statistical mechanics, and quantum mechanics. 
+
+\subsection{The Kepler Orbit}
+
+Consider the motion of a body under the gravitational attraction from another object. 
+\[ U(r) = -\frac{Gm_1m_2}{r} \implies \Vec{F} = -\frac{Gm_1m_2}{r^2}\Hat{r} \]
+The orbit equation can be solved with
+\[ \frac{d^2u}{d\theta^2} + u = - \frac{\mu F}{L^2u^2} = \frac{\mu Gm_1m_2}{L^2u^2r^2} \]
+Since $ur = 1$,
+\[ \frac{d^2u}{d\theta^2} + u = \frac{\mu Gm_1m_2}{L^2} \]
+$L$ is conserved, and the right-hand side of this equation is a constant. \\
+Using the differential equation techniques introduced in Notes 1 and 2, 
+\[ \frac{d^2u}{d\theta^2} + u = 0 + \frac{\mu Gm_1m_2}{L^2} \]
+\[ \begin{dcases}
+\frac{d^2u_1}{d\theta^2} + u_1 = 0 \implies u_1 = A\cos(\theta + \phi) \\
+\frac{d^2u_2}{d\theta^2} + u_2 = \frac{\mu Gm_1m_2}{L^2} \implies u_2 = \frac{\mu Gm_1m_2}{L^2}
+\end{dcases}\]
+For some constants $A$ and $\phi$. Therefore the full solution is
+\[ u = A\cos(\theta + \phi) + \frac{\mu Gm_1m_2}{L^2} \]
+We can rewrite the equation in terms of another constant $\epsilon = AL^2 / \mu Gm_1m_2$,
+\[ u = \frac{\mu Gm_1m_2}{L^2}(1 + \epsilon\cos(\theta + \phi)) \]
+The constant in the front $\frac{\mu Gm_1m_2}{L^2}$ has units of [$1/$length]. We can introduce the length constant
+\[ c = \frac{L^2}{\mu Gm_1m_2} \]
+And
+\[ u = \frac{1}{c}(1 + \epsilon\cos(\theta + \phi)) \]
+Thus the Keplar Orbit of Gravitation is given by
+\[ r = \frac{c}{1 + \epsilon\cos(\theta + \phi)} \]
+Both constants, $c$ and $\epsilon$, should be strictly nonnegative. In mathematics, the length $c$ is called the Semi-latus Rectum, and $\epsilon$ is the Eccentricity. \\
+Here is an interactive plot of the \href{https://www.desmos.com/calculator/yxlirnqcd6}{Kepler Orbit} that you can explore. 
+
+\begin{definition}
+The Kepler Orbit. \\
+For a two-body system governed by a negative inverse potential
+\begin{equation}
+U(r) = -\frac{k}{r}
+\end{equation}
+For some constant $k$, its orbit equation is given by
+\begin{equation}
+r = \frac{c}{1 + \epsilon\cos(\theta + \phi)}
+\end{equation}
+Where
+\begin{equation}
+c = \frac{L^2}{\mu k}
+\end{equation}
+And $\epsilon$ is the eccentricity, determined by the nature of the orbit. $\epsilon$ has the following properties: 
+\begin{itemize}
+\item When $\epsilon > 1$, the reduced mass orbit takes the shape of a hyperbola. The system is unbounded, and the objects will escape each other. 
+\item When $\epsilon = 1$, the reduced mass orbit takes the shape of a parabola. This system is on the border between unbounded and bounded. The objects will still escape each other. 
+\item When $0 < \epsilon < 1$, the reduced mass orbit takes the shape of an ellipse. The system is bounded, and the objects orbit around their center of mass. 
+\item When $\epsilon = 0$, the reduced mass orbit is a perfect circle. $r = r_1 - r_2$ is a constant value, and the distance between the two objects remains constant. 
+\end{itemize}
+\end{definition}
+
+\subsection{The Virial Theorem}
+
+Consider a reduced mass $\mu$ moving in a circular orbit about the origin, in an attractive force field with associated potential 
+\[ U = \alpha r^n \]
+Where $\alpha$ is an arbitrary constant. The central force is
+\[ \Vec{F} = -\frac{dU}{dr}\Hat{r} = -\alpha n r^{n - 1}\Hat{r} \]
+This force produces the centripetal acceleration required for a circular orbit. 
+\[ \Vec{F} = - \mu r\Dot{\theta}^2\Hat{r} = -\frac{\mu v^2}{r}\Hat{r} \]
+Equating these expressions, 
+\[ \frac{\mu v^2}{r} = \alpha n r^{n - 1} \]
+Manipulating the terms, 
+\[ \frac{1}{2}\mu v^2 = \frac{1}{2}\alpha n r^n \]
+Therefore
+\[ K = \frac{n}{2}U \]
+This relation is known as the Virial Theorem. In fact, the Virial Theorem can be generalized into bound elliptical orbits, in which case the Virial Theorem relates the average kinetic and potential energies per one full orbit. \\
+In particular, for a gravitational potential, $n = -1$, and $K = - \frac{1}{2}U$. 
+
+\begin{definition}
+The Virial Theorem. \\
+For a bounded two-body system governed by a potential energy in the form
+\begin{equation}
+U(r) = \alpha r^n
+\end{equation}
+The average kinetic and potential energies per one full orbit have the relation
+\begin{equation}
+K = \frac{n}{2}U
+\end{equation}
+\end{definition}
+
+If by any chance you are familiar with Classics, you may recognize that the term \textit{virial} came from the Latin word \textit{vis} (pl. \textit{vires}). In colloquial English, \textit{vis} is translated as "force", or "strength", yet the Virial Theorem relates two forms of \textit{energies}. In the 17-19th centuries, scientists proposed the term \textit{vis viva} (living force) for this physical quantity, which in turn was named "energy" in modern English, and the Virial Theorem got to keep its name. 
+
+\pagebreak
+
+\section{Exercises}
+
+\begin{problem}
+Inverse-cube Central Force. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 10.3} \\
+A particle moves in a circle under the influence of an inverse cube law force.
+\[ \Vec{F} = - \frac{2A}{r^3}\Hat{r} \]
+Show that when $A = L^2 / 2m$, the particle moves with constant radial velocity. For the motion with constant radial velocity $\Dot{r} = v$, find $\theta$ as a function of $r$. 
+\end{problem}
+
+\begin{problem}
+Maximum Angular Momentum. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 6.1} \\
+A particle moves in a potential 
+\[ U(r) = -U_0 e^{-\lambda^2r^2} \]
+\begin{enumerate}
+\item Given the angular momentum $L$, find the radius of the stable circular orbit. 
+\item It turns out that if $L$ is too large, then a circular orbit actually doesn’t exist. What is the largest value of $L$ for which a circular orbit does indeed exist? What is the value of $U_{eff}(r)$ in this case?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Spring Ellipse. \\
+\textit{Morin, Introduction to Classical Mechanics, Problem 6.5} \\
+A particle moves under a spring potential
+\[ U(r) = \frac{1}{2} kr^2 \]
+Show that the particle’s orbit is an ellipse.
+\end{problem}
+
+\begin{problem}
+Satellite with Air Friction. \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 10.10}
+\begin{enumerate}
+\item A satellite of mass $m$ is in circular orbit about the Earth. The radius of the orbit is $r_0$ and the mass of the Earth is $M$. Find the total mechanical energy of the satellite.
+\item Now suppose that the satellite moves in the extreme upper atmosphere of the Earth where it is retarded by a constant feeble friction force $f$. The satellite will slowly spiral toward the Earth. Since the friction force is weak, the change in radius will be very slow. We can therefore assume that at any instant the satellite is effectively in a circular orbit of average radius $r$. Find the approximate change in radius per revolution of the satellite, $\Delta r$.
+\item Find the approximate change in kinetic energy $\Delta K$ of the satellite per revolution.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+An Exponential Orbit. \\
+\textit{Physics 105, Fall 2023 (Chiang)}
+\begin{enumerate}
+\item Find the force law for a central force that allows a particle to move in a spiral orbit given by $r(\theta) = ke^{\alpha \theta}$, where $k$ and $\alpha$ are positive real constants.
+\item Show that $\theta(t)$ has the form
+\[ \theta(t) = \frac{1}{2\alpha}\ln\Big( \frac{2\alpha L t}{\mu k^2} + C \Big) \]
+Where $C$ is a constant, $L$ is the angular momentum, and $\mu$ is the reduced mass. 
+\item Show that $r(t)$ has the form
+\[ r(t) = \sqrt{\frac{2\alpha L t}{\mu} + k^2C} \]
+\end{enumerate}
+\end{problem}
 
 \end{document}

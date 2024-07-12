@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics, mathtools}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 6}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -36,16 +65,255 @@
 \begin{center}
 \vspace{3in}
 {\Large Note 6 } \\[0.05in]
-Precession \\ [0.5in]
+Potentials and Oscillatory Motion \\ [0.5in]
 \end{center}
 
 % this is a comment
 
-\section{1}
-1
+\section*{Motivation}
 
-\subsection{11}
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
 
-1
+\textit{So why should I still read this?} \\
+Most physical systems in the real world have no closed-form mathematical solutions. However, we can approximate small magnitude \textbf{Perturbations from Equilibrium as Simple Harmonic Motion} for any arbitrary physical system at a desirable accuracy. This technique is one that you will encounter in every physics class hereafter. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+\begin{itemize}
+\item The Elastic Potential Energy:
+\[ U_s = \frac{1}{2}k(x - x_0)^2 \]
+\item The Conservative Force of a conserved potential: 
+\[ F = - \frac{dU}{dx} \]
+\item Some common derivatives: 
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\ln x) = \frac{1}{x} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+
+\item The Taylor Series\footnote{We will present a brief derivation in the following section.} of a function $f$: 
+\[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2!}f''(c)(x - c)^2 + \frac{1}{3!}f'''(c)(x - c)^3 \ ... \]
+For any arbitrary constant $c$ where $f$ is differentiable at $c$. Typically in physics, we take the first one or two terms of the Taylor Series and call it a good enough approximation of $f$. 
+\end{itemize}
+
+\pagebreak
+
+\section{The Theory of Potentials}
+
+\subsection{Conservative Force and Equilibrium}
+
+A particle in a conservative potential field feels a force equal to the negative derivative of the potential, 
+\[ F = -\frac{dU}{dx} \]
+Two simple consequences follow:
+\begin{itemize}
+\item The particle is at equilibrium when the derivative $U'(x)$ equals zero and is subject to no force. 
+\item At other times, the force equals the negative slope of the $U$-$x$ graph. \\
+When $U(x)$ is increasing ($U'(x) > 0$), the particle accelerates towards the left; when $U(x)$ is decreasing ($U'(x) < 0$), the particle accelerates towards the right. 
+\end{itemize}
+
+Consider a graph of Potential Energy with respect to Position. 
+
+\fig{figs/n6/equilibrium.jpg}{Potential versus Position Graph}{0.3}{0}
+
+Noises and disturbances are prevalent in real-world engineering systems. Let us first consider a particle located at a local minimum of $U(x)$. Should a disturbance move the particle to the left by a tiny amount, a restoring force $F = -\frac{dU}{dx} > 0$ pushes the particle to the right. And if the particle is slightly disturbed towards the right, the potential gives a restoring force $F = -\frac{dU}{dx} < 0$ towards the left. Either way, the potential distribution gives a response that pushes the particle back toward the equilibrium position, forming a "potential well" that confines the particle. \\
+
+Notice that this is not the case for local maxima or saddle points of $U(x)$, where a slight disturbance from the equilibrium position will cause the particle to be driven further away from equilibrium. Hence these are called unstable equilibria. \\
+
+If a segment within the $U(x)$ graph is piecewise constant, i.e., is a flat horizontal line, then the particle does not experience a force from the potential moving either way, as long as it remains on the constant potential. A constant-valued segment on the $U(x)$ graph is a neutral equilibrium region for the particle. 
+
+Thus we can make these conclusions: 
+
+\begin{definition}
+The Stability of Equilibria. \\
+For a given form of potential energy $U(x)$:
+\begin{itemize}
+\item Stable equilibrium positions are the local minima of $U$. A particle at stable equilibrium under disturbance will feel a force that moves it back to equilibrium.
+\item Unstable equilibrium positions are the local maxima of $U$. A particle at unstable equilibrium under disturbance will feel a force that drives it away from equilibrium. 
+\item Neutral equilibrium regions are piecewise constant segments of $U$. A particle at neutral equilibrium will feel no force when its position fluctuates. 
+\end{itemize}
+
+\end{definition}
+
+\subsection{Quadratic Energy Forms}
+
+Many dynamical systems in physics and engineering are modeled by quadratic energies in the form: 
+\[ \begin{cases}
+V = \frac{1}{2} Aq^2 \\
+T = \frac{1}{2} B\Dot{q}^2
+\end{cases} \]
+Where $q$ is a dynamical variable (such as position/angle), $A$, $B$ are positive constants with appropriate dimensions, and $V$, $T$ correspond to energy-like quantities. For example, in a mass-spring system, 
+\[ \begin{cases}
+A = k \\
+B = m \\
+q = x
+\end{cases} \implies \quad \begin{cases}
+U = \frac{1}{2} kx^2 \\
+K = \frac{1}{2} m\Dot{x}^2
+\end{cases} \]
+Here, I shall stick with abstract variables, as this exact form of quadratic equations can describe far more types of physical systems (including torsional pendulum and inductor-capacitor circuit). Many engineering models too (such as signal processing) rely on the same mathematical setup, albeit with no physical implications. \\
+
+In an isolated system with no external forces acted on, its total energy is conserved. 
+\[ H = T + V = H_0 \implies dH = 0 \]
+Therefore, 
+\[ \frac{dH}{dt} = \frac{d}{dt}(\frac{1}{2} B\Dot{q}^2 + \frac{1}{2} Aq^2) = B\Dot{q}\Ddot{q} + Aq\Dot{q} = 0 \]
+Cancel out the common factor $\Dot{q}$, 
+\[ B\Ddot{q} + Aq = 0 \implies \Ddot{q} = -\frac{A}{B}q \]
+This is exactly the equation of Simple Harmonic Motion, which has the solution
+\[ \begin{cases}
+q = Q_0\cos(\omega t + \phi) \\ 
+\omega = \sqrt{A / B}
+\end{cases} \]
+Where $Q_0$, $\phi$ are constants to be determined by the initial state of the system. \\
+
+In fact, our conclusions can be even more generalized and may work for any independent variable, where this mathematical framework is much exploited in theoretical mechanics and engineering. 
+
+\begin{definition}
+Quadratic Energy Forms. \\
+Let $q$ denote the state of a dynamical system, which depends on the independent variable $\alpha$, 
+\begin{equation}
+q = q(\alpha)
+\end{equation}
+Let $\Dot{q}$ denote the rate of change of $q$ with respect to $\alpha$,
+\begin{equation}
+\Dot{q} = \frac{dq}{d\alpha}
+\end{equation}
+For a system governed by the equation
+\begin{equation}
+H(q, \Dot{q}) = T(\Dot{q}) + V(q)
+\end{equation}
+Where
+\begin{equation}
+V = \frac{1}{2} Aq^2
+\end{equation}
+\begin{equation}
+T = \frac{1}{2} B\Dot{q}^2
+\end{equation}
+For some positive constants $A$ and $B$. \\
+Under the condition that the quantity $H$ is conserved, 
+\begin{equation}
+dH = 0 \implies \frac{dH}{d\alpha} = 0
+\end{equation}
+The state of the system $q$ oscillates in the form of a Simple Harmonic Oscillator: 
+\begin{equation}
+q = Q_0\cos(\omega \alpha + \phi)
+\end{equation}
+\begin{equation}
+\omega = \sqrt{\frac{A}{B}}
+\end{equation}
+Where $Q_0$, $\phi$ are constants subject to the initial state of the system.
+\end{definition}
+In most undergraduate physics classes, the independent variable $\alpha$ is the time $t$. \\
+As one advances in their STEM degree, they are presented with concepts in more and more abstract terms. But almost always, these abstractions are merely a generalization of something one may learn from introductory classes. Indeed \href{https://lsa.umich.edu/technology-services/news-events/all-news/teaching-tip-of-the-week/three-activities-to-activate-prior-knowledge.html}{this} is a very powerful technique to learn something quick and solid, and such realization has personally saved me in quite a few advanced math and physics classes. 
+
+\subsection{Example: Small Oscillations of a Teeter Toy}
+
+\begin{example}
+Small Oscillations of a Teeter Toy \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 6.3} \\
+
+
+\end{example}
+
+\pagebreak
+
+\section{The Taylor Series}
+
+\textit{\textbf{Note:} Taylor Series is officially introduced in Math 1B, a co-requisite of Physics 7A. I am aware that most physics classes outpace the corresponding math classes listed as co-requisites. Therefore we will present a brief derivation and prove the validity of the Taylor Series below. If you are familiar with this mathematical technique, feel free to skip this section.} 
+
+\subsection{Prelude}
+
+Mathematically, it is easier to work with equations that only involve polynomials of first or second orders, compared to other more complex functions. For example, the equation of motion of a pendulum is: 
+\[ \Ddot{\theta} = -\frac{g}{l}\sin\theta \]
+Which does not have a closed-form solution. However, the following equation
+\[ \Ddot{\theta} = -\frac{g}{l}\theta \]
+Has a closed-form solution of a harmonic oscillator: 
+\[ \theta = A\cos(\sqrt{\frac{g}{l}}t + \phi) \]
+Or, consider the Lennard-Jones Potential between two atoms in a molecule, given by:
+\[ U = 4\epsilon\Big[ (\frac{\sigma}{r})^{12} - (\frac{\sigma}{r})^6 \Big] \]
+But in reality, intermolecular oscillations can be approximated as
+\[ U = \frac{36\epsilon}{r_0^2}(r - r_0)^2 \]
+Which has the same form of a spring-mass potential. \\
+
+Indeed, the fuller version of these equations provides a more precise explanation of the underlying systems, but they are often much harder to work with mathematically. In fact, we can use the Taylor Series to simplify any arbitrary function into a polynomial function, a technique adored by most physicists. 
+
+\subsection{Mathematical Derivation}
+
+Consider an arbitrary function $f(x)$ that is differentiable at an arbitrary point $c$, which is the center of our series. If we were to accept by faith that $f$ can be written in the form of a Taylor Series, denoted by $g(x)$, where $g$ is a polynomial function with the form
+\[ g(x) = a_0 + a_1(x - c) + a_2(x - c)^2 + a_3(x - c)^3 + a_4(x - c)^4 \ ... \]
+Enforcing that they are equal to each other
+\[ g(x) = f(x) \]
+Would mean that their values are equal at any arbitrary point $c$, 
+\[ g(c) = f(c) \]
+And their slopes, concavities, and all higher-order derivatives are equal at $c$. 
+\[ \begin{cases}
+g'(c) = f'(c) \\
+g''(c) = f''(c) \\
+g'''(c) = f'''(c) \\
+...
+\end{cases} \]
+Start by differentiating the function $g$: 
+\[ g(x) = a_0 + a_1(x - c) + a_2(x - c)^2 + a_3(x - c)^3 + a_4(x - c)^4 \ ... \]
+\[ g'(x) = a_1 + 2a_2(x - c) + 3a_3(x - c)^2 \ ... \]
+\[ g''(x) = 2a_2 + 6a_3(x - c) + 12a_4(x - c)^2 \ ... \]
+\[ g'''(x) = 6a_3 + 24a_4(x - c) + 60a_5(x - c)^2 \ ... \]
+We conveniently defined $g$ such that all terms with $x$ appear as $(x - c)$. Therefore, if we plug in $x = c$ to the original function $g(c)$,
+\[ g(c) = a_0 + a_1(c - c) + a_2(c - c)^2 \ ... = a_0 \]
+The first derivative $g'(c)$:
+\[ g'(c) = a_1 + 2a_2(cx - c) + 3a_3(c - c)^2 \ ... = a_1 \]
+The second derivative $g''(c)$:
+\[ g''(c) = 2a_2 + 6a_3(c - c) + 12a_4(c - c)^2 \ ... = 2a_2 \]
+The third derivative $g'''(c)$:
+\[ g'''(c) = 6a_3 + 24a_4(c - c) + 60a_5(c - c)^2 \ ... = 6a_3 \]
+Substitute the coefficients $a_n$ back into the function $g$,
+\[ g(x) = g(c) + g'(c)(x - c) + \frac{1}{2}g''(c)(x - c)^2 + \frac{1}{6}g'''(c)(x - c)^3 + \frac{1}{24}g''''(c)(x - c)^4 \ ... \]
+Since we enforced the condition that $g(x)$ exactly equals $f(x)$ at any arbitrary point, we can thus replace all $g$ with $f$. 
+\[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2}f''(c)(x - c)^2 + \frac{1}{6}f'''(c)(x - c)^3 + \frac{1}{24}f''''(c)(x - c)^4 \ ... \]
+Note that the denominators of the fractions equal to the factorials of the coefficients, 
+\[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2!}f''(c)(x - c)^2 + \frac{1}{3!}f'''(c)(x - c)^3 + \frac{1}{4!}f''''(c)(x - c)^4 \ ... \]
+
+\begin{definition}
+Taylor Series. \\
+For an arbitrary function $f(x)$ that is differentiable at point $c$, the function $f$ can be expressed as a polynomial centered at $c$: 
+\begin{equation}
+f(x) = f(c) + f'(c)(x - c) + \frac{1}{2!}f''(c)(x - c)^2 + \frac{1}{3!}f'''(c)(x - c)^3 \ ...
+\end{equation}
+Or as an infinite sum, 
+\begin{equation}
+f(x) = \sum_{n = 0}^{\infty} \frac{1}{n!}f^n(c)(x - c)^n
+\end{equation}
+Where $f^n$ denotes the $n$-th derivative of $f$. \\
+In physics, we typically only keep the first one or two powers of the Taylor Series as a local approximation of the original function around the point $c$. 
+\end{definition}
+
+\textit{Link: \href{https://www.desmos.com/calculator/lldzowzesu}{Graphing Calculator}. \\
+Visualization of the Taylor Series of $\sin(x)$. The center of this series is $c = 0$. You can use the interactive slider to see when more terms are included in the series, the polynomial accurately captures larger sections of the original function.}
+
+\begin{definition}
+Some Common Taylor Series. \\
+Below are a few Taylor Series commonly used in physics. We will not derive these results here, but feel free to confirm them on your own. 
+\begin{equation}
+\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} \ ... = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n + 1)!}x^{2n + 1}
+\end{equation}
+\begin{equation}
+\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} \ ... = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n)!}x^{2n}
+\end{equation}
+\begin{equation}
+e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} \ ... = \sum_{n = 0}^{\infty} \frac{1}{n!}x^n
+\end{equation}
+\begin{equation}
+\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} \ ... = \sum_{n = 1}^{\infty} \frac{(-1)^{n + 1}}{n}x^n
+\end{equation}
+\begin{equation}
+(1 + x)^k = 1 + kx + \frac{k(k - 1)}{2!}x^2 \ ... = \sum_{n = 0}^{\infty} \binom{k}{n} x^n
+\end{equation}
+Where
+\[ \binom{k}{n} = \frac{k(k - 1)(k - 2) \ ... \ (k - n + 1)}{n!} \]
+Is the Binomial Coefficient. 
+\end{definition}
+
+You can indeed verify that the simplifications we made to the pendulum equation of motion and the Lennard-Jones potential are the results of the Taylor Series. 
+
+\pagebreak
 
 \end{document}

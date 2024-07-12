@@ -8,9 +8,9 @@
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Note 2}
+	\fancyhead[R]{Note 3}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
@@ -99,11 +99,10 @@ With the solution
 For now, will drop the phase shift $\phi$ as it is not the main point of the discussion in these notes. 
 \item The equation of motion of a pendulum: 
 \[ \Ddot{\theta} = -\frac{g}{l}\sin\theta \]
-Which we can use Taylor Expansion
+Which we can keep the first term of the Taylor Series\footnote{Taylor Expansion is a concept from Math 1B. If you haven't taken that class, here's a brief explanation. Because $\sin0 = 0$, when the angle $\theta$ is very close to $0$, the value of $\sin\theta$ is also very close to $0$, so they must be very close to each other, and we can make the approximation $\sin\theta \approx \theta$.}
 \[ \sin\theta = \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5} \ ... \]
-To approximate pendulum as a harmonic oscillator
+For sufficiently small angles $\theta \approx 0$, to approximate the pendulum as a harmonic oscillator
 \[ \Ddot{\theta} = -\frac{g}{l}\theta \]
-For sufficiently small angles $\theta \approx 0$. 
 \item Some common derivatives: 
 \[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
 \[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
@@ -117,7 +116,7 @@ For sufficiently small angles $\theta \approx 0$.
 \section{Formulation}
 \textit{“The career of a young theoretical physicist consists of treating the harmonic oscillator in ever-increasing levels of abstraction.”
 \begin{flushright}
--- Sidney Colman
+-- Sidney Coleman
 \end{flushright}}
 
 \subsection{Linear Systems of Masses and Springs}
@@ -149,7 +148,7 @@ Notice that there are two ways the system can exhibit some sort of symmetry.
 \begin{itemize}
 \item Case 1: $x_1 = x_2$. In this case, the two masses move in phase with each other, having equal displacements in the same direction. 
 \fig{figs/n3/same.jpg}{Case 1: $x_1 = x_2$}{1}{0}
-\item Case 2: $x_1 = -x_2$. In this case, the two masses move in opposite directions with each other, with displacements of the same magnitude. 
+\item Case 2: $x_1 = -x_2$. In this case, the two masses move with displacements of the same magnitude in opposite directions. 
 \fig{figs/n3/opposite.jpg}{Case 2: $x_1 = -x_2$}{1}{0}
 \end{itemize}
 
@@ -302,7 +301,7 @@ Since the angles $\theta_{1, 2}$ are very small, we can further approximate the 
 Again, the two possible geometric symmetries of the system are: 
 \begin{itemize}
 \item \textbf{First Normal Mode: $\theta_1 = \theta_2$} \\
-The $(\theta_1 - \theta_2)$ become zero. Thus
+The $(\theta_1 - \theta_2)$ terms become zero. Thus
 \[ \Ddot{\theta_1} = -\frac{g}{l}\theta_1 \]
 \[ \Ddot{\theta_2} = -\frac{g}{l}\theta_2 \]
 Each individual equation of motion has the solution
@@ -329,9 +328,11 @@ Where
 
 \section{Exercises}
 \begin{problem}
-The Reduced Mass Method \\
+The Reduced Mass Method. \\
 \textit{Helliwell and Sahakian, Modern Classical Mechanics, Problem 13.1} \\
-Two blocks, of masses $m$ and $M$, are connected by a single spring of force constant $k$. The blocks are free to slide on a frictionless table. Define the \textit{Reduced Mass} of the system as $\mu = mM / (m + M)$. Find the equation of the motion of the reduced mass, and find its solution. Pay specific attention to the case where $m = M$. 
+Two blocks, of masses $m$ and $M$, are connected by a single spring of force constant $k$. The blocks are free to slide on a frictionless table. Define the \textit{Reduced Mass} of the system $\mu$ as: 
+\[ \mu = \frac{Mm}{M + m} \]
+Find the equation of the motion of the reduced mass, and find its solution. Pay specific attention to the case where $m = M$. 
 \end{problem}
 
 \begin{problem}
@@ -341,6 +342,8 @@ Two particles of mass $m$ are constrained to move along two horizontal frictionl
 shown?
 \fig{figs/n3/angled.jpg}{Morin, Problem 4.16}{0.5}{0}
 \end{problem}
+
+\pagebreak
 
 \begin{problem}
 Normal Modes and Symmetry. \\
@@ -361,9 +364,9 @@ Springs on a Circle. \\
 \end{problem}
 
 \begin{problem}
-Masses, Springs, and Dampers \\
+Masses, Springs, and Dampers. \\
 \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 11.13} \\
-Two identical masses $M$ are hung between three identical springs. Each spring is massless and has spring constant $k$. The masses are connected as shown to a dashpot of negligible mass. Neglect gravity. The dashpot exerts a force $F = -bv$ opposing motion, where $v$ is the relative velocity of its two ends. Let $x_1$ and $x_2$ be the displacements of the two masses from equilibrium.
+Two identical masses $M$ are hung between three identical springs. Each spring is massless and has spring constant $k$. The masses are connected as shown to a dashpot of negligible mass. Neglect gravity. The dashpot exerts a force $F = -b(v_1 - v_2)$ opposing motion, dependent on the relative velocity of its two ends. Let $x_1$ and $x_2$ be the displacements of the two masses from equilibrium.
 \fig{figs/n3/dampers.jpg}{Kleppner and Kolenkow, Problem 11.13}{0.5}{0}
 \begin{enumerate}
 \item Find the equation of motion for each mass.
@@ -373,6 +376,8 @@ Two identical masses $M$ are hung between three identical springs. Each spring i
 And find $\omega$. 
 \end{enumerate}
 \end{problem}
+
+\pagebreak
 
 \begin{problem}
 Springs to Mind. \\

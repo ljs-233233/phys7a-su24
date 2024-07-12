@@ -8,7 +8,7 @@
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 101}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
 	\fancyhead[R]{Note 1}
 \renewcommand{\headrulewidth}{0pt}
@@ -141,7 +141,7 @@ The most important force on a non-swimming bacterium in a fluid is the viscous d
 \[ F = m\Dot{v} = -bv \implies \Dot{v} = \frac{-b}{m}v \]
 Notice that in this expression, the derivative of $v$ is proportional to $v$ itself. Conveniently, you may have also learned from Calculus that the only type of function whose derivative is proportional to itself are exponential functions, 
 \[ f(x) = Ae^{bx} \implies f'(x) = Abe^{bx} \]
-In fact, exponential functions are the \textit{only} type of functions whose derivatives are proportional to the functions themselves. So we could conclude that the velocity due to a drag force must be an exponential function (And this process method is called \textit{Ansatz}, "guess" or "estimation" in German), 
+In fact, exponential functions are the \textit{only} type of functions whose derivatives are proportional to the functions themselves. So we could conclude that the velocity due to a drag force must be an exponential function (And this method is called \textit{Ansatz}, meaning "attempt" or "initial approach" in German), 
 \[ v(t) = Ae^{rt} \]
 For some constants $A$ and $r$ that we need to find. Differentiate our proposed solution for $v$, 
 \[ \Dot{v} = Are^{rt} \]
@@ -149,7 +149,7 @@ And plug these results into the equation of motion,
 \[ Are^{rt} = (\frac{-b}{m})Ae^{rt} \]
 Thus, 
 \[ r = \frac{-b}{m} \implies v = Ae^{-bt/m} \]
-As we are given the bacterium's initial velocity, 
+Since we are given the bacterium's initial velocity, 
 \[ v_0 = v(t = 0) = Ae^0 = A \]
 Thus we have, 
 \[ v = v_0e^{-bt/m} = v_0e^{-t / \tau} \]
@@ -160,7 +160,7 @@ Consistent with the results we found with Separation of Variables.
 
 \begin{example}
 Falling Raindrop \\
-çç\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.9} \\
+\textit{Kleppner and Kolenkow, An Introduction to Mechanics, Example 3.9} \\
 The Earth’s atmosphere normally contains a large number of very small particles, for instance water droplets and carbon soot, generally called aerosols. Consider a spherical water droplet in still air falling under gravity, when also subject to a drag force $F_v = -bv$. Solve the equation of motion to find the speed at any time after the droplet is released from rest. \\
 
 \textbf{Solution:} Per Newton's Second Law, 
