@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Note 0-2}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Note 0, Part 2 } \\[0.05in]
+Vector Calculus  \\ 
+\blfootnote{If you found any errors, or have any questions about these notes, please contact Jinsheng Li.} \blfootnote{Email Address: \href{mailto:ljs233233@berkeley.edu}{ljs233233@berkeley.edu}} \\ [-0.5in]
+\end{center}
+
+\section*{Motivation}
+
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. You are certainly not responsible for the materials discussed here, unless it is also mentioned by the professor in lecture. 
+
+\textit{So why should I still read this?} \\
+\textbf{Vector Calculus} will be an integral part of every physics course to come. It is a convenient and heavily used mathematical tool to express vectorial quantities, regardless of their physical nature. Within these sets of notes, we will also discuss the immediate applications of Vector Calculus in Conservative Forces and Potential. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+
+\begin{itemize}
+\item Some common derivatives:
+\[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
+\[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
+\[ \frac{d}{dx}(\sin x) = \cos x \]
+\[ \frac{d}{dx}(\cos x) = -\sin x \]
+\item The relationship between 1-Dimensional Conservative Forces and Potential:
+\[ \Vec{F} = - \frac{dU}{dx}\hat{x} \]
+\[ U = - \int_{0}^x F \ dx \]
+\end{itemize}
+\pagebreak
+
+\section{The Partial Derivative}
+
+
+
+\end{document}

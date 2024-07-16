@@ -63,17 +63,230 @@
 
 \begin{center}
 \vspace{3in}
-{\Large Discussion 9 } \\ [0.05in]
-Gravitation \\ [-0.5in]
+{\Large Discussion 11 } \\ [0.05in]
+Gravitation and Center of Mass \\ [-0.5in]
 \end{center}
 
 \section*{Topics}
-Newton's Law of Gravitation, Gravitational Field, and Laws of Orbits. 
+Newton's Law of Gravitation, Gravitational Field, and Laws of Orbits. Center of Mass. 
 
 \section{Review}
 
-\subsection{Potential Energy}
+\subsection{Gravitational Potential Energy}
 
+Two objects of mass $M$ and $m$ separated at a distance $r$ attract each other gravitationally. The \textbf{Gravity} between them is
+\[ \Vec{F}_G = \frac{-GMm}{r^2}\Hat{r} \]
+Where $\Hat{r}$ is the unit vector from one object to the other. They carry a \textbf{Gravitational Potential Energy} of 
+\[ U_G = \frac{-GMm}{r} \]
+Where $G = 6.67 \times 10^{-11} \ Nm^2/kg^2$ is the Gravitational Constant. 
 
+By convention, we define $U_G = 0$ when $r = \infty$, the gravitational potential is zero for objects at an infinitely far distance away. The escape velocity of an object is the velocity that can bring it out of the gravitational attraction to an infinitely far distance. 
+\[ K_{esc} = -U \implies \frac{1}{2}mv_{esc}^2 = \frac{GMm}{r} \]
+Thus the \textbf{Escape Velocity} is
+\[ v_{esc} = \sqrt{\frac{2GM}{r}} \]
+
+\subsection{The Gravitaional Field}
+
+The \textbf{Gravitational Field}, $\Vec{g}$, is another way to say "acceleration due to gravity from the attraction of a source object". On the surface of the Earth, $\Vec{g} = -9.8 m/s^2 \ \Hat{y}$ is a uniform value. However, if we are dealing with astronomical distances, $\Vec{g}$ deviates from uniformity. 
+\[ F_g = m\Vec{g} \implies \frac{-GMm}{r^2}\Hat{r} = m\Vec{g} \]
+Thus a point mass $M$ produces a gravitational field of
+\[ \Vec{g} = \frac{-GM}{r^2}\Hat{r} \]
+
+\fig{figs/0716/gauss.jpeg}{Gauss' Law for Gravitation}{0.1}{0}
+
+\textbf{Gauss' Law for Gravitation} states that for a spherically symmetric source mass $M_1$, and a receiving mass $m$ at a distance $r$ that is less than the radius of $R$, the gravitational field on $m$ only depends on the portion of mass $M_2$ enclosed by a sphere of radius $r$. 
+
+Mathematically, Gauss' Law reads
+\[ A \Vec{g} = -4\pi GM \Hat{r} \]
+Where $M$ is the amount of source mass enclosed by a sphere of radius $r$, which in this case is $M_2$. \\
+$A$ is the surface area of a sphere of radius $r$, $A = 4\pi r^2$. 
+
+This means
+\[ \Vec{g}_{\text{ at m}} = \frac{-GM_2}{r^2}\Hat{r} \]
+
+\subsection{Kepler's Laws of Planetary Motion}
+
+\textbf{1.} The path of a planet about a star is an ellipse with the star at one focus. 
+
+\textbf{2.} Each planet moves so that the area swept by its trajectory are equal in equal periods of time. 
+
+\textbf{3.} The following mathematical quantity is constant.  
+\[ \frac{4\pi^2}{GM} = \frac{T^2}{r^3} \]
+Where $M$ is the star's mass, $T$ is the orbital period, and $r$ is the planet's orbital radius. 
+
+\pagebreak
+
+\subsection{Center of Mass}
+
+The \textbf{Center of Mass} of a set of point masses is defined as
+\[ \Vec{r}_{CM} = \frac{1}{M} \sum_i m_i\Vec{r}_i \]
+Where $M$ is the total mass of the system. Since this is a vector equation, it implies that 
+\[ \begin{cases}
+x_{CM} = \frac{1}{M} \sum_i m_ix_i \\
+y_{CM} = \frac{1}{M} \sum_i m_iy_i \\
+z_{CM} = \frac{1}{M} \sum_i m_iz_i
+\end{cases} \]
+
+For a continuous object, the discrete sum becomes an integral. 
+\[ \Vec{r}_{CM} = \frac{1}{M} \int \Vec{r} \ dm \]
+
+For an extended object in a uniform gravitational field ($\Vec{g}$ is constant), we can treat it as if gravity acts on the center of mass of that object. 
+
+\pagebreak
+
+\subsection{Collisions as Viewed from the Center of Mass Frame}
+
+By exploiting the properties of the Center of Mass reference frame, we can sometimes simplify our calculations for two-body collisions. Here's the framework: 
+
+For a 1D two-body collision, 
+\[ x_{CM} = \frac{m_1x_1 + m_2x_2}{m_1 + m_2} \]
+\[ v_{CM} = \frac{d}{dt}(x_{CM}) = \frac{m_1v_1 + m_2v_2}{m_1 + m_2} \]
+
+If the objects initially have velocities $v_1$ and $v_2$, then in the CM reference frame, 
+\[ v_{1, CM} = v_1 - v_{CM} = v_1 - \frac{m_1v_1 + m_2v_2}{m_1 + m_2} \]
+\[ v_{2, CM} = v_2 - v_{CM} = v_2 - \frac{m_1v_1 + m_2v_2}{m_1 + m_2} \]
+Thus
+\[ v_{1, CM} = (v_1 - v_2) \Bigl(\frac{m_2}{m_1 + m_2}\Bigr) \]
+\[ v_{2, CM} = (v_2 - v_1) \Bigl(\frac{m_1}{m_1 + m_2}\Bigr) \]
+We can see that the total initial momentum in the CM reference frame is zero. 
+\[ \sum p_{CM} = m_1v_{1, CM} + m_2v_{2, CM} \]
+\[ \sum p_{CM} = (v_1 - v_2) \Bigl(\frac{m_1m_2}{m_1 + m_2}\Bigr) + (v_2 - v_1) \Bigl(\frac{m_1m_2}{m_1 + m_2}\Bigr) = 0 \]
+By conservation of momentum, the final momentum in the CM reference frame must also be zero. 
+
+When we know the final velocities in the CM reference frame, we can then convert them back into the rest frame and retrieve the actual final velocities of the objects.
+\[ v_1 = v_{1, CM} + v_{CM} \]
+\[ v_2 = v_{2, CM} + v_{CM} \]
+
+\subsection{1D Elastic Collision}
+
+If the masses are constrained to move in 1D and the collision is elastic, the following equation holds true.\footnote{This can be found in Giancoli, Physics for Scientists and Engineers, Page 223}
+\[ v_{10} - v_{20} = v_{2f} - v_{1f} \]
+
+\pagebreak
+
+\section{Gravity, Potential, and Field}
+
+\textbf{1.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 6.63} \\
+If you are traveling directly away from Earth at a constant speed v, show that the rate of change of your weight $W$ is
+\[ \frac{dW}{dt} = \frac{-2GMmv}{r^3} \]
+Your mass is $m$, the Earth's mass is $M$, and $r$ is your distance from the center of the Earth at any moment.
+
+\pagebreak
+
+\textbf{2.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 6.71} \\
+An astroid of mass $m$ is in a circular orbit of radius $r$ with speed $v$ around the Sun. It has an impact with another astroid of mass $M$ and is kicked into a new circular orbit with a speed of $1.5 v$. What is the radius of this new orbit? 
+
+\pagebreak
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 6.23} \\
+Two identical point masses, each of mass $M$, always remain separated by a distance of $2R$. A third mass $m$ is then placed a distance $x$ along the perpendicular bisector of the original two masses. Show that the gravitational force on the third mass is directed inward along the perpendicular bisector and has a magnitude of
+\[ F = \frac{2GMmx}{(x^2 + R^2)^{3/2}} \]
+\fig{figs/0716/g623.png}{Giancoli, Problem 6.23}{0.5}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Morin, Introduction to Classical Mechanics, Problem 5.55} \\
+Two planets of mass $M$ and radius $R$ are at rest (somehow) with respect to each other, with their centers a distance $4R$ apart. You wish to fire a projectile from the surface of one planet to the other. What is the minimum firing speed for which this is possible?
+
+\pagebreak
+
+\textbf{5.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.100} \\
+Suppose the gravitational potential energy for an object of mass $m$ at a distance $r$ from the center of the Earth is given by
+\[ U(r) = \frac{-GMm}{r}e^{-\alpha r} \]
+Where $\alpha$ is a positive constant. (Newton’s law of universal gravitation has $\alpha = 0$). 
+
+(a) What would be the force on the object as a function of $r$? 
+
+(b) What would be the object’s escape velocity in terms of the Earth’s radius, $R_E$?
+
+\pagebreak
+
+\textbf{6.} \textit{Morin, Introduction to Classical Mechanics, Problem 5.62} \\
+Consider a planet of mass $M$ and radius $R$. A very long stick of mass $m$ and length $2R$ extends from just above the surface of the planet out to a radius $3R$. Its center of mass is at a distance $2R$. If initial conditions have been set up so that the stick moves in a circular orbit while always pointing radially, what is the period of this orbit? How does this period compare with the period of a satellite in a circular orbit of radius $2R$?
+\fig{figs/0716/m562.png}{Morin, Problem 5.62}{0.5}{0}
+\textit{Hint: In this case, the Center of Mass is no longer the Center of Gravity. The stick has a linear mass density $\lambda = \frac{m}{2R}$. Consider the differential force felt by a differential mass $dF = \frac{-GM dm}{r^2}$, and integrate to find the total force on the stick.}
+
+\pagebreak
+
+\section{More Energy and Momentum}
+
+\textbf{7.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 9.90} \\
+In a physics lab, a cube of mass $M$ slides down a frictionless incline and elastically strikes another cube at the bottom that is only one-half its mass, $M = 2m$. If the incline's height is $h$ and the table's height is $H$ off the floor, how far does each cube land?
+
+\textit{Hint: Use the velocity difference equation for 1D elastic collision. \\ For now, use the variables $h$ instead of $45 cm$ and $H$ instead of $95 cm$ and leave your answers as expressions. They should simplify cleanly---you are free to plug in the numbers at the end. }
+\fig{figs/0716/g990.png}{Giancoli, Problem 9.90}{0.5}{0}
+
+\pagebreak
+
+\textbf{8.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.19} \\
+A uniform rope of mass density per unit length $\lambda$ is coiled on a smooth horizontal table. One end is pulled straight up with constant speed $v$, as shown.
+
+\fig{figs/0716/kk519.png}{Kleppner and Kolenkow, Problem 5.19}{0.5}{0}
+
+(a) Find the force exerted on the end of the rope as a function of height $y$. 
+
+(b) Compare the power delivered to the rope with the rate of change of the rope’s total mechanical energy. 
+
+\textit{Hint: Use the momentum form of Newton's Second Law. Notice that the velocity $v$ does not change, but the amount of moving mass $m$ is increasing. }
+
+\pagebreak
+
+\textbf{9.} \textit{Morin, Introduction to Classical Mechanics, Problem 5.43} \\
+A block of mass $m$ is supported by a spring on an inclined plane, as shown. The spring constant is $k$, the plane’s angle of inclination is $\theta$, and the coefficient of static friction between the block and the plane is $\mu$.
+
+(a) You move the block down the plane, compressing the spring. What is the maximum compression distance of the spring (relative to the relaxed length it has when nothing is attached to it) that allows the block to remain at rest when you let go of it?
+
+(b) Assume that the block is at the maximum compression you found in part (a). At a given instant, you somehow cause the plane to become frictionless, and the block gets pushed up along the plane. What must the relation between $\theta$ and the original $\mu$ be, so that the block reaches its maximum height when the spring is at its relaxed length?
+\fig{figs/0716/m543.png}{Morin, Problem 5.43}{0.65}{0}
+
+\pagebreak
+
+\textbf{10.} \textit{Morin, Introduction to Classical Mechanics, Problem 5.44} \\
+A fixed hoop of radius $R$ stands vertically. A spring with spring constant $k$ and relaxed length of zero is attached to the top of the hoop.
+
+(a) A block of mass $m$ is attached to the unstretched spring and
+dropped from the top of the hoop. If the resulting motion of the
+mass is a linear vertical oscillation between the top and bottom
+points on the hoop (with the mass momentarily at rest at the top and bottom), what is $k$? (Fig. 5.33)
+
+(b) The block is now removed from the spring, and the spring is
+stretched and connected to a bead, also of mass $m$, at the bottom
+of the hoop. The bead is constrained to move along the hoop. It is given a rightward kick and acquires an initial speed $v_0$. Assuming that it moves frictionlessly, how does its speed depend on its position along the hoop? (Fig. 5.34) \\
+\textit{Hint: For part (b), define $\theta$ as the angle upward from the bottom of the circle. }
+\fig{figs/0716/m544.png}{Morin, Problem 5.44}{0.65}{0}
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textbf{11.} \textit{Taylor, Classical Mechanics, Problem 3.3} \\
+A shell traveling with velocity $\Vec{v}_0$ explodes into three pieces of equal masses. Just after the explosion, one piece has velocity $\Vec{v}_1 = \Vec{v}_0$ and the other two have velocities $\Vec{v}_2$ and $\Vec{v}_3$ that are equal in magnitude ($v_2 = v_3$) but mutually perpendicular. Find $\Vec{v_2}$ and $\Vec{v}_3$ and sketch the three velocities. 
+
+\pagebreak
+
+\textbf{12.} \textit{Taylor, Classical Mechanics, Problem 4.34} \\
+A system that you will study later in this course is the simple pendulum, consisting of a point mass $m$, fixed to the end of a massless rod (length $l$), whose other end is pivoted from the ceiling to let it swing freely in a vertical plane. The pendulum's position can be specified by its angle $\phi$ from the equilibrium position. (It could equally be specified by its distance $s$ from equilibrium —
+indeed $s = l\phi$ by the arc length formula—but the angle is a little more convenient.) 
+\fig{figs/0716/t434.png}{Taylor, Problem 4.34}{0.65}{0}
+
+(a) Show that the pendulum's potential energy (let $U = 0$ at the equilibrium level) is 
+\[ U = mgl(1 - cos\phi) \]
+
+(b) Write down the total energy $E$ in terms of $\phi$ and $\omega = \frac{d\phi}{dt}$. \\
+\textit{Hint: $v = \frac{ds}{dt} = l\omega$.}
+
+(c) Show that by differentiating your expression for $E$ with respect to $t$ you can get the equation of motion for $\phi$, and you retrieve the equation of motion. 
+\[ \alpha = \frac{-g}{l}\sin\phi \]
+Where $\alpha = \frac{d^2\phi}{dt^2}$ is the angular acceleration. 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
 
 \end{document}

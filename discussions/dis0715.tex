@@ -74,8 +74,232 @@ Momentum, Impulse, and Conservation of Momentum.
 
 \section{Review}
 
-\subsection{Conservative Forces and Potential Energy}
+\subsection{Potential Energy}
 
+\textbf{The statements below are equivalent.} That is, if one statement is satisfied, all other statements must also be true; if one statement is not satisfied, then all other statements must also be false. 
+\begin{enumerate}
+\item The force $\Vec{F}$ is a \textbf{Conservative Force}. 
+\item The vector $\Vec{F}$ can be written as the negative gradient of some potential energy $U$. For 7A, this means 
+\[ \Vec{F} = - \frac{dU}{dx}\hat{x} \ \ \text{(1D, like Spring)} \]
+Or 
+\[ \Vec{F} = - \frac{dU}{dr}\hat{r} \ \ \text{(2D, like Gravity)} \]
+For some function $U$. 
+\item The curl of $\Vec{F}$ is zero. For 7A, this means that if the magnitude $F$ depends only on the $x$-position, then $\Vec{F}$ must be along the $x$ (or $-x$) direction. Or if $F$ depends only on the distance from origin $r$, then $\Vec{F}$ must be radially inward/outward with respect to the origin. 
+\[ \text{If: } F = F(x) \implies \text{Then: } \hat{F} = \hat{x} \]
+\[ \text{If: } F = F(r) \implies \text{Then: } \hat{F} = \hat{r} \]
+\item The work done by the force 
+\[ W = \int_{\Vec{r}_0}^{\Vec{r}_f} \Vec{F} \cdot d\Vec{r} \]
+Depends only on the initial and final positions (${\Vec{r}_0}$, ${\Vec{r}_f}$). 
+\item The work done by the force when the object's trajectory is a closed loop is zero. 
+\[ W_{loop} = \oint_{loop} \ \Vec{F} \cdot d\Vec{r} = 0 \]
+Where the contour integral ($\oint$) denotes integrating the force $\Vec{F}$ along a closed curve. For now, you can think of it as "integrating $\Vec{F}$ along some circle as shown on the integral symbol". 
+\end{enumerate}
 
+The definitions above can seem daunting, as a full mathematical explanation would demand knowledge from Math 53 (Multivariable Calculus). But for Physics 7A, a qualitative understanding of them is enough. Nonetheless, we can still deduce some important mathematical properties about conservative forces. For example, if we want to find the potential $U(r)$ at some position $\Vec{r}$, we can integrate \#2, 
+\[ \Vec{F} = - \frac{dU}{dr} \hat{r} \implies \int_{U_0}^{U(r)} dU = - \int_{\Vec{r}_0}^{\Vec{r}} \Vec{F} \cdot d\Vec{r} \]
+And get
+\[ U(r) - U_0 = - \int_{\Vec{r}_0}^{\Vec{r}} \Vec{F} \cdot d\Vec{r} \]
+Which gives the \textbf{Potential of a Conservative Force}, $U(r)$. Typically, we choose to set $U_0 = 0$ at some reference point. 
+
+Substitute this result into \#4, 
+\[ W = \int_{\Vec{r}_0}^{\Vec{r}_f} \Vec{F} \cdot d\Vec{r} \]
+We get
+\[ W_{cf} = U_0 - U_f \]
+Which tells us the \textbf{Work done by a Conservative Force} when we know its potential $U$, without the need to explicitly solve for the force. 
+
+\subsection{Conservative Forces}
+
+Common forms of conservative forces include: 
+\begin{enumerate}
+\item \textbf{Elastic Potential} from a Spring Force: 
+\[ \Vec{F}_s = -k \Vec{x} \implies U_s = \frac{1}{2}kx^2 \]
+\item \textbf{Gravity}, as on the surface of the Earth: 
+\[ \Vec{F}_g = -mg \Hat{y} \implies U_g = mgy \]
+\item \textbf{Gravity}, at some astronomical distance away, where the gravitational field strength $\Vec{g}$ is not constant anymore, 
+\[ \Vec{F}_G = \frac{-GMm}{r^2}\Hat{r} \implies U_G = \frac{-GMm}{r} \]
+\end{enumerate}
+
+\pagebreak
+
+\subsection{Conservation of Energy}
+
+Energy cannot be created nor destroyed. This means that when external forces act on a physical system, its final energy equals its initial energy plus the net work done on the system. 
+\[ K_0 + U_0 + W_{ext} + W_{nc} = K_f + U_f \]
+Where $K_0$, $K_f$, $U_0$, $U_f$ are the initial/final kinetic/potential energies of the system. \\
+$W_{ext}$ is the work done by applied forces. \\
+$W_{nc}$ is the energy lost from neoconservative forces, such as friction and air resistance, which is usually a negative quantity. 
+
+\subsection{Power}
+
+\textbf{Power} is defined as the rate of change of energy in a system. 
+\[ P = \frac{dE}{dt} \]
+Since the change of energy equals the work done on the system, 
+\[ P = \frac{dW}{dt} \]
+If a constant force is applied to an object that moves at a constant velocity, the power delivered by the force is 
+\[ P = \Vec{F} \cdot \Vec{v} \]
+
+\subsection{Momentum and Impulse}
+
+The \textbf{Momentum} of an object equals to its mass times velocity. 
+\[ \Vec{p} = m\Vec{v} \]
+\textbf{Impulse} is the momentum delivered by a force during a period of time. 
+\[ \Vec{J} = \int \Vec{F} \ dt \]
+The Impulse-Momentum Theorem relates the change in an object's momentum and the force it experiences over a certain amount of time. 
+\[ \Vec{J} = \Delta \Vec{P} \implies \int_{t_0}^{t_f} \Vec{F} \ dt = m(\Vec{v}_f - \Vec{v}_0) \]
+
+\pagebreak
+
+\subsection{Newton's Second Law, Revisited}
+
+A more correct way to write \textbf{Newton's Second Law} is
+\[ \Vec{F} = \frac{d\Vec{p}}{dt} \]
+Using the Product Rule, 
+\[ \Vec{F} = \frac{d}{dt}(m\Vec{v}) = \frac{dm}{dt}\Vec{v} + m \frac{d\Vec{v}}{dt} \]
+We must use the momentum form of Newton's Second Law when analyzing a physical system of changing mass, such as the motion of a rocket. 
+
+When $m$ is constant, $\frac{dm}{dt} = 0$ and so
+\[ \Vec{F} = m \frac{d\Vec{v}}{dt} = m \Vec{a} \]
+Gives the form familiar to us. 
+
+\subsection{Conservation of Momentum}
+
+Similar to the Conservation of Energy, the initial momentum of a system plus the impulse delivered equals the final momentum of the system. 
+\[ \Vec{p}_0 + \Vec{J} = \Vec{p}_f \]
+
+\subsection{Two-Body Collisions}
+
+When two particles collide without the presence of an external force, the \textbf{total Momentum is always conserved}. 
+\[ m_1\Vec{v}_{1o} + m_2\Vec{v}_{2o} = m_1\Vec{v}_{1f} + m_2\Vec{v}_{2f} \]
+
+However, the system's kinetic energy is not always conserved. Three scenarios follow:
+\begin{enumerate}
+\item \textbf{Elastic Collision}: The total energy is also conserved. We can then impose an additional energy conservation equation
+\[ \frac{1}{2}m_1\Vec{v}_{1o}^2 + \frac{1}{2}m_2\Vec{v}_{2o}^2 = \frac{1}{2}m_1\Vec{v}_{1f}^2 + \frac{1}{2}m_2\Vec{v}_{2f}^2 \]
+
+\item \textbf{Totally Inelastic Collision}: The two initial objects merge into one single object of mass $M = m_1 + m_2$. The momentum conservation equation becomes
+\[ m_1\Vec{v}_{1o} + m_2\Vec{v}_{2o} = M\Vec{V}_f \]
+\item \textbf{Inelastic Collision}: Some energy is lost, but the objects remain isolated. In this case, we do not have any additional tools to assist our calculation. 
+\end{enumerate}
+
+\section{Energy}
+
+\textbf{1.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.9} \\
+A particular spring obeys the force law 
+\[ \Vec{F}_s = (-kx + ax^3 + bx^4) \Hat{x} \]
+Where $k$, $a$ and $b$ are constants.
+
+(a) Is this force conservative? Explain why or why not.
+
+(b) If it is conservative, determine the form of the potential energy function $U$. Let $U = 0$ at the equilibrium length $x = 0$. 
+
+\pagebreak
+
+\textbf{2.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.17} \\
+An object of mass $m$ moves in one dimension under only a conservative force $F$ with an associated potential energy $U(x)$. Use the Conservation of Energy
+\[ E = \frac{1}{2}mv^2 + U = \text{constant} \]
+To show that the object obeys Newton's Second Law
+\[ F = ma \]
+\textit{Hint: Use the Chain Rule. }
+\[ \frac{dv}{dx}\frac{dx}{dt} = \frac{dv}{dt} \]
+
+\pagebreak
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.26} \\
+A skier of mass $m$ starts from rest at the top of a solid sphere of radius $r$ and slides down its frictionless surface.
+
+(a) At what angle $\theta$ will the skier leave the sphere? 
+
+(b) If friction is present, does the skier fly off at a greater or lesser angle? 
+
+\textit{Hint: The skier loses contact with the sphere when the normal force is 0. }
+\fig{figs/0715/g826.png}{Giancoli, Problem 8.26}{0.35}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.82} \\
+A ball is attached to a horizontal cord of length $l$ whose other end is fixed. 
+
+(a) If the ball is released, what will be its speed at the lowest point of its path? 
+
+(b) A peg is located a distance $h$ directly below the point of attachment of the cord. If $h = 0.80 l$, what will be the speed of the ball when it reaches the top of its circular path about the peg?
+
+(c) Show that $h$ must be greater than $0.60 l$ if the ball is to make a complete circle about the peg.
+\fig{figs/0715/g845.png}{Giancoli, Problem 8.82}{0.55}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.101} \\
+A particle of mass m moves under the influence of a potential
+energy
+\[ U(x) = \frac{A}{x} + Bx \]
+Where $a$ and $b$ are positive constants and the particle is restricted to the region $x > 0$. Find a point of equilibrium for the particle where it is not subject to any forces. Is the equilibrium stable? 
+
+\pagebreak
+
+\textbf{5.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 8.23} \\
+A block of mass $m$ is attached to the end of a spring with spring constant $k$. The mass is given an initial displacement $x$ from equilibrium, and an initial speed $v$. Ignore friction and the mass of the spring. 
+
+(a) What is the maximum speed of the block, $v_{max}$? 
+
+(b) What is the maximum stretch of the spring from equilibrium, $x_{max}$? 
+
+\pagebreak
+
+\textbf{6.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.13} \\
+A bead of mass $m$ slides without friction on a smooth rod along the $x$-axis. The rod is equidistant between two spheres of mass $M$. The spheres are located at $x = 0$, $y = \pm a$ as shown, and attract the
+bead gravitationally.
+
+(a) Find the potential energy of the bead.
+
+(b) The bead is released at $x = 3a$ with velocity $v_0$ toward the
+origin. Find the speed as it passes the origin.
+\fig{figs/0715/kk513.png}{Kleppner and Kolenkow, Problem 5.13}{0.6}{0}
+
+\pagebreak
+
+\textbf{7.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.2} \\
+A block of mass $M$ slides along a horizontal table with speed $v_0$.
+At $x = 0$ it hits a spring with spring constant $k$ and begins to experience a friction force, as indicated in the sketch. The coefficient of friction is variable and is given by $\mu = bx$, where $b$ is a constant. Find the distance $l$ the block travels before coming to rest.
+\fig{figs/0715/kk52.png}{Kleppner and Kolenkow, Problem 5.2}{0.6}{0}
+
+\pagebreak
+
+\section{Momentum}
+
+\textbf{8.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.3} \\
+A simple way to measure the speed of a bullet is with a ballistic pendulum. As illustrated, this consists of a wooden block of mass $M$ into which the bullet is shot. The block is suspended from cables of length $l$, and the impact of the bullet causes it to swing through a maximum angle $\phi$, as shown. The initial speed of the bullet is $v$, and its mass is $m$.
+
+(a) How fast is the block moving immediately after the bullet merges with the block? 
+
+(b) Show how to find the velocity of the bullet if we know $m$, $M$, $l$, and $\phi$.
+\fig{figs/0715/kk53.png}{Kleppner and Kolenkow, Problem 5.3}{0.6}{0}
+
+\pagebreak
+
+\textbf{9.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.4} \\
+A small cube of mass $m$ slides down a circular path of radius $R$ cut into a large block of mass $M$, as shown. $M$ rests on a table, and both blocks move without friction. The blocks are initially at rest, and $m$ starts from the top of the path. Find the velocity $v$ of the cube as it leaves the block.
+\fig{figs/0715/kk54.png}{Kleppner and Kolenkow, Problem 5.4}{0.6}{0}
+\textit{Hint: No forces in the system dissipate energy. But make sure you understand why that is the case.}
+
+\pagebreak
+
+\textbf{10.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 9.98} \\
+A massless spring with spring constant $k$ is placed between a block of mass $m$ and a block of mass $3m$. Initially the blocks are at rest on a frictionless surface and they are held together so that the spring between them is compressed by an amount $D$ from its equilibrium length. The blocks are then released and the spring pushes them off in opposite directions. Find the speeds of the two blocks when they detach from the spring.
+
+\pagebreak
+
+\section{Collisions}
+
+\textbf{11.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 9.96} \\
+A fake hockey puck of mass $4m$ has been rigged to explode. Initially the puck is at rest on a frictionless ice rink. Then it bursts into three pieces. One chunk, of mass $m$, slides across the ice at velocity $v\Hat{x}$. Another chunk, of mass $2m$, slides across the ice at velocity $2v \Hat{y}$. Determine the velocity of the third chunk. 
+
+\pagebreak
+
+\textbf{12.} \textit{Taylor, Classical Mechanics, Problem 3.5} \\
+A billiard ball of mass $m$ collides elastically with an identical stationary billiard ball. Use Conservation of Momentum and Energy, and the fact that $(\Vec{v}^2)$ may be written as $(\Vec{v} \cdot \Vec{v})$ to show that the angle between the resulting trajectories is $90 \degree$.
+
+\textit{This result was important in the history of atomic and nuclear physics: That two bodies emerged from a collision traveling on perpendicular paths was strongly suggestive that they had equal mass and had undergone an elastic collision.}
+
+\pagebreak
 
 \end{document}
