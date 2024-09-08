@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Discussion 17 \\ August 1}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Discussion 17 } \\ [0.05in]
+Sound, Fluid \\ [-0.5in]
+\end{center}
+
+\section{Review}
+
+\subsection{Sound}
+
+Sounds are waves, and they obey all the properties of waves we've discussed before. For example, sound waves can exhibit constructive and destructive interference.
+
+\fig{figs/0801/sound.png}{Interference of Sound Waves}{0.4}{0}
+
+In the figure above, Constructive interference occurs at C (crest of both waves), Destructive interference occurs at D (crest for one and trough for the other).
+
+\fig{figs/0801/beat.png}{Beat Frequencies}{0.45}{0}
+
+Here, the superposition of two waves of different frequencies gives a third wave with a different period. The period of this new wave is called the Beat Period, and its frequency the Beat Frequency. 
+
+\pagebreak
+
+\fig{figs/0801/doppler.png}{Doppler Effect}{0.5}{0}
+
+When the source of the wave or the receiver moves toward the other, the frequency of the wave observed is attenuated. This phenomenon is called the Doppler Effect. If $f$ is the originally transmitted frequency, and $f'$ is the observed frequency, then
+\[ f' = f\Bigl( \frac{v_{\text{sound}} \pm v_{\text{observer}}}{v_{\text{sound}} \mp v_{\text{source}}} \Bigr) \]
+The upper signs in the numerator and denominator apply if source and/or observer move toward each other; the lower signs apply if they are moving apart.
+
+\pagebreak
+
+\subsection{Fluid}
+
+You should read the summary on the next page as I didn't have time to finish typing it. 
+
+\fig{figs/0801/sum.png}{Fluid}{0.55}{0}
+
+\pagebreak
+
+\section{Sound}
+
+\textbf{1.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 16.100} \\
+A source of sound waves (wavelength $\lambda$) is a distance $l$ from a detector. Sound reaches the detector directly, and also by reflecting off an obstacle. The obstacle is equidistant from source and detector. When the obstacle is a distance $d$ to the right of the line of sight between source and detector, as shown, the two waves arrive in phase. How much farther to the right must the obstacle be moved if the two waves are to be out of phase by $1/2$ wavelength, so destructive interference occurs? (Assume $\lambda$ is much less than $l$ and $d$.)
+
+\fig{figs/0801/g100.png}{Giancoli, Problem 16.100}{0.55}{0}
+
+\pagebreak
+
+\section{Fluid}
+
+\textbf{2.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.25} \\
+A cylindrical bucket of liquid (density $\rho$) is rotated about its symmetry axis, which is vertical. If the angular velocity is $\omega$, show that the pressure at a distance $r$ from the rotation axis is
+\[ P = P_0 + \frac{1}{2}\rho\omega^2 r^2 \]
+
+\pagebreak
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.56} \\
+In the figure below, take into account the speed of the top surface of the tank and show that the speed of fluid leaving an opening near the bottom is 
+\[ v_1 = \sqrt\frac{2gh}{1 - (A_1 / A_2)^2} \]
+where $h = y_2 - y_1$, and $A1$ and $A2$ are the areas of the opening and of the top surface, respectively. Assume $A_1 \ll A_2$ so that the flow remains nearly steady and laminar.
+
+\fig{figs/0801/tank.png}{Giancoli, Problem 13.56}{0.6}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.58} \\
+In the same problem, show that Bernoulli’s principle predicts that the level of the liquid, $h = y_2 - y_1$, drops at a rate
+\[ \frac{dh}{dt} = -\sqrt{\frac{2ghA_1^2}{A_2^2 - A_1^2}} \]
+
+\fig{figs/0801/tank.png}{Giancoli, Problem 13.58}{0.6}{0}
+
+\pagebreak
+
+\textbf{5.} \textit{Physics 7A Past Homework Problem} \\
+A tank located near sea level is filled with liquid water of uniform density $\rho_w$. A buoy consisting of a thin spherical shell of diameter $D$ and small mass $m$, and filled with air of density $\rho_a$, is tethered by a thin, massless, ideal string to the bottom of the tank, as shown. 
+
+\fig{figs/0801/float.png}{The Water Tank}{0.65}{0}
+
+The water in the tank is of height $Z$, length $X$, and width $Y$. The actual height $H$ of the aquarium is somewhat higher than $Z$, so no water ever spills.
+
+(a) If the tank is at rest near the surface of the Earth, what is the tension in the string?
+
+If the tank is accelerating to the right at acceleration $a$:
+
+(b) What is the tension in the string?
+
+(c) What angle does the string make with the bottom of the tank?
+
+If instead the tank is accelerating upward at acceleration $a$:
+
+(d) What is the tension in the string?
+
+\pagebreak
+
+\textbf{6.} \textit{Physics 7A Past Homework Problem} \\
+A self-gravitating fluid of total mass $M$ in otherwise empty space equilibrates in the shape of a sphere:
+
+(a) First suppose the fluid is an incompressible fluid of uniform mass density $\rho$. Find the outer radius $R$ of the sphere and the pressure $P(r)$ everywhere inside the sphere $(0 \leq r \leq R)$. Express your answers in terms of $\rho$, $M$, and the universal gravitational constant $G$.
+
+(b) Instead, suppose the fluid is an isothermal ideal gas, with pressure proportional to density, $P(r) = \nu^2\rho(r)$, where $\nu$ can be assumed to be a positive constant. Find the outer radius $R$ of the sphere, and both the density $\rho(r)$ and pressure $P(r)$ everywhere inside the sphere $(0 \leq r \leq R)$. Express your answers in terms of $\nu$, $M$, and $G$.
+
+
+\end{document}

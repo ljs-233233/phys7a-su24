@@ -1,29 +1,58 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
 \usepackage[OT1]{fontenc}
-\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsmath, amsfonts, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics, mathtools}
 
 \fancypagestyle{pages}{
 	%Headers
-	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 1xx}
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
 	%\fancyhead[C]{\thepage}
-	\fancyhead[R]{Discussion 1 \\ April 23, 2024}
+	\fancyhead[R]{Note 8}
 \renewcommand{\headrulewidth}{0pt}
 	%Footers
 	%\fancyfoot[L]{}
-	\fancyfoot[C]{\thepage}
-	%\fancyfoot[R]{}
-\renewcommand{\footrulewidth}{0.0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{warning}{boxrule=0pt,boxsep=0pt,colback={red!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{red},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{warning}{Warning}[]}
 
 \headheight=0pt
 \footskip=0pt
 \setlength{\oddsidemargin}{0 in}
 \setlength{\evensidemargin}{0 in}
-\setlength{\topmargin}{-0.25 in}
+\setlength{\topmargin}{-0.5 in}
 \setlength{\textwidth}{6.5 in}
 \setlength{\textheight}{8.5 in}
-\setlength{\headsep}{1 in}
+\setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0 in}
 \setlength{\parskip}{0.1 in}
 
@@ -36,16 +65,206 @@
 \begin{center}
 \vspace{3in}
 {\Large Note 8 } \\[0.05in]
-Review \\ [0.5in]
+Addenda to Rotational Motion \\ [0.5in]
 \end{center}
 
 % this is a comment
 
-\section{1}
-1
+\section*{Motivation}
 
-\subsection{11}
+These supplementary notes are written to either discuss a topic we learned in greater detail, or to present an application of the concepts from the class. Note 8, in particular, discusses rotational motion in detail. This topic is assessed on exams and you are responsible for the concepts we discuss below. 
 
-1
+\textit{So why should I read this?} \\
+During discussion sections and office hours, I noticed that there is some confusion and misconceptions among the students, especially regarding the role of friction forces in rotational motion and the nature of \textbf{Rolling Without Slipping}. We will clarify these concepts here, which should be helpful as you prepare for the exams. 
+
+\subsection*{Review}
+
+You should be familiar with the following relationships that we will use in this note. 
+\begin{itemize}
+\item Force and Torque: 
+\[ \Vec{F} = m\Vec{a} = m\frac{d\Vec{v}}{dt} \]
+\[ \Vec{\tau} = \Vec{r} \times \Vec{F} \]
+\[ \Vec{\tau} = I\Vec{\alpha} = I\frac{d\Vec{\omega}}{dt} \]
+\item Static and Kinetic Friction: 
+\[ F_{fs} \leq \mu_s F_N \]
+\[ F_{fk} = \mu_k F_N \]
+\item Angular Displacement and Arc Length (For a circle rotating about its center of mass): 
+\[ s = r\theta \]
+Differentiate this equation with respect to time, 
+\[ v = r\omega \]
+\[ a = r\alpha \]
+These equations relate the angular velocity/acceleration of the object (about the center of mass) to the linear velocity/acceleration (of a point on the circumference). 
+\end{itemize}
+\pagebreak
+
+\section{TLDR}
+
+\textit{When an object is rolling without slipping, it travels 1 circumference for every 1 revolution. (You can think of unrolling a ribbon on the ground: one layer unrolled equals one circumference). In mathematical terms, this means}
+\[ x_{\text{CM}} = r\theta \]
+\[ v_{\text{CM}} = r\omega \]
+\[ a_{\text{CM}} = r\alpha \]
+
+\section{Preliminary Dynamics}
+
+Before officially discussing rotational motion, it is necessary to review some definitions in dynamics that we will use later. 
+
+\subsection{A Slippery Slope}
+
+Suppose you try to stand still on a ramp. You would be "slipping down the ramp" if your shoes cannot grasp the floor due to a lack of friction. You would be "not slipping down the ramp" if you remain stationary and there is enough static friction to overcome the component of gravity along the hill. 
+
+\fig{figs/n8/slip.jpeg}{A Slippery Slope}{0.1}{0}
+
+\begin{definition}
+Slipping. \\
+For an object on top of a surface, we define slipping as when there is a nonzero velocity between the bottom of the object and the top of the surface. If an object does not slip, then there is no velocity between the bottom of the object and the top of the surface. \\
+
+If a friction force is present between the object and the surface, then friction would be kinetic when the object slips; friction would be static if the object does not slip. 
+\end{definition}
+
+\pagebreak
+
+\subsection{Relative Velocity}
+
+Consider three friends---Alphonse, Beatrice, and Cecilia (Which we shall conveniently denote them as A, B, and C). A is standing still. From A's perspective, B is moving at a velocity of $\Vec{v}_{BA}$, and from B's perspective, C is moving at a velocity of $\Vec{v}_{CB}$. \\
+\textit{($\Vec{v}_{BA}$ denote the velocity of B from the perspective of A, and $\Vec{v}_{CB}$ denote the velocity of C from the perspective of B.)}
+
+\fig{figs/n8/rel.jpeg}{Alphonse, Beatrice, and Cecilia}{0.125}{0}
+
+Therefore, to Alphonse, Cecilia's velocity is her velocity as measured by Beatrice plus the velocity of Beatrice with respect to Alphonse. 
+\[ \Vec{v}_{CA} = \Vec{v}_{BA} + \Vec{v}_{CB} \]
+
+\begin{definition}
+Galilean Relativity. \\
+Suppose a non-stationary reference frame moves at a velocity $\Vec{v}_F$ with respect to a stationary observer. If the velocity of an object is $\Vec{v}'$ when measured from the moving reference frame, then the object's velocity with respect to the stationary observer is: 
+\begin{equation}
+\Vec{v} = \Vec{v}_F + \Vec{v}'
+\end{equation}
+\end{definition}
+
+\pagebreak
+
+\section{Rotational Motion}
+
+\subsection{A Rolling Wheel}
+
+Consider a wheel that is rolling toward the right. 
+
+\fig{figs/n8/wheel.png}{A Wheel Rolling toward the Right}{0.45}{0}
+
+Note that the motion of the wheel can be broken down into two parts: \\
+\textbf{1.} The center of mass of the wheel moves at a translational velocity of $\Vec{v}_{\text{cm}}$ (Figure 4). \\
+\textbf{2.} On top of that, the wheel spins at a angular velocity of $\Vec{\omega}$ about the center of mass (Figure 5). 
+
+\fig{figs/n8/linear.png}{The Linear motion of CM}{0.45}{0}
+
+\fig{figs/n8/rot.png}{The Rotational Motion about CM}{0.45}{0}
+
+\pagebreak
+
+From the arc length formula, every point along the circumference of the wheel travels at a velocity of magnitude 
+\[ v_{\text{(about CM)}} = r\omega \]
+With respect to the center of mass, in the directions labeled below. Since for a clockwise rotation, the angular velocity vector $\Vec{\omega}$ is directed into the page, we can therefore write the velocity vector as the cross product
+\[ \Vec{v}_{\text{(about CM)}} = \Vec{\omega} \times \Vec{r} \]
+
+\fig{figs/n8/about.jpeg}{Velocities of Points on the Circumference about CM}{0.125}{0}
+
+Therefore, we can treat the center of mass as a reference frame whose velocity is $\Vec{v}_{\text{cm}}$, and the spin of the wheel causes a velocity $\Vec{v}_{\text{(about CM)}}$ as viewed from the CM reference frame. Using the relative velocity formula established above, we can find the absolute velocity (velocity with respect to the ground) of any point along the circumference of the wheel. 
+\[ \Vec{v} = \Vec{v}_{\text{(CM)}} + \Vec{v}_{\text{(about CM)}} = \Vec{v}_{\text{CM}} + \Vec{\omega} \times \Vec{r} \]
+
+\begin{definition}
+Absolute Velocity of a Rolling Circular Object. \\
+For a rolling circular object, the absolute velocity (with respect to the ground) of any point along the circumference of the object is given by
+\begin{equation}
+\Vec{v} = \Vec{v}_{\text{CM}} + \Vec{\omega} \times \Vec{r}
+\end{equation}
+\end{definition}
+
+\subsection{Rolling Without Slipping}
+
+With the mathematical and physical formulations above, we are ready to discuss the nature of rolling without slipping. By definition, when an object rolls without slipping, the velocity at the point where the wheel touches the ground is zero, which means, the point of contact $P$ is temporarily at rest. 
+\[ \Vec{v}_{\text{(at P)}} = \Vec{v}_{\text{(CM)}} + \Vec{v}_{\text{(about CM)}} = \Vec{0} \]
+
+\fig{figs/n8/rollwoslip.jpeg}{Rolling Without Slipping}{0.11}{0}
+
+The center of mass velocity $\Vec{v}_{\text{(CM)}}$ is toward the right. At the bottom of the wheel, the velocity about the center of mass $\Vec{v}_{\text{(about CM)}}$ is toward the left. If the absolute velocity is equal to zero, then $\Vec{v}_{\text{(CM)}}$ and $\Vec{v}_{\text{(about CM)}}$ must have equal magnitude and opposite direction, or: 
+\[ v_{\text{CM}} = r\omega \]
+
+If you are ever confused about the orientation of $\omega$ given a particular direction of $\Vec{v}$, you should be able to eliminate the incorrect orientation using the fact that the absolute velocity at $P$ must equal zero. 
+
+\begin{definition}
+Rolling without Slipping. \\
+For a circular object that is rolling without slipping, the absolute velocity at the point of contact between the object and the ground is zero. This implies the magnitude of $v_{\text{CM}}$ and $\omega$ must satisfy
+\begin{equation}
+v_{\text{CM}} = r\omega
+\end{equation}
+\end{definition}
+
+\subsection{Friction Forces on a Rolling Wheel}
+
+Consider a wheel that rolls without slipping on a surface. If a frictional force is present between the wheel and the surface, the friction must be static in nature, as the point of contact is temporarily stationary. 
+
+In the case where an object rolls while slipping on the surface, and a frictional force is present, then the friction is kinetic in nature, in the direction that opposes the velocity at the point of contact. 
+
+We will illustrate these concepts with a series of qualitative examples. 
+
+\begin{example}
+Rolling without Slipping on a Ramp \\
+If a wheel rolls without slipping up a ramp with the presence of friction, is the friction static or kinetic? What is the direction of friction (upward or downward along the ramp)? What about a wheel rolling without slipping down a ramp? \\
+
+\textbf{Solution:} \\
+In either case, the friction is static in nature, as the velocity is zero at the point of contact between the wheel and the ramp. We shall also note the relation
+\[ v_{\text{CM}} = r\omega \]
+\[ a_{\text{CM}} = r\alpha \]
+For an object that rolls without slipping. \\
+
+\textbf{Case 1:} Rolling Up a Ramp. \\
+We first identify the directions of $\Vec{v}_{\text{CM}}$ and $\Vec{\omega}$ as drawn below. We know that the object slows down as kinetic energy converts into gravitational potential energy. In order to satisfy $v = r\omega$ for rolling without slipping, the magnitude of $\omega$ must also decrease. Therefore the torque produced by $F_f$ must oppose the direction of $\omega$, hence $\Vec{F}_f$ is pointed uphill. \\
+A complete free-body diagram of rolling uphill without slipping is drawn below. 
+\fig{figs/n8/up.jpeg}{Rolling Up a Ramp}{0.11}{0}
+
+\textbf{Case 2:} Rolling Down a Ramp. \\
+Likewise, we first identify the directions of $\Vec{v}_{\text{CM}}$ and $\Vec{\omega}$ as drawn below. We know that the object speeds up as gravitational potential energy converts into kinetic energy. In order to satisfy $v = r\omega$ for rolling without slipping, the magnitude of $\omega$ must also increase. Therefore the torque produced by $F_f$ must be in the same direction $\omega$, hence $\Vec{F}_f$ is also pointed uphill. \\
+A complete free-body diagram of rolling downhill without slipping is drawn below. 
+\fig{figs/n8/down.jpeg}{Rolling Down a Ramp}{0.1}{0}
+
+It may be important to notice that in either case, since the displacement vector $d\Vec{r}$ is zero at where $\Vec{F}_f$ is acting, the integral $W = \int \Vec{F}_f \cdot d\Vec{r} = 0$, and static friction does no work on the system. The total energy in the system is conserved, and we may use energy conservation methods in solving these problems. 
+\end{example}
+
+\begin{example}
+A Stationary Spinning Wheel \\
+A wheel that is spinning at an angular velocity $\omega$ counterclockwise is carefully placed on a tabletop, such that the wheel continues to spin but the center of mass is initially at rest. Assume no energy or momentum is lost during the placement of the wheel. Afterwards, a friction force is present between the wheel and the table. What is the nature of friction? In which direction does it accelerate the wheel? \\
+
+\textbf{Solution:} \\
+Since $\omega$ is counterclockwise, the relative velocity $\Vec{v}_{\text{(about CM)}}$ is toward the right at the point of contact. The absolute velocity at the point of contact is
+\[ v_{\text{(at P)}} = v_{\text{(CM)}} + v_{\text{(about CM)}} = 0 + r\omega \]
+Towards the right. And so, there must be a kinetic friction toward the left to counter the direction of absolute velocity. Its magnitude is given by
+\[ F_f = \mu_kF_N = \mu_kmg \]
+This kinetic friction continues to apply a force and torque until the object rolls without slipping
+\[ v_{\text{CM}} = r\omega \]
+And the absolute velocity at the bottom is zero. 
+\fig{figs/n8/drop.jpeg}{A Wheel Dropped on a Table}{0.15}{0}
+In this case, the friction is kinetic and the displacement vector $d\Vec{r}$ between the wheel and the table is nonzero. Friction does negative work. Some energy is lost and we cannot apply the conservation of energy here. 
+
+This phenomenon is famously known in sports as "Backspin", which occurs after the white ball hits the black ball in \href{https://youtu.be/auJPuzKigGA?t=58}{This Video}. Note that immediately after the collision, $v_{\text{CM}}$ of the white ball is zero, but it has a clockwise angular velocity, hence friction accelerates it towards the right. 
+\end{example}
+
+\pagebreak
+
+\begin{example}
+Launching a Bowling Ball \\
+A bowling ball with radius $r$ is launched at a speed $v = 2r\omega$ towards the left while it spins at an angular velocity $\omega$ counterclockwise. A friction force is present between the ball and the table. What is the nature of friction? In which direction does it accelerate the wheel? \\
+
+\textbf{Solution:} \\
+Since $\omega$ is counterclockwise, the relative velocity $\Vec{v}_{\text{(about CM)}}$ is toward the right at the point of contact. Define left as positive, the absolute velocity at the point of contact is
+\[ v_{\text{(at P)}} = v_{\text{(CM)}} + v_{\text{(about CM)}} = 2r\omega - r\omega = r\omega \]
+Towards the left. And so, there must be a kinetic friction toward the right to counter the direction of absolute velocity. Similar to the previous example, the magnitude of kinetic friction is
+\[ F_f = \mu_kF_N = \mu_kmg \]
+The kinetic friction continues to apply a force and torque until the object rolls without slipping
+\[ v_{\text{CM}} = r\omega \]
+And the absolute velocity at the bottom is zero. 
+\fig{figs/n8/bowling.jpeg}{Launching a Bowling Ball}{0.125}{0}
+\end{example}
+
+There are no exercises associated with this set of notes. However, I encourage you to go back to the examples that your professor has gone over in lecture, or your GSI has gone over in discussion, and think about the direction of forces and rotational velocities using these principles. 
 
 \end{document}

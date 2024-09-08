@@ -1,0 +1,242 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Discussion 16 \\ July 30}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Discussion 16 } \\ [0.05in]
+Waves \\ [-0.5in]
+\end{center}
+
+\section{Review}
+
+\subsection{Waves}
+
+\textbf{Waves} are the propagation of disturbances. A wave is characterized by its Amplitude $A$, Wavelength $\lambda$, Frequency $f$, and Period $T$. 
+
+\fig{figs/0730/wave.png}{A Wave}{0.6}{0}
+
+The period of a wave is the time it takes to complete one cycle, and frequency is the reciprocal of the period. 
+
+The wave speed $v$ is the speed at which any point on the wave travels to the right. 
+\[ v = \lambda f \]
+
+For a transverse wave on a string with tension $F_T$ and mass density $\mu = m/l$, the speed of the wave is given by
+\[ v = \sqrt{\frac{F_T}{\mu}} \]
+
+Consider a wave propagating through a medium with density $rho$ and a cross-sectional area $S$. 
+\fig{figs/0730/medium.png}{Wave Propagating through a Medium}{0.75}{0}
+
+The energy carried by each particle on the wave is
+\[ E = 2\pi^2mf^2A^2 \]
+For a wave that propagates across the elastic medium, the power delivered by the wave is
+\[ P = 2\pi^2\rho Svf^2A^2 \]
+And its intensity is the power per unit area: 
+\[ I = 2\pi^2\rho vf^2A^2 \]
+
+For a wave that propagates spherically outward, the intensity is proportional to the inverse square of the distance from the source, and the amplitude is proportional to the inverse of the distance from the source. 
+\[ I \propto \frac{1}{r^2} \]
+\[ A \propto \frac{1}{r} \]
+
+\fig{figs/0730/sphere.png}{Wave Propagating Spherically Outward}{0.5}{0}
+
+A wave can be mathematically represented by a sinusoidal function. The vertical displacement $D$ is a function of the horizontal displacement $x$ and time $t$. 
+\[ D(x, t) = A\sin(kx + \omega t + \phi) \]
+Where $k$ is the wave number and $\omega$ is the frequency. A constant $\phi$ can be added if necessary. 
+
+The wave number $k$ is inversely proportional to the wavelength $\lambda$. 
+\[ k = \frac{2\pi}{\lambda} \]
+The wave speed $v$ equals the frequency $\omega$ divided by $k$. 
+\[ v = \frac{\omega}{k} \]
+
+\pagebreak
+
+All waves must satisfy the wave equation, that is, 
+\[ \frac{\partial^2 D}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2 D}{\partial t^2} \]
+Any equation that satisfies the wave equation must be a function of the sum/difference $(kx \pm \omega t)$. 
+
+If the sign here is negative, then the wave travels toward the $+x$ direction. 
+\[ D = D(kx - \omega t) \]
+If the sign here is positive, then the wave travels toward the $-x$ direction. 
+\[ D = D(kx + \omega t) \]
+
+
+The superposition of any two waves is also a wave. For example, if $D_1$ and $D_2$ are waves, then for
+\[ D_3(x, t) = aD_1(x, t) + bD_2(x, t) \]
+$D_3$ is also a wave. 
+
+Therefore, when two waves superpose at the same location, the displacement of the resulting wave will be the sum of the individual waves. 
+
+\fig{figs/0730/superpose.png}{Superposition of Waves}{0.65}{0}
+
+\pagebreak
+
+When a wave propagates from one medium to another, some of the wave is transmitted while others are reflected. 
+
+The transmitted wave is always upright. If the new medium is heavier (With a greater density $\mu$), the reflected wave is inverted; if the new medium is lighter, the reflected wave is upright. A fixed end is heavier than any medium, and a loose end is lighter than any medium. 
+
+At the boundary between two media $x_0$, the wave and its first derivative with respect to $x$ are continuous, unless an external force is applied at the boundary. 
+\[ D_{\text{left}}(x_0, t) = D_{\text{right}}(x_0, t) \]
+\[ \frac{\partial D}{\partial x}_{\text{left}}(x_0, t) = \frac{\partial D}{\partial x}_{\text{right}}(x_0, t) \]
+
+\fig{figs/0730/transmit.png}{The Transmission of a Wave to a Heavier Medium}{0.6}{0}
+
+Standing waves are stable waves between two fixed points. In order for a wave to be standing, the horizontal distance $l$ between the fixed points must be integer multiples of half-wavelengths of the waves. The frequencies at which standing waves are produced are called resonant frequencies. The resonant frequencies are given by
+\[ f = \frac{n}{2l}\sqrt{\frac{F_T}{\mu}} \]
+
+\fig{figs/0730/stand.png}{Standing Waves}{0.55}{0}
+
+\pagebreak
+
+\section{Simple Harmonic Motion}
+
+\textbf{1.} \textit{A Challenging Problem} \\
+A spherical ball of radius $r$ and mass $M$, moving under the influence of gravity, rolls back and forth without slipping across the center of a bowl which is itself spherical with a larger radius $R$. The position of the ball can be described by the angle $\theta$ between the vertical and a line drawn from the center of curvature of the bowl to the center of mass of the ball. Show that, for small displacements, the oscillation of $\theta$ is simple harmonic and find the frequency of oscillation. \\
+The moment of inertia of a sphere is: 
+\[ I_{\text{Sphere}} = \frac{2}{5}Mr^2 \]
+\textit{Hint: It is simplest to solve this problem using Conservation of Energy. The angular displacements $\theta$ and $\phi$ are not equal. You would need an equation to relate the angular velocities of $\omega_\theta = \frac{d\theta}{dt}$ and $\omega_\phi = \frac{d\phi}{dt}$, using the formulas for arc length (of the bowl) and CM velocity while rolling without slipping (of the sphere).}
+\fig{figs/0729/charman.png}{Rolling in a Bowl}{0.75}{0}
+
+\pagebreak
+
+\textbf{2.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 6.3} \\
+\textit{Note: You don't need to solve for or understand where these energy equations came from. The goal is for you to identify simple harmonic motion from arbitrary energy equations. The same applies to the next problem. }
+
+A teeter toy that is free to swing back and forth obeys the potential energy
+\[ U(\theta) = 2mg(L - l\cos\alpha)\cos\theta \]
+$\theta$ is the displacement angle with respect to the upright position, and all other variables are constants. \\
+When the toy swings at an angular velocity $\omega = \frac{d\theta}{dt}$, each mass has a linear velocity $v = s\omega$. Therefore the system carries a total kinetic energy of 
+\[ K(\theta) = 2\Bigl(\frac{1}{2}mv^2\Bigr) = ms^2\omega^2 \]
+Given that the total energy in the system is conserved, find the simple harmonic oscillation frequency $\omega_{\text{SHM}}$ about the upright equilibrium position for small magnitudes of $\theta$. 
+
+\textit{Hint: Remember the Taylor Series approximation says $\sin\theta \approx \theta$ when $\theta$ is small.}
+
+\fig{figs/0729/kk63.png}{Kleppner and Kolenkow, Problem 6.3}{0.5}{0}
+
+\pagebreak
+
+\section{Waves}
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 15.33} \\
+By explicitly differentiating and substituting into the wave equation, show that
+\[ D = A\ln(x + vt) \]
+\[ D = (x - vt)^4 \]
+\[ D = e^{-(kx - \omega t)^2} \]
+All describe the propagation of waves. 
+
+\pagebreak
+
+\textbf{4.} \textit{Griffiths, Introduction to Electrodynamics, Problem 9.2} \\
+Show that the wave
+\[ f(x, t) = A\sin(kx)\cos(kvt) \]
+Satisfies the wave equation. Then use trigonometric identities to convert this wave into a superposition of waves that are functions of $(kx \pm \omega t)$. 
+\[ \sin\alpha\cos\beta = \frac{1}{2}\Bigl(\sin(\alpha + \beta) + \sin(\alpha - \beta)\Bigr) \]
+
+\pagebreak
+
+\textbf{5.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 15.44} \\
+Suppose two linear waves of equal amplitude and frequency have a constant phase difference $\phi$ as they travel in the same medium. They can be represented by
+\[ D_1 = A\sin(kx - \omega t) \]
+\[ D_2 = A\sin(kx - \omega t + \phi) \]
+(a) Using trigonometric identities, write the superposition of $D_1$ and $D_2$ as a function of $(kx \pm \omega t)$. \\
+\[ \sin(\theta_1) + \sin(\theta_2) = 2\sin(\frac{\theta_1 + \theta_2}{2})\cos(\frac{\theta_1 - \theta_2}{2}) \]
+(b) What is the amplitude of this resultant wave? Is the wave sinusoidal, or not? \\
+(c) Show that constructive interference occurs if $\phi = 0, 2\pi, 4\pi$, and so on, and destructive interference occurs if $\phi = \pi, 3\pi, 5\pi$. \\
+(d) Describe the resultant wave, by equation and in words, if $\phi = \frac{\pi}{2}$. 
+
+\pagebreak
+
+\textbf{6.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 15.53} \\
+One end of a horizontal string is attached to a small amplitude mechanical $60.0-Hz$ oscillator. The string’s mass per unit length is $3.9 \times 10^{-4} kg/m$. The string passes over a pulley, a distance $l = 1.50 m$ away, and weights are hung from this end. What mass m must be hung fromthis end of the string to produce \\
+(a) one loop, \\
+(b) two loops, \\
+(c) five loops of a standing wave? \\
+Assume the string at the oscillator is a node, which is approximately true.
+
+\fig{figs/0730/g.png}{Giancoli, Problem 15.53}{0.6}{0}
+
+\pagebreak
+
+\textbf{7.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 15.54} \\
+Consider the setup from the problem above. The length of the string may be adjusted by moving the pulley. If the hanging mass $m$ is fixed at $0.070 kg$, how many different standing wave patterns may be achieved by varying $l$ between $10 cm$ and $1.5 m$?
+
+\fig{figs/0730/g.png}{Giancoli, Problem 15.54}{0.6}{0}
+
+\pagebreak
+
+\section{Practice Problems}
+
+\textbf{8.} \textit{Taylor, Classical Mechanics, Problem 5.13} \\
+A particle of mass $m$ is free to move in the region $0 \leq x \leq \infty$. It is governed by the potential energy
+\[ U(x) = U_0\Bigl(\frac{x}{A} + \lambda^2\frac{A}{x}\Bigr) \]
+Where $U_0$, $A$, and $\lambda$ are constants. \\
+(a) Find the equilibrium distance $x_0$, where the particle is subject to no force. \\
+(b) Let $\Delta x = x - x_0$ be the distance of the particle from equilibrium. Under conservation of energy, what is the frequency of simple harmonic oscillations about equilibrium when $\Delta x$ is very small? \\
+
+\textit{Hint: For this problem, you would have to use the general formula for Taylor Expansion, given below:} \\
+When the position $x$ is very close to $x_0$, we can approximate $f(x)$ as
+\[ f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2} f''(x_0)(x - x_0)^2 + \frac{1}{6}f'''(x_0)(x - x_0)^3 + ... \]
+In this problem, you should keep the lowest nonzero order of derivative. 
+
+\pagebreak
+
+\end{document}

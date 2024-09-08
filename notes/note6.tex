@@ -92,6 +92,8 @@ You should be familiar with the following relationships that we will use in this
 \[ \frac{d}{dx}(\sin x) = \cos x \]
 \[ \frac{d}{dx}(\cos x) = -\sin x \]
 
+\pagebreak
+
 \item The Taylor Series\footnote{We will present a brief derivation in the following section.} of a function $f$: 
 \[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2!}f''(c)(x - c)^2 + \frac{1}{3!}f'''(c)(x - c)^3 \ ... \]
 For any arbitrary constant $c$ where $f$ is differentiable at $c$. Typically in physics, we take the first one or two terms of the Taylor Series and call it a good enough approximation of $f$. 
@@ -232,14 +234,14 @@ Has a closed-form solution of a harmonic oscillator:
 Or, consider the Lennard-Jones Potential between two atoms in a molecule, given by:
 \[ U = 4\epsilon\Big[ (\frac{\sigma}{r})^{12} - (\frac{\sigma}{r})^6 \Big] \]
 But in reality, intermolecular oscillations can be approximated as
-\[ U = \frac{36\epsilon}{r_0^2}(r - r_0)^2 \]
+\[ U = -\epsilon + \frac{36\epsilon}{r_0^2}(r - r_0)^2 \]
 Which has the same form of a spring-mass potential. \\
 
-Indeed, the fuller version of these equations provides a more precise explanation of the underlying systems, but they are often much harder to work with mathematically. In fact, we can use the Taylor Series to simplify any arbitrary function into a polynomial function, a technique adored by most physicists. 
+Indeed, the fuller version of these equations provides a more precise explanation of the underlying systems, but they are often much harder to work with mathematically. Oftentimes, we can use the Taylor Series to simplify any arbitrary function into a polynomial function, to make a mathematical solution possible. Such a technique is adored by many physicists. 
 
 \subsection{Mathematical Derivation}
 
-Consider an arbitrary function $f(x)$ that is differentiable at an arbitrary point $c$, which is the center of our series. If we were to accept by faith that $f$ can be written in the form of a Taylor Series, denoted by $g(x)$, where $g$ is a polynomial function with the form
+Consider an arbitrary function $f(x)$ that is differentiable at an arbitrary point $c$, which will be the center of our Taylor Series. If we were to accept by faith that $f$ can be written in the form of a polynomial function, which we name $g(x)$, with the form
 \[ g(x) = a_0 + a_1(x - c) + a_2(x - c)^2 + a_3(x - c)^3 + a_4(x - c)^4 \ ... \]
 Enforcing that they are equal to each other
 \[ g(x) = f(x) \]
@@ -265,12 +267,14 @@ The second derivative $g''(c)$:
 \[ g''(c) = 2a_2 + 6a_3(c - c) + 12a_4(c - c)^2 \ ... = 2a_2 \]
 The third derivative $g'''(c)$:
 \[ g'''(c) = 6a_3 + 24a_4(c - c) + 60a_5(c - c)^2 \ ... = 6a_3 \]
+Only the leading constant in each derivative survives. \\
 Substitute the coefficients $a_n$ back into the function $g$,
 \[ g(x) = g(c) + g'(c)(x - c) + \frac{1}{2}g''(c)(x - c)^2 + \frac{1}{6}g'''(c)(x - c)^3 + \frac{1}{24}g''''(c)(x - c)^4 \ ... \]
 Since we enforced the condition that $g(x)$ exactly equals $f(x)$ at any arbitrary point, we can thus replace all $g$ with $f$. 
 \[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2}f''(c)(x - c)^2 + \frac{1}{6}f'''(c)(x - c)^3 + \frac{1}{24}f''''(c)(x - c)^4 \ ... \]
-Note that the denominators of the fractions equal to the factorials of the coefficients, 
+Notice that the denominators are equal to the factorials of exponents in each term, 
 \[ f(x) = f(c) + f'(c)(x - c) + \frac{1}{2!}f''(c)(x - c)^2 + \frac{1}{3!}f'''(c)(x - c)^3 + \frac{1}{4!}f''''(c)(x - c)^4 \ ... \]
+We call this polynomial on the right-hand side the Taylor Series of $f$ about the point $c$. 
 
 \begin{definition}
 Taylor Series. \\
@@ -315,5 +319,7 @@ Is the Binomial Coefficient.
 You can indeed verify that the simplifications we made to the pendulum equation of motion and the Lennard-Jones potential are the results of the Taylor Series. 
 
 \pagebreak
+
+\subsection{Example: The Lennard-Jones Potential}
 
 \end{document}

@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Discussion 13 \\ July 23}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Discussion 13 } \\ [0.05in]
+Statics (Part 1), Midterm Review \\ [-0.5in]
+\end{center}
+
+\section*{Topics}
+Conditions for Statics, and some Review Problems. 
+
+\section{Review}
+
+\subsection{Static Equilibrium}
+
+For a system in static equilibrium, all parts of it are stationary. That means, 
+\[ \sum \Vec{F} = 0 \]
+And
+\[ \sum \Vec{\tau} = 0 \]
+For every object in the system. 
+
+Since the object is stationary for any observer at any location, it must be true that $\sum \Vec{\tau} = 0$ at any pivot point of choice. Therefore when dealing with statics, we are free to choose a pivot point that makes the math easiest when calculating torque. 
+
+\pagebreak
+
+\section{Statics}
+
+\textbf{1.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.14} \\
+One stick leans on another as shown in Fig. 2.21. A right angle is formed where they meet, and the right stick makes an angle $\theta$ with the horizontal. The left stick extends infinitesimally beyond the end of the right stick. The coefficient of friction between the two sticks is $\mu$. The sticks have the same mass density per unit length and are both hinged at the ground. What is the minimum angle $\theta$ for which the sticks don’t fall?
+
+\fig{figs/0723/m221.png}{Morin, Problem 2.14}{0.6}{0}
+
+\pagebreak
+
+\textbf{2.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.17} \\
+A spool consists of an axle of radius $r$ and an outside circle of radius $R$ which rolls on the ground. A thread is wrapped around the axle and is pulled with tension $T$ at an angle $\theta$ with the horizontal (see Fig. 2.24). 
+
+\fig{figs/0723/m224.png}{Morin, Problem 2.17}{0.6}{0}
+
+(a) Given $R$ and $r$, what should $\theta$ be so that the spool doesn’t move? Assume that the friction between the spool and the ground is large enough so that the spool doesn’t slip.
+
+(b) Given $R$, $r$, and the coefficient of friction $\mu$ between the spool and the ground, what is the largest value of $T$ for which the spool remains at rest?
+
+(c) Given $R$ and $\mu$, what should $r$ be so that you can make the spool slip from the static position with as small a $T$ as possible? That is, what should $r$ be so that the upper bound on $T$ in part (b) is as small as possible? What is the resulting value of $T$?
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\section{Midterm Review}
+
+\textbf{3.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 4.7} \\
+A system is composed of two blocks of mass $m_1$ and $m_2$ connected by a massless spring with spring constant $k$. The blocks slide on a frictionless plane. The unstretched length of the spring is $l$. Initially $m_2$ is held so that the spring is compressed to $l/2$ and $m_1$ is forced against a wall, as shown. $m_2$ is then released.
+
+Let $t = 0$ be the time when $m_1$ loses contact with the wall. Find the velocity and position of the center of mass as a function of time for $t \geq 0$. 
+
+\fig{figs/0723/kk47.png}{Kleppner and Kolenkow, Problem 4.7}{0.6}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 5.7} \\
+A ring of mass $M$ hangs from a thread, and two beads of mass $m$ slide on it without friction, as shown. The beads are released simultaneously from the top of the ring and slide down opposite sides. Show that the ring will start to rise if $m > 3M/2$, and find the angle at which this occurs.
+
+\textit{Hint: The ring will start to rise when the tension force in the thread is zero.}
+
+\fig{figs/0723/kk57.png}{Kleppner and Kolenkow, Problem 5.7}{0.6}{0}
+
+\pagebreak
+
+\textbf{5.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 7.10} \\
+A cylinder of mass $M$ and radius $R$ is rotated in a uniform V groove with constant angular speed $\omega$. The coefficient of friction between the cylinder and each surface is $\mu$. What torque must be applied to the cylinder to keep it rotating?
+
+\fig{figs/0723/kk710.png}{Kleppner and Kolenkow, Problem 7.10}{0.6}{0}
+
+\pagebreak
+
+\textbf{6.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 7.30} \\
+A bowling ball is thrown down the alley with speed $v_0$. Initially it slips without rolling, but due to friction it begins to roll. Show that its speed when it rolls without slipping is $v_f = \frac{5}{7}v_0$. 
+
+\end{document}
