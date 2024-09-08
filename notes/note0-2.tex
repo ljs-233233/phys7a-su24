@@ -82,16 +82,738 @@ You should be familiar with the following relationships that we will use in this
 \item Some common derivatives:
 \[ \frac{d}{dx}(x^n) = nx^{n - 1} \]
 \[ \frac{d}{dx}(e^{ax}) = ae^{ax} \]
-\[ \frac{d}{dx}(\sin x) = \cos x \]
-\[ \frac{d}{dx}(\cos x) = -\sin x \]
-\item The relationship between 1-Dimensional Conservative Forces and Potential:
-\[ \Vec{F} = - \frac{dU}{dx}\hat{x} \]
-\[ U = - \int_{0}^x F \ dx \]
+\[ \frac{d}{dx}(\ln(x)) = \frac{1}{x} \]
+\item Work done by a Force:
+\[ W = \int \Vec{F} \cdot d\Vec{r} \]
+\item Conservative Forces and Potential in 1-Dimension:
+\[ \Vec{F} = - \frac{dU}{dr}\hat{r} \]
+\[ U = - \int_{r_0}^r \Vec{F} \cdot d\Vec{r} \]
+\item Note: In these notes, we will use the dot on top of a variable refers to the time derivative of the variable. For example: 
+\[ v = \Dot{x} = \frac{dx}{dt} \]
 \end{itemize}
 \pagebreak
 
-\section{The Partial Derivative}
+\section{Functions of Multiple Variables}
+\subsection{Partial Derivatives}
 
+Recall that for a function of one variable, $f(x)$, it's derivative is defined as
+\[ \frac{df}{dx} = f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \]
+For a function of multiple variables, $f(x, y)$, we define its partial derivative with respect to one variable (say, $x$) as the rate of change of $f$ with respect to $x$ while keeping $y$ fixed at some constant $y = b$. \\
+Notation-wise, instead of $d$, we use the partial symbol $\partial$ in the fraction form ($\frac{\partial f}{\partial x}$ is pronounced "Partial $f$ Partial $x$"). And instead of the prime notation $f'$, we use the subscript $f_x$ to denote the partial derivative of $f$ with respect to x. \\
+Just like the derivative of single-variable functions, partial derivatives are also defined in the form of a limit. \\
+For a function of two variables 
+\[ f = f(x, y) \]
+Its partial derivates are defined as 
+\[ \frac{\partial f}{\partial x} = f_x(x, y) = \lim_{h \to 0} \frac{f(x + h, y) - f(x, y)}{h} \]
+\[ \frac{\partial f}{\partial y} = f_y(x, y) = \lim_{h \to 0} \frac{f(x, y + h) - f(x, y)}{h} \]
 
+\fig{figs/n0/partial.png}{The rate of change $\frac{\partial f}{\partial x}$ when $y = 1$ is held constant.}{0.7}{0}
+
+\pagebreak
+
+Formally, we introduce this definition for the partial derivative. 
+\begin{definition}
+The Partial Derivative. \\
+Give a function of $n$-variables, 
+\begin{equation}
+f = f(x_1, x_2, ..., x_i, ..., x_n)
+\end{equation}
+It's partial derivative with respect to the variable $x_i$ is defined as 
+\begin{equation}
+\begin{aligned}
+\frac{\partial f}{\partial x_i} &= f_{x_i}(x_1, x_2, ..., x_i, ..., x_n) \\ 
+&= \lim_{h \to 0} \frac{f(x_1, x_2, ..., x_i + h, ..., x_n) - f(x_1, x_2, ..., x_i, ..., x_n)}{h}
+\end{aligned}
+\end{equation}
+In fact, this definition works for any number of variables ($n \geq 1$). The partial derivative of a single-variable function is equivalent to its ordinary derivative. 
+\end{definition}
+
+Practically speaking, when taking a partial derivative, all the rules and tricks from the ordinary derivative still apply. We just need to treat all other variables as constants. 
+
+\begin{example}
+The Partial Derivative \\
+\textit{Stewart, Calculus: Early Transcendentals, Example 14.3.1} \\
+If $f(x, y) = x^3 + x^2 y^3 - 2y^2$, find $f_x(2, 1)$ and $f_y(2, 1)$. \\
+
+\textbf{Solution:} \\
+Holding $y$ as a constant and differentiating with respect to $x$, 
+\[ f_x(x, y) = 3x^2 + 2xy^3 \]
+Thus,
+\[ f_x(2, 1) = 16 \]
+Holding $x$ as a constant and differentiating with respect to $y$, 
+\[ f_y(x, y) = 3x^2y^2 - 4y \]
+Thus,
+\[ f_y(2, 1) = 8 \]
+\end{example}
+
+\begin{example}
+Implicit Partial Derivatives \\
+\textit{Stewart, Calculus: Early Transcendentals, Example 14.3.2} \\
+Find $\frac{\partial z}{\partial x}$ and $\frac{\partial z}{\partial y}$ if $z$ is defined implicitly as a function of $x$ and $y$ by the equation
+\[ x^3 + y^3 + z^3 + 6xyz = 1 \]
+
+\textbf{Solution:} \\
+Differentiate the equation with respect to $x$, while holding $y$ as a constant: 
+\[ 3x^2 + 3z^2\frac{\partial z}{\partial x} + 6yz + 6xy\frac{\partial z}{\partial x} = 0 \]
+Solving this equation for $\frac{\partial z}{\partial x}$: 
+\[ \frac{\partial z}{\partial x} = - \frac{x^2 + 2yz}{z^2 + 2xy} \]
+Differentiate the equation with respect to $y$, while holding $x$ as a constant: 
+\[ 3y^2 + 3z^2\frac{\partial z}{\partial y} + 6xz + 6xy\frac{\partial z}{\partial y} = 0 \]
+Solving this equation for $\frac{\partial z}{\partial y}$: 
+\[ \frac{\partial z}{\partial y} = - \frac{y^2 + 2xz}{z^2 + 2xy} \]
+\end{example}
+
+\begin{definition}
+The Chain Rule for Multivariable Functions. \\
+Suppose that $f = f(x, y, z)$ is a differentiable function of $x$, $y$, and $z$, where $x = x(t)$, $y = y(t)$, $z = z(t)$ are differentiable functions of $t$.
+Then $f$ is a differentiable function of $t$ and
+\begin{equation}
+\frac{df}{dt} = \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt} + \frac{\partial f}{\partial z} \frac{dz}{dt}
+\end{equation}
+Or, 
+\begin{equation}
+\Dot{f} = \frac{\partial f}{\partial x} \Dot{x} + \frac{\partial f}{\partial y} \Dot{y} + \frac{\partial f}{\partial z} \Dot{z}
+\end{equation}
+\end{definition}
+
+\begin{example}
+The Chain Rule \\
+\textit{Stewart, Calculus: Early Transcendentals, Example 14.5.1} \\
+If $f(x, y) = x^2y + 3xy^4$, where $x = \sin 2t$ and $y = \cos t$, find $\frac{df}{dt}$ when $t = 0$. \\
+
+\textbf{Solution:} \\
+By the Chain Rule, 
+\[ \frac{df}{dt} = (2xy + 3y^4)(2\cos 2t) + (x^2 + 12xy^3)(-\sin t) \]
+When $t = 0$, $x = \sin 0 = 0$ and $y = \cos 0 = 1$. Therefore
+\[ \frac{df}{dt} \Big|_{t = 0} = (0 + 3)(2) + (0 + 0)(-0) = 6 \]
+\end{example}
+
+\subsection{Anti-derivative of Partial Derivatives}
+
+Again, let's review the anti-derivative of a single variable function before moving into higher dimensions. Consider the function
+\[ f(x) = x^3 + 2 \]
+Whose derivative is 
+\[ f'(x) = 3x^2 \]
+And if we were to find the anti-derivative of $f'(x)$, 
+\[ f(x) = \int f'(x) \ dx = \int 3x^2 \ dx = x^3 + C \]
+Since the derivative of any constant is zero, the value $+2$ in the original function is inevitably lost when we attempt to integrate $f'(x)$---which is why we introduce the integration constant $+C$. \\
+
+Consider the multivariable function from the example above,
+\[ f(x, y) = x^3 + x^2 y^3 - 2y^2 \]
+With partial derivatives
+\[ f_x(x, y) = 3x^2 + 2xy^3 \]
+\[ f_y(x, y) = 3x^2y^2 - 4y \]
+It may be tempting to just say
+\[ f(x, y) = \int f_x \ dx \]
+But if we explicitly carry out the integration, 
+\[ \int f_x \ dx = \int 3x^2 + 2xy^3 \ dx = x^3 + x^2y^3 + C \]
+You might notice something is wrong. The $-2y^2$ term is completely gone. Indeed, when we take the partial derivative with respect to $x$, every term that only depends on $y$ is treated as a constant. The "Constant" term really means "Constant with respect to $x$, but can depend on $y$". 
+
+Therefore, if we first integrate $f_x$,
+\[ f(x, y) = \int 3x^2 + 2xy^3 \ dx = x^3 + x^2y^3 + g(y) \]
+And combine it with the integral of $f_y$, 
+\[ f(x, y) = \int 3x^2y^2 - 4y \ dy = x^2y^3 - 2y^2 + h(x) \]
+Where $g$ and $h$ are functions yet unknown to us. \\
+Equate the expressions above, 
+\[ x^3 + x^2y^3 + g(y) = x^2y^3 - 2y^2 + h(x) \]
+\[ x^3 + g(y) = - 2y^2 + h(x) \]
+We can find that
+\[ g(y) = -2y^2 \]
+And
+\[ h(x) = x^3 \]
+Therefore
+\[ f(x, y) = x^3 + x^2y^3 - 2y^2 + C \]
+Is the anti-derivative of the partial derivatives. Still, we cannot rule out a possible constant of integration $C$. 
+
+\section{Vector Products}
+
+Given two vectors, we can define the Dot Product (which is a scalar quantity), and the Cross Product (which is a vector quantity) between them. Since these two vector products are already extensively discussed in Physics 7A, we will go through them with minimal detail. 
+
+\subsection{Dot Product}
+
+The Dot Product of two vectors is a scalar quantity that measures how much the vectors align with each other. 
+
+\begin{definition}
+The Dot Product. \\
+For vectors $\Vec{A}$ and $\Vec{B}$, 
+\begin{equation}
+\Vec{A} = A_x\Hat{x} + A_y\Hat{y} + A_z\Hat{z}
+\end{equation}
+\begin{equation}
+\Vec{B} = B_x\Hat{x} + B_y\Hat{y} + B_z\Hat{z}
+\end{equation}
+
+Their dot product is defined as
+\begin{equation}
+\Vec{A} \cdot \Vec{B} = A_xB_x + A_yB_y + A_zB_z = \sum_i A_iB_i
+\end{equation}
+Or alternatively, 
+\begin{equation}
+\Vec{A} \cdot \Vec{B} = AB \cos\theta
+\end{equation}
+Where $A$, $B$ are the magnitudes of the vectors, and $\theta$ is the angle between the $\Vec{A}$, $\Vec{B}$ vectors. 
+\end{definition}
+
+\fig{../discussions/figs/0711/dot.png}{Dot Product}{0.4}{0} 
+
+\pagebreak
+
+\begin{definition}
+Properties of the Dot Product. \\
+The square of a vector is defined as the dot product of the vector with itself, which equals the square of its magnitude.
+\begin{equation}
+\Vec{A}^2 = \Vec{A} \cdot \Vec{A} = A^2
+\end{equation}
+
+The dot product is commutative and distributive. 
+\begin{equation}
+\Vec{A} \cdot \Vec{B} = \Vec{B} \cdot \Vec{A}
+\end{equation}
+\begin{equation}
+\Vec{A} \cdot (\Vec{B} + \Vec{C}) = \Vec{A} \cdot \Vec{B} + \Vec{A} \cdot \Vec{C}
+\end{equation}
+
+We can also apply the Product Rule when taking the derivative of a dot product. 
+\begin{equation}
+\frac{d}{dt}(\Vec{A} \cdot \Vec{B}) = \frac{d\Vec{A}}{dt} \cdot \Vec{B} + \Vec{A} \cdot \frac{d\Vec{B}}{dt}
+\end{equation}
+\end{definition}
+
+\subsection{Matrix Determinant}
+
+The Determinant of a matrix is a scalar value that carries some information about the matrix, such as its invertibility or the span of its columns. Most importantly for us, we will use the matrix determinant as a mathematical tool to carry out cross products. 
+
+\begin{definition}
+The Determinant of a $2 \times 2$ Matrix. \\
+For a $2 \times 2$ Matrix
+\begin{equation}
+M = 
+\begin{bmatrix}
+a & b \\
+c & d 
+\end{bmatrix}
+\end{equation}
+We define its determinant as the product of the main diagonal minus the product of the off-diagonal. 
+\begin{equation}
+\det(M) = \begin{vmatrix}
+a & b \\
+c & d 
+\end{vmatrix} = ad - bc
+\end{equation}
+\end{definition}
+
+\begin{definition}
+The Determinant of a $3 \times 3$ Matrix. \\
+For a $3 \times 3$ Matrix
+\begin{equation}
+M = 
+\begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{bmatrix}
+\end{equation}
+We define its determinant in terms of the entries in the first row, and the determinants of the $2 \times 2$ sub-matrices excluding the row and column of the aforementioned entries. 
+\begin{equation}
+\det(M) = 
+a 
+\begin{vmatrix}
+e & f \\
+h & i 
+\end{vmatrix}
+- b 
+\begin{vmatrix}
+d & f \\
+g & i 
+\end{vmatrix}
++c
+\begin{vmatrix}
+d & e \\
+g & h 
+\end{vmatrix}
+\end{equation}
+Expanding the $2 \times 2$ determinants, we have
+\begin{equation}
+\det(M) = a(ei - fh) - b(di - fg) + c(dh - eg)
+\end{equation}
+\end{definition}
+
+\begin{example}
+The Determinant of a $3 \times 3$ Matrix \\
+\textit{Lay, Linear Algebra and Its Applications, Example 3.1.1} \\
+Compute the determinant of
+\[ A = 
+\begin{bmatrix}
+1 & 5 & 0 \\
+2 & 4 & -1 \\
+0 & -2 & 0
+\end{bmatrix} \]
+
+\textbf{Solution:} \\
+By definition, 
+\[ \det(A) = 
+1
+\begin{vmatrix}
+4 & -1 \\
+-2 & 0 
+\end{vmatrix}
+- 5 
+\begin{vmatrix}
+2 & -1 \\
+0 & 0
+\end{vmatrix}
++ 0
+\begin{vmatrix}
+2 & 4 \\
+0 & -2
+\end{vmatrix}\]
+\[ \det(A) = 1(0 - 2) - 5(0 - 0) + 0(-4 - 0) \]
+Therefore, 
+\[ \det(A) = -2 \]
+\end{example}
+
+\subsection{Cross Product}
+
+The Cross Product of two vectors is a vector quantity that is perpendicular to both initial vectors. 
+
+\begin{definition}
+The Cross Product. \\
+For vectors $\Vec{A}$ and $\Vec{B}$, 
+\begin{equation}
+\Vec{A} = A_x\Hat{x} + A_y\Hat{y} + A_z\Hat{z}
+\end{equation}
+\begin{equation}
+\Vec{B} = B_x\Hat{x} + B_y\Hat{y} + B_z\Hat{z}
+\end{equation}
+
+Their cross product is defined as the $3 \times 3$ determinant
+\begin{equation}
+\Vec{A} \times \Vec{B} = 
+\begin{vmatrix}
+\Hat{x} & \Hat{y} & \Hat{z} \\
+A_x & A_y & A_z \\
+B_x & B_y & B_z
+\end{vmatrix}
+\end{equation}
+Or alternatively, 
+\begin{equation}
+\Vec{A} \times \Vec{B} = 
+\begin{vmatrix}
+A_y & A_z \\
+B_y & B_z
+\end{vmatrix} \Hat{x}
+- 
+\begin{vmatrix}
+A_x & A_z \\
+B_x & B_z
+\end{vmatrix} \Hat{y}
++ 
+\begin{vmatrix}
+A_x & A_y \\
+B_x & B_y
+\end{vmatrix} \Hat{z}
+\end{equation}
+Expanding the $2 \times 2$ determinants, 
+\begin{equation}
+\Vec{A} \times \Vec{B} = (A_yB_z - A_zB_y) \Hat{x} - (A_xB_z - A_zB_x) \Hat{y} + (A_xB_y - A_yB_x) \Hat{z}
+\end{equation}
+\end{definition}
+
+\fig{figs/n0/times.png}{Cross Product and the Right-Hand Rule}{0.5}{0} 
+
+\begin{definition}
+Properties of the Cross Product. \\
+The cross product, $\Vec{A} \times \Vec{B}$, is perpendicular to both $\Vec{A}$ and $\Vec{B}$. 
+\begin{equation}
+(\Vec{A} \times \Vec{B}) \perp \Vec{A}
+\end{equation}
+\begin{equation}
+(\Vec{A} \times \Vec{B}) \perp \Vec{B}
+\end{equation}
+
+The magnitude of a cross product equals to
+\begin{equation}
+|\Vec{A} \times \Vec{B}| = AB \sin\theta
+\end{equation}
+Where $A$, $B$ are the magnitudes of the vectors, and $\theta$ is the angle between the $\Vec{A}$, $\Vec{B}$ vectors. \\
+
+The direction of the resulting vector is given by the Right-Hand Rule, as illustrated in the figure above. To find the direction of $(\Vec{A} \times \Vec{B})$, 
+\begin{enumerate}
+\item Align the palm of your right hand in the direction of $\Vec{A}$ (The first vector),
+\item Bend your four fingers toward the direction of $\Vec{B}$ (The second vector),
+\item Then your thumb would naturally point toward the direction of the resultant vector $(\Vec{A} \times \Vec{B})$. 
+\end{enumerate}
+\textit{If you reverse the order of steps 1 and 2, or if you use the left hand, your answer will end up in the opposite direction. (Sorry lefties!)} \\
+
+The cross product of a vector with itself is the zero vector. In fact, because $\sin(0 \degree) = \sin(180 \degree) = 0$, the cross product of all parallel/antiparallel vectors are zero. 
+\begin{equation}
+\Vec{A} \times \Vec{A} = \Vec{0}
+\end{equation}
+The cross product is anti-commutative and distributive. 
+\begin{equation}
+\Vec{A} \times \Vec{B} = - \Vec{B} \times \Vec{A}
+\end{equation}
+\begin{equation}
+\Vec{A} \times (\Vec{B} + \Vec{C}) = \Vec{A} \times \Vec{B} + \Vec{A} \times \Vec{C}
+\end{equation}
+
+We can also apply the Product Rule when taking the derivative of a cross product. 
+\begin{equation}
+\frac{d}{dt}(\Vec{A} \times \Vec{B}) = \frac{d\Vec{A}}{dt} \times \Vec{B} + \Vec{A} \times \frac{d\Vec{B}}{dt}
+\end{equation}
+\end{definition}
+
+\subsection{Example: The Triple Product}
+\begin{example}
+The Triple Product \\
+\textit{Taylor, Classical Mechanics, Problem 1.19} \\
+If $\Vec{r}, \Vec{v}, \Vec{a}$ denote the position, velocity, and acceleration of a particle, prove that 
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \Dot{\Vec{a}} \cdot (\Vec{v} \times \Vec{r}) \]
+Where $\Dot{\Vec{a}} = \frac{d\Vec{a}}{dt}$ is the time derivative of acceleration. \\
+
+\textbf{Solution:} Use the Product Rule, 
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \frac{d\Vec{a}}{dt} \cdot (\Vec{v} \times \Vec{r}) + \Vec{a} \cdot \frac{d}{dt}(\Vec{v} \times \Vec{r}) \]
+Use the product rule again on the last term, 
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \frac{d\Vec{a}}{dt} \cdot (\Vec{v} \times \Vec{r}) + \Vec{a} \cdot (\frac{d\Vec{v}}{dt} \times \Vec{r}) + \Vec{a} \cdot (\Vec{v} \times \frac{d\Vec{r}}{dt}) \]
+Since $\frac{d\Vec{v}}{dt} = \Vec{a}$ and $\frac{d\Vec{r}}{dt} = \Vec{v}$, 
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \frac{d\Vec{a}}{dt} \cdot (\Vec{v} \times \Vec{r}) + \Vec{a} \cdot (\Vec{a} \times \Vec{r}) + \Vec{a} \cdot (\Vec{v} \times \Vec{v}) \]
+Since: 
+\begin{enumerate}
+\item $(\Vec{a} \times \Vec{r})$ is perpendicular to $\Vec{a}$, the dot product $\Vec{a} \cdot (\Vec{a} \times \Vec{r})$ must equal to zero. 
+\item $\Vec{v}$ is parallel to $\Vec{v}$, the cross product $\Vec{v} \times \Vec{v}$ must also equal to zero. 
+\end{enumerate}
+Therefore, 
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \frac{d\Vec{a}}{dt} \cdot (\Vec{v} \times \Vec{r}) \]
+Or
+\[ \frac{d}{dt}\Bigl[\Vec{a} \cdot (\Vec{v} \times \Vec{r})\Bigr] = \Dot{\Vec{a}} \cdot (\Vec{v} \times \Vec{r}) \]
+\end{example}
+
+\section{The Differential Operator}
+
+\subsection{Formulation}
+
+Before we can unlock the full potential of the physical theory, we must introduce one more piece of mathematical tool, the Differential Operator (which is also called "Nabla" or "Del"). 
+
+\begin{definition}
+The Differential Operator. \\
+The Differential Operator $\nabla$ is a vectorial quantity given in Cartesian Coordinates by
+\begin{equation}
+\nabla = \frac{\partial}{\partial x}\Hat{x} + \frac{\partial}{\partial y}\Hat{y} + \frac{\partial}{\partial z}\Hat{z}
+\end{equation}
+The Differential Operator, by itself, carries little physical meaning. However, when combined with appropriate mathematical operations, it is widely exploited in all branches of physics. 
+\end{definition}
+
+\begin{definition}
+The Gradient of a Scalar Function. \\
+For a scalar function in three dimensions 
+\begin{equation}
+f = f(x, y, z)
+\end{equation}
+Its gradient $\nabla f$ is a vector quantity defined as $\nabla$ times $f$: 
+\begin{equation}
+\nabla f = \frac{\partial f}{\partial x}\Hat{x} + \frac{\partial f}{\partial y}\Hat{y} + \frac{\partial f}{\partial z}\Hat{z}
+\end{equation}
+Where each component of $\nabla f$ is the partial derivative of $f$ with respect to that direction. 
+\end{definition}
+
+\begin{definition}
+The Divergence of a Vector Function. \\
+For a vector function in three dimensions
+\begin{equation}
+\Vec{A} = A_x\Hat{x} + A_y\Hat{y} + A_z\Hat{z}
+\end{equation}
+Its divergence $\nabla \cdot \Vec{A}$ is a scalar quantity defined as the dot product of $\nabla$ and $\Vec{A}$: 
+\begin{equation}
+\nabla \cdot \Vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}
+\end{equation}
+Qualitatively, $\nabla \cdot \Vec{A}$ measures the outward flow of the vector $\Vec{A}$ at every point in space. 
+\end{definition}
+
+\begin{definition}
+The Curl of a Vector Function. \\
+For a vector function in three dimensions
+\begin{equation}
+\Vec{A} = A_x\Hat{x} + A_y\Hat{y} + A_z\Hat{z}
+\end{equation}
+Its curl $\nabla \times \Vec{A}$ is a vector quantity defined as the cross product of $\nabla$ and $\Vec{A}$: 
+\begin{equation}
+\nabla \times \Vec{A} = 
+\begin{vmatrix}
+\Hat{x} & \Hat{y} & \Hat{z} \\
+\frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+A_x & A_y & A_z
+\end{vmatrix}
+\end{equation}
+
+Or, 
+\[ \nabla \times \Vec{A} = \Bigl(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\Bigr)\Hat{x} - \Bigl(\frac{\partial A_z}{\partial x} - \frac{\partial A_x}{\partial z}\Bigr)\Hat{y} + \Bigl(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\Bigr)\Hat{z} \]
+Qualitatively, $\nabla \times \Vec{A}$ counter-clockwise rotation of the vector $\Vec{A}$ at every point in space. 
+\end{definition}
+
+\begin{definition}
+The Laplace Operator. \\
+The Laplace Operator $\nabla^2$ is defined as the square of the Differential Operator. 
+\begin{equation}
+\nabla^2 = \nabla \cdot \nabla = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}
+\end{equation}
+For a scalar function in three dimensions
+\begin{equation}
+f = f(x, y, z)
+\end{equation}
+Its Laplacian $\nabla^2 f$ is a scalar quantity
+\begin{equation}
+\nabla^2 f = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2} + \frac{\partial^2f}{\partial z^2}
+\end{equation}
+\end{definition}
+
+\subsection{Examples: Gradient, Divergence, and Curl}
+
+\begin{example}
+The Gradient of a Scalar Function \\
+\textit{Taylor, Classical Mechanics, Problem 4.13} \\
+Calculate the gradient $\nabla f$ of
+\[ f(r) = \ln(r) \]
+Where
+\[ r(x, y, z) = \sqrt{x^2 + y^2 + z^2} \]
+
+\textbf{Solution:} Use the Chain Rule, 
+\[ \frac{\partial f}{\partial x} = \frac{df}{dr}\frac{\partial r}{\partial x} \]
+Therefore, 
+\[ \frac{\partial f}{\partial x} = \Bigl(\frac{1}{r}\Bigr)\Bigl(\frac{x}{\sqrt{x^2 + y^2 + z^2}}\Bigr) = \frac{x}{r^2} \]
+Similarly,
+\[ \frac{\partial f}{\partial y} = \frac{df}{dr}\frac{\partial r}{\partial y} \]
+\[ \frac{\partial f}{\partial y} = \Bigl(\frac{1}{r}\Bigr)\Bigl(\frac{y}{\sqrt{x^2 + y^2 + z^2}}\Bigr) = \frac{y}{r^2} \]
+And
+\[ \frac{\partial f}{\partial z} = \frac{df}{dr}\frac{\partial r}{\partial z} \]
+\[ \frac{\partial f}{\partial z} = \Bigl(\frac{1}{r}\Bigr)\Bigl(\frac{z}{\sqrt{x^2 + y^2 + z^2}}\Bigr) = \frac{z}{r^2} \]
+Therefore, 
+\[ \nabla f = \frac{x}{r^2}\Hat{x} + \frac{y}{r^2}\Hat{y} + \frac{z}{r^2}\Hat{z} \]
+\end{example}
+
+\begin{example}
+The Curl and Divergence of a Vector Function \\
+\textit{Stewart, Calculus: Early Transcendentals, Example 16.5.1} \\
+Find the Curl and Divergence of
+\[ \Vec{F} = xz \ \Hat{x} + xyz \ \Hat{y} - y^2 \ \Hat{z} \]
+
+\textbf{Solution:} Using the definition of Curl,
+\[ \nabla \times \Vec{F} = 
+\begin{vmatrix}
+\Hat{x} & \Hat{y} & \Hat{z} \\
+\frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+xz & xyz & -y^2
+\end{vmatrix}
+\]
+\[ \nabla \times \Vec{F} = (-2y - xy)\Hat{x} - (0 - x)\Hat{y} + (yz - 0)\Hat{z} \]
+The Curl of $\Vec{F}$ is thus
+\[ \nabla \times \Vec{F} = (-2y - xy)\Hat{x} + x \ \Hat{y} + yz \ \Hat{z} \]
+Using the definition of divergence, 
+\[ \nabla \cdot \Vec{F} = \frac{\partial}{\partial x}(xz) + \frac{\partial}{\partial y}(xyz) + \frac{\partial}{\partial z}(-y^2) \]
+The Divergence of $\Vec{F}$ is thus
+\[ \nabla \cdot \Vec{F} = z + xz \]
+\end{example}
+
+\section{Line Integrals}
+
+The work done by a force is given by the integral of the force along a path. 
+\[ W = \int_{\Vec{r}_0}^{\Vec{r}_f} \Vec{F} \cdot d\Vec{r} \]
+Let us consider the scenario where one drags an object along the table surface. Say the object's trajectory forms a closed path, and it ends up at the same position as where it started. Kinetic friction does work and dissipates energy. 
+
+\fig{figs/n0/path.png}{A Closed Path}{0.65}{0}
+
+If we were to directly plug in ${\Vec{r}_f} = {\Vec{r}_0}$, 
+\[ W = \int_{\Vec{r}_0}^{\Vec{r}_0} \Vec{F} \cdot d\Vec{r} \]
+We would get that $W = 0$ because the bounds of integration are equal. However, this answer is clearly unphysical. The work should not be zero, as friction does negative work. In this case, we must rewrite $d\Vec{r}$ in terms of a non-identical variable and integrate with respect to that variable. 
+
+Recall that
+\[ \frac{d\Vec{r}}{dt} = \Vec{v} \]
+Therefore
+\[ d\Vec{r} = \Vec{v} \ dt \]
+Plug this relationship into the work integral
+\[ W = \int_{t_0}^{t_f} \Vec{F} \cdot \Vec{v} \ dt = \oint_C \ \Vec{F} \cdot d\Vec{r} \]
+We use the closed integral symbol ($\oint$) to denote integration along a closed path. This agrees with physical intuition: The integrand $\Vec{F} \cdot \Vec{v}$ is the Power delivered by the force, and integrating $\int P \ dt = \Delta E$ indeed gives the change in energy. 
+
+\section{Applications of Vector Calculus}
+\subsection{Potential and Conservative Forces}
+
+\begin{definition}
+Conservative Forces. \\
+The statements below are equivalent. That is, if one statement is satisfied, all other statements must also be true; if one statement is not satisfied, then all other statements must also be false. 
+\begin{enumerate}
+\item The force $\Vec{F}$ is a Conservative Force. 
+\item There exists some scalar function $U$, called the potential energy, such that $\Vec{F}$ can be written as the negative gradient of the potential energy $U$. 
+\begin{equation}
+\Vec{F} = - \nabla U
+\end{equation}
+Where
+\begin{equation}
+\Vec{F} = - \frac{\partial U}{\partial x}\Hat{x} - \frac{\partial U}{\partial y}\Hat{y} - \frac{\partial U}{\partial z}\Hat{z}
+\end{equation}
+\item The curl of $\Vec{F}$ is the zero vector. 
+\begin{equation}
+\nabla \times \Vec{F} = \Vec{0}
+\end{equation}
+\item The work done by the force 
+\begin{equation}
+W = \int_{\Vec{r}_0}^{\Vec{r}_f} \Vec{F} \cdot d\Vec{r}
+\end{equation}
+Depends only on the initial and final positions (${\Vec{r}_0}$, ${\Vec{r}_f}$), regardless of the path taken from the initial to the final position. 
+\item The work done by the force along a closed loop is zero. 
+\begin{equation}
+W_C = \oint_C \ \Vec{F} \cdot d\Vec{r} = 0
+\end{equation}
+\end{enumerate}
+\end{definition}
+
+Following the second statement above, if we are given a force $\Vec{F}$, we can find its associated potential energy $U$ from the negative anti-derivative of each component of $\Vec{F}$. 
+
+\begin{definition}
+Potential Energy. \\
+Given a force $\Vec{F}$, let $F_x$, $F_y$, $F_z$ be the $x$, $y$, and $z$ components of $\Vec{F}$. That is, 
+\[ \Vec{F} = F_x\Hat{x} + F_y\Hat{y} + F_z\Hat{z} \]
+If $\Vec{F}$ is the conservative force of some potential energy $U$, then
+\begin{equation}
+F_x = - \frac{\partial U}{\partial x}\Hat{x}
+\end{equation}
+\begin{equation}
+F_y = - \frac{\partial U}{\partial y}\Hat{y}
+\end{equation}
+\begin{equation}
+F_z = - \frac{\partial U}{\partial z}\Hat{z}
+\end{equation}
+Therefore we can construct the following integrals
+\begin{equation}
+U_1 = - \int F_x \ dx + f(y, z)
+\end{equation}
+\begin{equation}
+U_2 = - \int F_y \ dy + g(x, z)
+\end{equation}
+\begin{equation}
+U_3 = - \int F_z \ dz + h(x, y)
+\end{equation}
+For arbitrary functions $f$, $g$, and $h$. 
+
+If some $f$, $g$, and $h$ can be found such that $U_1 = U_2 = U_3 = U$, then $\Vec{F}$ is a conservative force and $U$ is its potential energy. 
+\end{definition}
+
+\subsection{Physical Examples}
+
+\begin{example}
+Conservative Force and Potential Energy \\
+\textit{Giancoli, Physics for Scientists and Engineers, Problem 8.8} \\
+Given a force
+\[ \Vec{F} = (-6x - 2y)\Hat{x} + (-2x -8yz)\Hat{y} + (-4y^2)\Hat{z} \]
+(a) Is the force conservative? \\
+(b) If so, what is its potential energy $U$? \\
+
+\textbf{Solution:} \\
+(a) Take the curl of $\Vec{F}$, 
+\[ \nabla \times \Vec{F} = 
+\begin{vmatrix}
+\Hat{x} & \Hat{y} & \Hat{z} \\
+\frac{\partial }{\partial x} & \frac{\partial }{\partial y} & \frac{\partial }{\partial z} \\
+(-6x - 2y) & (-2x -8yz) & -4y^2
+\end{vmatrix} \]
+\[ \nabla \times \Vec{F} = (-8y + 8y)\Hat{x} - (0 - 0)\Hat{y} + (-2 + 2)\Hat{z} \]
+\[ \nabla \times \Vec{F} = \Vec{0} \]
+The curl of $\Vec{F}$ is zero. $\Vec{F}$ is conservative. \\
+
+(b) Consider the following integrals: 
+\[ U_1 = - \int -6x - 2y \ dx + f(y, z) \]
+\[ U_1 = 3x^2 + 2xy + f(y, z) \]
+\[ U_2 = - \int -2x -8yz \ dy + g(x, z) \]
+\[ U_2 = 2xy + 4y^2 z + g(x, z) \]
+\[ U_3 = - \int -4y^2 \ dz + h(x, y) \]
+\[ U_3 = 4y^2 z + h(x, y) \]
+Equate $U = U_1 = U_2 = U_3$, we can find that
+\[ f(y, z) = 4y^2 z \]
+\[ g(x, z) = 3x^2 \]
+\[ h(x, y) = 3x^2 + 2xy \]
+Therefore we can determine potential energy being (up to some constant of integration $C$),
+\[ U = 3x^2 + 2xy +4y^2z + C \]
+\end{example}
+
+\pagebreak
+
+\begin{example}
+Force and Work Done \\
+\textit{Taylor, Classical Mechanics, Problem 4.2} \\
+Evaluate the work done by a 2-Dimensional Force
+\[ \Vec{F} = (x^2)\Hat{x} + (2xy)\Hat{y} \]
+Along the path
+\[ x = t^3 \]
+\[ y = t^2 \]
+Joining the origin and the point $(1, 1)$ during time $0 \leq t \leq 1$. \\
+
+\textbf{Solution:} The work done by the force is
+\[ W = \int_{(0, 0)}^{(1, 1)} \Vec{F} \cdot d\Vec{r} = \int_0^1 \Vec{F} \cdot \Vec{v} \ dt \]
+We rewrite $\Vec{F}$ in terms of time $t$, 
+\[ \Vec{F} = (t^6)\Hat{x} + (2t^5)\Hat{y} \]
+And the velocity vector is
+\[ \Vec{v} = \frac{d\Vec{r}}{dt} = (3t^2) \Hat{x} + (2t) \Hat{y} \]
+Therefore
+\[ \Vec{F} \cdot \Vec{v} = 3t^8 + 4t^6 \]
+And the work done is
+\[ W = \int_0^1 3t^8 + 4t^6 \ dt = \Bigl[ \frac{3}{9}t^9 + \frac{4}{7} t^7 \Bigr]_0^1 = \frac{19}{21} \]
+\end{example}
+
+These sets of notes are by no means extensive. It is impossible to cover the entire subject of vector calculus in one chapter of notes. However, this should give you a powerful mathematical framework to work with forces and energy in Physics 7A, until you can gain an in-depth understanding of vector calculus from Math 53 (Multivariable Calculus). 
+
+\pagebreak
+
+\section{Exercises}
+
+In the problems below, the variable $\Vec{r}$ refers to the position vector, defined as
+\[ \Vec{r} = x\Hat{x} + y\Hat{y} + z\Hat{z} \]
+Its magnitude, $r$, equals to
+\[ r = \sqrt{x^2 + y^2 + z^2} \]
+Its unit vector, $\Hat{r}$, is thus
+\[ \Hat{r} = \frac{1}{r}\Vec{r} = \frac{x}{r}\Hat{x} + \frac{y}{r}\Hat{y} + \frac{z}{r}\Hat{z} \]
+
+\begin{problem}
+The Divergence of a Point Source. \\
+\textit{Griffiths, Introduction to Electrodynamics, Problem 1.16} \\
+Find the Divergence, $\nabla \cdot \Vec{F}$, of this vector function. 
+\[ \Vec{F} = \frac{1}{r^2}\Hat{r} \]
+\end{problem}
+
+\begin{problem}
+The Product Rule. \\
+\textit{Griffiths, Introduction to Electrodynamics, Problem 1.21} \\
+Prove the following vector calculus identity.
+\[ \nabla(fg) = f\nabla g + g\nabla f \]
+Where $f = f(x, y, z)$ and $g = g(x, y, z)$ are arbitrary functions in 3-Dimensions. 
+\end{problem}
+
+\begin{problem}
+Gradients. \\
+\textit{Taylor, Classical Mechanics, Problem 4.12} \\
+For the potential energies below, find the associated conservative force, $\Vec{F} = -\nabla U$. 
+\[ U = x^2 + z^3 \]
+\[ U = ky \]
+\[ U = r \]
+\[ U = \frac{1}{r} \]
+Where $k$ is a constant. 
+\end{problem}
+
+\pagebreak
+
+\begin{problem}
+The 3-Dimensional Spring Potential. \\
+\textit{Taylor, Classical Mechanics, Problem 4.16} \\
+If a particle's potential energy is given by 
+\[ U(r) = \frac{1}{2}kr^2 \]
+What is the force on the particle? 
+\end{problem}
+
+\begin{problem}
+Conservative Forces. \\
+\textit{Taylor, Classical Mechanics, Problem 4.23} \\
+Which of the following forces is conservative? For the forces that are conservative, find their associated potential energy $U$, and verify by taking the gradient that $\Vec{F} = - \nabla U$. \\
+\[ \Vec{F} = (kx)\Hat{x} + (2ky)\Hat{y} + (3kz)\Hat{z} \]
+\[ \Vec{F} = (ky)\Hat{x} + (kx)\Hat{y} \]
+\[ \Vec{F} = (-ky)\Hat{x} + (kx)\Hat{y} \]
+Where $k$ is a constant. 
+\end{problem}
 
 \end{document}

@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Capstone}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Capstone } \\ [0.05in]
+Pendulum with a Moving Support \\ [-0.5in]
+\end{center}
+
+\textit{Note: This problem is extremely challenging, and will require you to combine most of the concepts and skills you've learned in this class to formulate a solution. You should give yourself at least an hour to thoroughly think and solve this problem.} 
+
+A bead of mass $m$ is fixed to move on a horizontal frictionless rail, and is connected to another bead of the same mass with a rope of negligible mass and length $L$. The system is subject to a uniform gravitational field $g$. 
+
+Denote the top mass as $m_1$, and the bottom mass as $m_2$. Let $x$ be the horizontal position of $m_1$ along the rail. Let $\theta$ be the angle between the rope and the vertical direction. Assume that the oscillation of the bottom mass is very small $(\theta \approx 0)$, find the oscillation frequency $\omega_{\text{SHM}}$ of the bottom mass, in terms of $L$ and $g$. 
+
+\fig{figs/caps/pendulum.png}{Pendulum with a Moving Support. Not Drawn to Scale.}{0.85}{0}
+
+Since there are two variables in the system ($x$ and $\theta$), we need two independent equations in order to isolate an expression only involving $\theta$. \\
+Take the following steps to solve this problem: 
+
+(a) What are the velocities $\Vec{v}_{1}$ and $\Vec{v}_{2}$ of the two masses? \\
+\textcolor{blue}{
+\textit{Your answers should be vectorial quantities. Recall the relative velocity formula: }
+\[ \Vec{v}_2 = \Vec{v}_1 + \Vec{v}_{\text{rel}} \]
+\textit{The net velocity $\Vec{v}_2$ is the vector sum of $\Vec{v}_1$ (the reference frame velocity) plus $\Vec{v}_{\text{rel}}$ (the velocity of $m_2$ viewed from the reference frame of $m_1$).}}
+
+(b) What is the total energy in the system? 
+
+(c) Using the Conservation of Energy, find an equation that involves the quantities $x$ and $\theta$, as well as their first-order derivatives $v_x = \frac{dx}{dt}$ and $\omega = \frac{d\theta}{dt}$, and their second-order derivatives $a_x = \frac{d^2x}{dt^2}$ and $\alpha = \frac{d^2\theta}{dt^2}$. \\
+\textcolor{blue}{
+\textit{A conserved quantity is a constant, therefore its derivative equals to $0$.}}
+
+(d) Draw free-body diagrams for $m_1$, $m_2$, and the whole system consisting of the two masses and the rope. What are the external forces acting on the system? Just giving the directions is sufficient. 
+
+(e) From your answer to part (d), what other physical quantity is conserved? Differentiate that quantity and set it to zero to get another equation of $x$, $\theta$, and their first/second order derivatives. 
+
+(f) Substitute the equation from (e) into the one from (c). You will get an equation purely in terms of $\theta$ and its first/second order derivatives, eliminating all terms depending on $x$. 
+
+(g) Since $\theta \approx 0$, we can make the following approximations to the equation found in (f). \\
+\textcolor{blue}{
+\textit{1. From Taylor Expansion, $\sin\theta \approx \theta$ and $\cos\theta \approx 1$. \\
+2. Since $\theta$ is close to zero, its square $\theta^2$ and higher powers are magnitudes smaller compared to $\theta$, therefore $\theta^2 \ll \theta$. The same applies to its derivatives: $\omega^2 \ll \omega$ and $\alpha^2 \ll \alpha$. Since $\theta$ is already very small, if higher powers of $\theta$ or its derivatives appear in the equation, we can treat them as zero. }}
+
+(h) Now, the equation can be readily written in the standard form of Simple Harmonic Motion: 
+\[ \alpha = \frac{d^2\theta}{dt^2} = -\omega_{\text{SHM}}^2\theta \]
+What is the frequency of the oscillation, $\omega_{\text{SHM}}$? 
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\end{document}

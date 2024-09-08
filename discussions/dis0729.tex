@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Discussion 15 \\ July 29}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Discussion 15 } \\ [0.05in]
+Angular Momentum, Oscillations \\ [-0.5in]
+\end{center}
+
+\section{Review}
+
+\subsection{Simple Harmonic Motion}
+
+Simple Harmonic Motion refers to a specific type of Differential Equation (an equation that involves derivatives). Namely, a system executes Simple Harmonic Motion when the second derivative of a quantity is proportional to the negative of that quantity. Or, 
+\[ \frac{d^2x}{dt^2} = -cx = -\omega^2 x \]
+For some constant $c$. $c$ also equals the square of the oscillation frequency $\omega$ of the Simple Harmonic Motion. 
+
+Its solution is, 
+\[ x = A\cos(\omega t) + b\sin(\omega t) \]
+Or,
+\[ x = C\cos(\omega t + \phi) \]
+$A$, $B$, $C$, and $\phi$ are constants. The two forms above are mathematically equivalent.\footnote{If you want to see a mathematical proof to why that's the case, I briefly talked about this in supplementary notes 1.} 
+
+Note that the Simple Harmonic Motion equation and solution apply to any physical variable obeying the mathematical relationship above. For example, a spring-mass system yields
+\[ \frac{d^2x}{dt^2} = -\frac{k}{m}x \]
+Therefore the solution to the position as a function of time $x(t)$ is
+\[ x = C\cos(\omega t + \phi) \impliedby \omega = \sqrt{\frac{k}{m}} \]
+For a pendulum,
+\[ \frac{d^2\theta}{dt^2} = -\frac{g}{l}\sin(\theta) \]
+When $\theta$ is relatively small $(\theta < 15\degree)$, $\sin(\theta) \approx \theta$ (this is also a consequence of the Taylor Series), and therefore,
+\[ \frac{d^2\theta}{dt^2} = -\frac{g}{l}\theta \]
+Which has the solution
+\[ \theta = C\cos(\omega t + \phi) \impliedby \omega = \sqrt{\frac{g}{l}} \]
+
+Given the oscillatory frequency $\omega$, the period $T$ of the simple harmonic motion can be found using
+\[ T = \frac{2\pi}{\omega} \]
+And the frequency $f$ is
+\[ f = \frac{1}{T} = \frac{\omega}{2\pi} \]
+A specific note on the units and terminology: 
+\begin{itemize}
+\item $T$ has units of $s \ (\text{per revolution})$. 
+\item $\omega$ has units of $1/s$. 
+\item $f$ has units of $\text{rev} / s$. 
+\end{itemize}
+Although both $\omega$ and $f$ are some sort of frequency, $\omega$ is the oscillatory frequency per a "radian" equivalent, or frequency per about $16\%$ of the entire revolution. $f$ is the frequency per one full revolution. 
+
+\pagebreak
+
+\section{Angular Momentum}
+
+\textbf{1.} \textit{Morin, Introduction to Classical Mechanics, Problem 8.26} \\
+A uniform stick of length $L$ is pivoted at its bottom end and is initially held vertical. It is given an infinitesimal kick, and it swings down around the pivot. After three-quarters of a turn (in the horizontal position shown in Fig. 8.39), the pivot is somehow vaporized, and the stick flies freely up in the air. \\
+(a) What is the maximum height of the center of the stick in the resulting motion? \\
+(b) At what angle is the stick tilted when the center reaches this maximum height? \\
+\fig{figs/0718/m826.png}{Morin, Problem 8.26}{0.5}{0}
+The momentum of inertia of this rod about its CM is
+\[ I_{CM} = \frac{1}{12}ML^2 \]
+The inertia about the pivot can be found using the Parallel Axis Theorem. 
+
+\pagebreak
+
+\textbf{2.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 7.37} \\
+(a) A plank of length $2l$ and mass $M$ lies on a frictionless table. A ball of mass $m$ and speed $v_0$ strikes its end as shown. Find the final velocity of the ball, $v_f$, assuming that the collision is elastic and that $v_f$ is along the original line of motion. \\
+(b) Find $v_f$ assuming that the stick is pivoted at the lower end. \\
+\textit{Hint: In part (b), linear momentum is not conserved as the pivot exerts a force along the direction of the rod. But this force does not produce a torque. }
+\fig{figs/0718/kk737.png}{Kleppner and Kolenkow, Problem 7.37}{0.5}{0}
+The momentum of inertia of this rod (length $2L$) about its CM is
+\[ I_{CM} = \frac{1}{12}M(2L)^2 = \frac{1}{3}ML^2 \]
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\section{Simple Harmonic Motion}
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 14.99} \\
+Consider the simple pendulum shown below. Use \\
+(a) Force analysis ($F = ma$) on the point mass \\
+(b) Torque analysis ($\tau = I\alpha$) about the pivot \\
+(c) Conservation of Energy ($E = K + U = \text{const}$) \\
+To show that the displacement angle $\theta$ executes simple harmonic motion. 
+\[ \theta = C\cos(\sqrt{\frac{g}{l}} t + \phi) \]
+For some constants $C$ and $\phi$. 
+
+\textit{Hint: Remember the Taylor Series approximation says $\sin\theta \approx \theta$ when $\theta$ is small.}
+\fig{figs/0729/g99.png}{Giancoli, Problem 14.99}{0.5}{0}
+
+\pagebreak
+
+\textbf{4.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 14.95} \\
+Imagine that a small circular hole was drilled all the way through the center of the Earth. At one end of the hole, you drop an apple into the hole. Show that, if you assume that the Earth has a constant density, the subsequent motion of the apple is simple harmonic. How long will the apple take to return? Assume that we can ignore all frictional effects. 
+
+\textit{Hint: Recall Gauss' Law for Gravitation: When the apple is at some radius $r$, only the mass within a radius less than or equal to $r$ generates a net gravitational force.}
+\fig{figs/0729/g95.png}{Giancoli, Problem 14.95}{0.5}{0}
+
+\pagebreak
+
+\textbf{5.} \textit{A Challenging Problem} \\
+A spherical ball of radius $r$ and mass $M$, moving under the influence of gravity, rolls back and forth without slipping across the center of a bowl which is itself spherical with a larger radius $R$. The position of the ball can be described by the angle $\theta$ between the vertical and a line drawn from the center of curvature of the bowl to the center of mass of the ball. Show that, for small displacements, the oscillation of $\theta$ is simple harmonic and find the frequency of oscillation. \\
+The moment of inertia of a sphere is: 
+\[ I_{\text{Sphere}} = \frac{2}{5}Mr^2 \]
+\textit{Hint: It is simplest to solve this problem using Conservation of Energy. The angular displacements $\theta$ and $\phi$ are not equal. You would need an equation to relate the angular velocities of $\omega_\theta = \frac{d\theta}{dt}$ and $\omega_\phi = \frac{d\phi}{dt}$, using the formulas for arc length (of the bowl) and CM velocity while rolling without slipping (of the sphere).}
+\fig{figs/0729/charman.png}{Rolling in a Bowl}{0.75}{0}
+
+\pagebreak
+
+\textbf{6.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 6.3} \\
+\textit{Note: You don't need to solve for or understand where these energy equations came from. The goal is for you to identify simple harmonic motion from arbitrary energy equations. The same applies to the next problem. }
+
+A teeter toy that is free to swing back and forth obeys the potential energy
+\[ U(\theta) = 2mg(L - l\cos\alpha)\cos\theta \]
+$\theta$ is the displacement angle with respect to the upright position, and all other variables are constants. \\
+When the toy swings at an angular velocity $\omega = \frac{d\theta}{dt}$, each mass has a linear velocity $v = s\omega$. Therefore the system carries a total kinetic energy of 
+\[ K(\theta) = 2\Bigl(\frac{1}{2}mv^2\Bigr) = ms^2\omega^2 \]
+Given that the total energy in the system is conserved, find the simple harmonic oscillation frequency $\omega_{\text{SHM}}$ about the upright equilibrium position for small magnitudes of $\theta$. 
+
+\textit{Hint: Remember the Taylor Series approximation says $\sin\theta \approx \theta$ when $\theta$ is small.}
+
+\fig{figs/0729/kk63.png}{Kleppner and Kolenkow, Problem 6.3}{0.5}{0}
+
+\pagebreak
+
+\textbf{7.} \textit{Taylor, Classical Mechanics, Problem 5.13} \\
+A particle of mass $m$ is free to move in the region $0 \leq x \leq \infty$. It is governed by the potential energy
+\[ U(x) = U_0\Bigl(\frac{x}{A} + \lambda^2\frac{A}{x}\Bigr) \]
+Where $U_0$, $A$, and $\lambda$ are constants. \\
+(a) Find the equilibrium distance $x_0$, where the particle is subject to no force. \\
+(b) Let $\Delta x = x - x_0$ be the distance of the particle from equilibrium. Under conservation of energy, what is the frequency of simple harmonic oscillations about equilibrium when $\Delta x$ is very small? \\
+
+\textit{Hint: For this problem, you would have to use the general formula for Taylor Expansion, given below:} \\
+When the position $x$ is very close to $x_0$, we can approximate $f(x)$ as
+\[ f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2} f''(x_0)(x - x_0)^2 + \frac{1}{6}f'''(x_0)(x - x_0)^3 + ... \]
+In this problem, you should keep the lowest nonzero order of derivative. 
+
+\pagebreak
+
+\section{Statics}
+
+\textbf{8.} \textit{Morin, Introduction to Classical Mechanics, Problem 2.31} \\
+A uniform cylinder of mass $M$ sits on a fixed plane inclined at an angle $\theta$. A string is tied to the cylinder’s rightmost point, and a mass $m$ hangs from the string. Assume that the coefficient of friction between the cylinder and the plane is sufficiently large to prevent slipping. What is $m$, in terms of $M$ and $\theta$, if the setup is static?
+
+\fig{figs/0729/m231.png}{Morin, Problem 2.31}{0.6}{0}
+
+\pagebreak
+
+\textbf{9.} \textit{Kleppner and Kolenkow, An Introduction to Mechanics, Problem 3.10} \\
+A uniform rope of weight $W$ hangs between two trees. The ends of the rope are the same height, and they each make angle $\theta$ with the trees. Find
+
+(a) The tension at either end of the rope.
+
+(b) The tension in the middle of the rope.
+
+\textit{Hint: It may be helpful to break down the rope into the left and right halves. }
+
+\fig{figs/0729/kk310.png}{Kleppner and Kolenkow, Problem 3.10}{0.4}{0}
+
+\pagebreak
+
+\end{document}

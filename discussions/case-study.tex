@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Lab 5 \\ July 22}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Lab 5 } \\ [0.05in]
+Case Study: The Walkway Woe \\ [-0.5in]
+\end{center}
+
+\textit{Note: This Case Study problem was given on a past 7A exam. In addition to thinking about the applications of Newton's Laws and structures in equilibrium, it is also a great problem for some exam review.} \\
+
+In the American Midwest in the early 1980s, insufficient attention to Newton’s Laws led to the collapse of an elevated double walkway over a hotel lobby, with tragic results (over one hundred fatalities and more than two hundred other injuries). In simplified form, the structure essentially consisted of two uniform slabs each of mass $M$, one above the other, suspended from vertical steel rods by metal nuts. In the original design $(I)$, the rods pass through small holes in the slabs and are secured underneath each slab by metal nuts. The tops of rods $(i)$ and $(ii)$ are to be attached securely to the building’s ceiling, not shown in the figures. 
+
+But this would have been inconvenient to build, because the supporting rods would have to be threaded over about half of their length, and nuts $A$ and $B$ would have to be twisted up all the way from the bottom after placing the upper floor and before installing the lower floor. So instead, the structure was built as shown in version $(II)$, with the upper rods terminated just underneath the upper slab, and the upper and lower slabs connected by another set of nearby rods, passing through small holes and secured with metal nuts on the top and bottom. The slabs and rods are rigid, without appreciable friction between them. 
+
+A sample of pedestrians have been included—treat each as a point mass of weight $F_g = mg$ at the locations indicated in the diagram, assuming their positions are the same in either scenario. Ignore the masses of the supporting rods and nuts, and the mass removed by the small holes. For simplicity, also neglect the small displacements between rods $(i)$ and $(iii)$, and between rods $(ii)$ and $(iv)$, and assume that all forces are applied in the plane of the page. Assume the structure is in static equilibrium---until, alas, it is not...
+
+\fig{figs/lab5/walkway.png}{Elevated Double Walkway. Not Drawn to Scale.}{0.8}{0}
+
+\pagebreak
+
+In the original design $(I)$:
+
+(a) What is the vertical force exerted by the lower slab on nut $C$?
+
+(b) What is the vertical force exerted by the upper slab on nut $B$? \\
+
+In the structure as built $(II)$:
+
+(c) What is the vertical force exerted by the lower slab on nut $H$?
+
+(d) What is the vertical force exerted by supporting rod $(iii)$ on nut $H$?
+
+(e) What is the tension in supporting rod $(i)$?
+
+(f) What is the vertical force exerted by the upper slab on nut $B$? Briefly explain why this could lead to collapse, if the materials and parts were chosen with design $(I)$ in mind.
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\end{document}

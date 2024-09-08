@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+\usepackage[pdftex]{graphicx}
+\usepackage[explicit]{titlesec}
+\usepackage[OT1]{fontenc}
+\usepackage[most]{tcolorbox}
+\usepackage[final]{pdfpages}
+\usepackage[colorlinks=true, urlcolor=cyan, hyperfootnotes=false]{hyperref}
+\usepackage{fullpage, graphicx, psfrag, url, caption, authblk, amsfonts, amsmath, amssymb, float, fancyhdr, multicol, cmbright, xcolor, amsthm, gensymb, physics}
+
+\fancypagestyle{pages}{
+	%Headers
+	\fancyhead[L]{Physics 7A, Summer 2024 \\ Section 103}
+	%\fancyhead[C]{\thepage}
+	\fancyhead[R]{Discussion 18 \\ August 5}
+\renewcommand{\headrulewidth}{0pt}
+	%Footers
+	%\fancyfoot[L]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
+\newcommand{\fig}[4]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale={#3}, angle={#4}]{#1}
+        \caption{#2}
+        \label{exp4fit}
+    \end{figure}
+}
+
+\newtheoremstyle{gangnamstyle}{}{}{}{}{\sffamily\bfseries}{.}{ }{}
+\tcolorboxenvironment{definition}{boxrule=0pt,boxsep=0pt,colback={blue!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{blue},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{example}{boxrule=0pt,boxsep=0pt,colback={orange!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{orange},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\tcolorboxenvironment{problem}{boxrule=0pt,boxsep=0pt,colback={cyan!10},left=8pt,right=8pt,enhanced jigsaw, borderline west={2pt}{0pt}{cyan},sharp corners,before skip=10pt,after skip=10pt,breakable}
+\theoremstyle{gangnamstyle}{\newtheorem{definition}{Definition}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{example}{Example}[]}
+\theoremstyle{gangnamstyle}{\newtheorem{problem}{Problem}[]}
+
+\headheight=0pt
+\footskip=0pt
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\begin{document}
+\normalfont
+\pagestyle{pages}
+
+% Begin Document
+
+\begin{center}
+\vspace{3in}
+{\Large Discussion 18 } \\ [0.05in]
+Fluid, Final Review \\ [-0.5in]
+\end{center}
+
+\section{Review}
+
+\subsection{Fluid}
+
+You should read the summary on the next page as I didn't have time to finish typing it. 
+
+\fig{figs/0801/sum.png}{Fluid}{0.55}{0}
+
+\pagebreak
+
+\section{Fluid}
+
+\textbf{1.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.25} \\
+A cylindrical bucket of liquid (density $\rho$) is rotated about its symmetry axis, which is vertical. If the angular velocity is $\omega$, show that the pressure at a distance $r$ from the rotation axis is
+\[ P = P_0 + \frac{1}{2}\rho\omega^2r^2 \]
+
+\pagebreak
+
+\textbf{2.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.56} \\
+In the figure below, take into account the speed of the top surface of the tank and show that the speed of fluid leaving an opening near the bottom is 
+\[ v_1 = \sqrt\frac{2gh}{1 - (A_1 / A_2)^2} \]
+where $h = y_2 - y_1$, and $A1$ and $A2$ are the areas of the opening and of the top surface, respectively. Assume $A_1 \ll A_2$ so that the flow remains nearly steady and laminar.
+
+\fig{figs/0801/tank.png}{Giancoli, Problem 13.56}{0.6}{0}
+
+\pagebreak
+
+\textbf{3.} \textit{Giancoli, Physics for Scientists and Engineers, Problem 13.58} \\
+In the same problem, show that Bernoulli’s principle predicts that the level of the liquid, $h = y_2 - y_1$, drops at a rate
+\[ \frac{dh}{dt} = -\sqrt{\frac{2ghA_1^2}{A_2^2 - A_1^2}} \]
+
+\fig{figs/0801/tank.png}{Giancoli, Problem 13.58}{0.6}{0}
+
+\pagebreak
+
+\section{Review}
+
+\textbf{4.} \textit{Past Exam Problem} \\
+As shown in the figure, a planet of mass $m_1$ orbits around the star with a circular orbit of radius $R$. Here $R$ is the distance between the centers of the Sun and the planet. We assume the planet is spherically symmetric and has a rotational inertia $I$ about its center. The planet moves along the circular orbit (in the $xy$ plane) with a speed $v_1$, and spins about its symmetry axis with an angular velocity $\Vec{\omega} = \omega \Hat{z}$. A tiny asteroid of mass $m_2$ approaches the planet from the bottom with a velocity $\Vec{v}_2 = v_2 \Hat{z}$, and collide with the planet at coordinates $(x, y, z) = (0, R + r, 0)$, where $r$ is the radius of the planet. The collision is totally inelastic and the two merge together after the collision.
+
+\fig{figs/mt2/105.png}{Star, Planet, and Astroid}{0.7}{0}
+
+(a) Find the velocity $v_f$ of the merged system (planet + asteroid) right after the collision. \\
+\textit{Hint: You do not have to worry about angular momentum here.}
+
+(b) Find the spin angular momentum $\Vec{L}_{\text{spin}}$ of the merged system, i.e. the angular momentum with respect to the new center of mass of the merged system, right after the collision. \\
+\textit{Hint: Recall that the total angular momentum of a system equals the sum of orbit angular momentum plus spin angular momentum.}
+\[ \Vec{L}_{\text{total}} = \Vec{L}_{\text{orbital}} + \Vec{L}_{\text{spin}} \]
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\textit{The following exam problem were administered under special circumstances where the questions had to be multiple choices. The answer choices are given for reference.} 
+
+\textbf{5.} \textit{Past Exam Problem} \\
+A ring-shaped space station of mass $M$ and radius $R$ rotates about its axis of symmetry in order to create artificial gravity for the astronauts living inside. The ring is rigidly connected to a rod of length $2D$ aligned with the axis of symmetry of the ring, as shown in the diagram. You may assume all of the mass is located in the outermost part of the ring a distance $R$ from the axis of symmetry. \\
+(In the answer choices below, $T = 1$ year refers to the orbital period of the Earth.) 
+
+\fig{figs/0805/dewese1.png}{Space Station}{0.45}{0}
+
+(a) In order to achieve simulated gravity inside the rotating station that feels like standing on the surface of the Earth, what should the magnitude of the angular velocity of the station be? \\
+\textbf{Answer Choices:} $\sqrt{2g/R}$, $\sqrt{g/R}$, $gT/R$, $2g/R$, $\sqrt{gR}$. 
+
+(b) A decision is made to slowly rotate the symmetry axis of the station to vary the amount of sunlight entering windows and create a sense of seasonal change like on Earth. To achieve this, rockets on either end of the axial rod a distance $D$ from the center will each exert a constant force of the same magnitude, though they will point in opposite directions. What is the magnitude $F$ of each rocket’s force if the axis will make one full rotation per year assuming the rockets are directed in the most efficient manner? \\
+\textbf{Answer Choices:} $(\pi MRg\omega T/D)$, $(\pi MR\omega/T)$, $(\pi MD^2\omega^2/R)$, $(\pi MR^2\omega^2/D)$, $(\pi MR^2\omega/TD)$. 
+
+(c) For the station axis to rotate in a clockwise direction as viewed in the diagram (i.e., left side moving upward, right side moving downward), what should be the direction of the force exerted by rocket 1 (shown on the left side of the diagram) on the space station? \\
+\textbf{Answer Choices:} Into the paper, Out of the paper, To the left, To the right, Upward. 
+
+(d) A second station of the same outer radius $R$ is built, but its mass distribution is different. It is well approximated as a solid disk of uniform density $\sigma$ (in units of mass per area), with three holes cut out, each with radius $r$ and centers located a distance $d$ from the center of the big disk. What is the moment of inertia about the central axis of the big disk? (i.e., the axis through the disk center that is perpendicular to the plane of the disk.) \\
+\textbf{Answer Choices:} $[\frac{\pi\sigma}{2}(R^4 - 3r^4)]$, $[\frac{\pi\sigma}{2}(R^4 + 3r^2(r^2 - d^2))]$, $[\pi\sigma(R^4 - 3r^2(r^2 + d^2))]$, \\ $[\frac{\pi\sigma}{2}(R^4 - 3r^2(r^2 + 2d^2))]$, $[\frac{\pi\sigma}{2}(R^4 + 3r^2(r^2 + 2d^2))]$
+
+\fig{figs/0805/deweese1.png}{A Second Space Station}{0.5}{0}
+
+\pagebreak
+
+\begin{center}
+(Blank Page)
+\end{center}
+
+\pagebreak
+
+\end{document}
